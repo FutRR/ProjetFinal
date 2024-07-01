@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Maesterclass{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <header>
+        <h1>Apprenez le piano comme il faut avec JJ Futterer</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <a class="btn header-btn" href="">Commencez dès maintenant</a>
+    </header>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/maxime_FUTTERER/ProjetFinal/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/maxime_FUTTERER/ProjetFinal/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <main>
+        <section id="why">
+            <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
+            <p>Chez insert_name vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.
+                Le chemin ne sera pas facile mais il sera efficace, ce n’est pas en apprenant Au clair de la Lune que vous deviendrez le prochain Bach !</p>
+        </section>
+
+        <section id="how">
+            <div id="schema"></div>
+            <div id="how-text">
+                <h2>Comment ça marche</h2>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <h2>Avis d'élèves</h2>
+            <div class="review"></div>
+        </section>
+    </main>
+
+
 {% endblock %}
