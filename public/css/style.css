@@ -85,3 +85,17 @@ header{
 main{
     margin: 20px 100px;
 }
+
+.form-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 10px;
+}
