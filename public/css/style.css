@@ -3,6 +3,7 @@
 :root{
     --white: #fff;
     --black: #070707;
+    --blue: #2C6B8E;
 }
 
 body{
@@ -82,7 +83,7 @@ nav{
 }
 
 .bleu{
-    color: #2C6B8E;
+    color: var(--blue);
 }
 
 header{
@@ -121,4 +122,19 @@ main{
     justify-content: center;
     align-items: center;
     margin: 10px;
+}
+
+.btn{
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.header-btn{
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--blue) !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
 }
