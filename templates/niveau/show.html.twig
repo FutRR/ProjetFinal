@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ niveau.nomNiveau }}{% endblock %}
+
+{% block body %}
+
+    {% for etape in etapes %}
+        <p> {{ etape.nomEtape }} </p>
+    {% endfor %}
+
+{% endblock %}
