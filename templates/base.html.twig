@@ -12,6 +12,20 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <nav>
+            <img src="" alt="" class="logo">
+            <ul class="nav-links">
+                <a href=""><li class="nav-link">Accueil</li></a>
+                <a href="{{ path('app_niveau')}}"><li class="nav-link">Niveaux</li></a>
+                <a href=""><li class="nav-link">Inscription</li></a>
+                <a href=""><li class="nav-link">Connexion</li></a>
+                {# {% if condition %} #}
+                    <a href=""><li class="nav-link">Profil</li></a>
+                {# {% endif %} #}
+            </ul>
+        </nav>
+
+        {% block body %}
+        {% endblock %}
     </body>
 </html>
