@@ -4,8 +4,11 @@
 
 {% block body %}
 
+    <h1>{{niveau.nomNiveau}}</h1>
+
     {% for etape in etapes %}
-        <p> {{ etape.nomEtape }} </p>
+        <h2> {{ etape.nomEtape }} </h2>
+        <p> {{ etape.description }} </p>
     {% endfor %}
 
 {% endblock %}
