@@ -1,0 +1,11 @@
+#home-main{
+    margin: 0 100px;
+}
+
+.home-page main{
+    margin: 0;
+}
+
+.home-page nav{
+    position: absolute !important;
+}

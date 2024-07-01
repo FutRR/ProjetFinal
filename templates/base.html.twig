@@ -12,9 +12,12 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+
+    <body class="{% block body_class %}{% endblock %}"></body>
+    
     <body>
         <nav>
-            <a href="{{ path('app_home')}}"><img src="" alt="" class="logo"></a>
+            <a class="logo" href="{{ path('app_home')}}"><img src="" alt="">LOGO</a>
             <ul class="nav-links">
                 <li class="nav-link"><a title="Acccueil" href="{{ path('app_home')}}">Accueil</a></li>
                 <li class="nav-link"><a title="Niveaux" href="{{ path('app_niveau')}}">Niveaux</a></li>
@@ -26,7 +29,9 @@
             </ul>
         </nav>
 
+        <main>
         {% block body %}
         {% endblock %}
+        </main>
     </body>
 </html>

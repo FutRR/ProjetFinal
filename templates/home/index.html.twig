@@ -2,14 +2,21 @@
 
 {% block title %}Maesterclass{% endblock %}
 
+{% block body_class %}home-page{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/home.css')}}">
+{% endblock %}
+
 {% block body %}
     <header>
         <h1>Apprenez le piano comme il faut avec JJ Futterer</h1>
 
-        <a class="btn header-btn" href="">Commencez dès maintenant</a>
+        <p><a class="btn header-btn" href="">Commencez dès maintenant</a></p>
     </header>
 
-    <main>
+    <div id="home-main">
         <section id="why">
             <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
             <p>Chez insert_name vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.
@@ -27,7 +34,7 @@
             <h2>Avis d'élèves</h2>
             <div class="review"></div>
         </section>
-    </main>
+    </div>
 
 
 {% endblock %}
