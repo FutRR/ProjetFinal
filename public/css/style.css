@@ -65,10 +65,16 @@ nav{
 }
 
 .logo{
-    text-decoration: none;
-    font-weight: 900;
-    font-size: 30px;
     margin-left: 10px;
+}
+
+.logo img{
+    width: 75px;
+    height: fit-content;
+}
+
+.bleu{
+    color: #2C6B8E;
 }
 
 header{
@@ -80,6 +86,7 @@ header{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 main{
@@ -97,5 +104,13 @@ main{
     display: flex;
     flex-direction: column;
     width: fit-content;
+    margin: 10px;
+}
+
+.checkbox{
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
 }
