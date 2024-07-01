@@ -49,10 +49,11 @@ nav{
 
 .nav-link a{
     text-decoration: none;
+    font-size: 24px;
 }
 
 .nav-link:hover{
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .nav-link a::before {
@@ -62,6 +63,12 @@ nav{
     height: 0;
     overflow: hidden;
     visibility: hidden;
+}
+
+.line{
+    width: 2px;
+    height: 30px;
+    background-color: var(--white);
 }
 
 .logo{
