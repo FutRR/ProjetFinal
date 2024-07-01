@@ -29,6 +29,10 @@ class Etape
     #[ORM\Column]
     private ?int $ordre = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Etapes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Niveau $Niveau = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Etape
     public function setOrdre(int $ordre): static
     {
         $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?Niveau
+    {
+        return $this->Niveau;
+    }
+
+    public function setNiveau(?Niveau $Niveau): static
+    {
+        $this->Niveau = $Niveau;
 
         return $this;
     }
