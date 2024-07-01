@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\EtapeRepository;
+use App\Repository\NiveauRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,11 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EtapeController extends AbstractController
 {
     #[Route('/etape', name: 'app_etape')]
-    public function index(EtapeRepository $etapeRepository): Response
+    public function index(EtapeRepository $etapeRepository, NiveauRepository $niveauRepository): Response
     {
-        $etapes = $etapeRepository->findAll();
-        return $this->render('etape/indes.html.twig', [
-            'etapes' => $etapes,
+        $niveaux = $niveauRepository->findAll();
+        return $this->render('etape/index.html.twig', [
+            'niveaux' => $niveaux,
         ]);
     }
 }
