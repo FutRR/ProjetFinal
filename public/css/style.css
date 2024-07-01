@@ -69,6 +69,7 @@ nav{
     width: 2px;
     height: 30px;
     background-color: var(--white);
+    margin: 0 2px;
 }
 
 .logo{
