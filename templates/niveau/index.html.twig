@@ -5,7 +5,7 @@
 {% block body %}
 
     {% for niveau in niveaux %}
-        <h2>{{niveau.nomNiveau}}</h2>
+        <h2><a href="{{ path('show_niveau', {'id': niveau.id}) }}">{{niveau.nomNiveau}}</a></h2>
         <ul>
             {% for etape in niveau.etapes %}
                 <li>{{etape.nomEtape}}</li>
