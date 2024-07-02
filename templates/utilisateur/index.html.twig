@@ -6,5 +6,5 @@
     <h1>Profil de {{ user.username }}</h1>
 
     <p>Email : {{ user.email }}</p>
-    <p>Date d'inscription : {{ user.displayRegisterDate }} à {{ user.displayRegisterHour }}</p>
+    <p>Date d'inscription : {{ user.registerDate|date('d/m/Y') }} à {{ user.registerDate|date('h:i') }}</p>
 {% endblock %}

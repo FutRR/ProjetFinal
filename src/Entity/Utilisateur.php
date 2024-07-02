@@ -144,16 +144,4 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function displayRegisterDate()
-    {
-        $date = $this->getRegisterDate();
-        return $date->format('d/m/Y');
-    }
-
-    public function displayRegisterHour()
-    {
-        $date = $this->getRegisterDate();
-        return $date->format('h:i');
-    }
 }
