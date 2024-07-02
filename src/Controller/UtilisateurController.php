@@ -12,16 +12,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UtilisateurController extends AbstractController
 {
     #[Route('/profil', name: 'app_utilisateur')]
-    public function index(EntityManagerInterface $entityManager, UserInterface $user): Response
+    public function index(EntityManagerInterface $entityManager, Utilisateur $utilisateur): Response
     {
-        $user = $entityManager->getRepository(Utilisateur::class)->find($user->getId());
-
-        if (!$user) {
+        if (!$utilisateur) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
         }
 
         return $this->render('utilisateur/index.html.twig', [
-            'user' => $user,
+            'utilisateur' => $utilisateur,
         ]);
     }
 }

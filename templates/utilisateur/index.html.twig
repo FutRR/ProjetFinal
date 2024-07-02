@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ user.username }}{% endblock %}
+{% block title %}{{ utilisateur.username }}{% endblock %}
 
 {% block body %}
-    <h1>Profil de {{ user.username }}</h1>
+    <h1>Profil de {{ utilisateur.username }}</h1>
 
-    <p>Email : {{ user.email }}</p>
-    <p>Date d'inscription : {{ user.registerDate|date('d/m/Y') }} à {{ user.registerDate|date('h:i') }}</p>
+    <p>Email : {{ utilisateur.email }}</p>
+    <p>Date d'inscription : {{ utilisateur.registerDate|date('d/m/Y') }} à {{ utilisateur.registerDate|date('h:i') }}</p>
 {% endblock %}
