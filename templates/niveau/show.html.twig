@@ -6,6 +6,10 @@
 
     <h1>{{niveau.nomNiveau}}</h1>
 
+    <a class="btn add-btn" href="{{ path('edit_niveau', {'id': niveau.id})}}">Modifier le niveau</a>
+
+    <p>{{ niveau.description }}</p>
+
     {% for etape in etapes %}
         <h2> {{ etape.nomEtape }} </h2>
         <p> {{ etape.description }} </p>

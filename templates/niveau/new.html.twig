@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% if edit %}
+Editer une niveau
+{% else %}
+Ajouter une niveau
+{% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if edit %}
+    <h1>Editer un niveau</h1>
+          
+    {% else %}
+    <h1>Ajouter un niveau</h1>
+    {% endif %}
+
+    {{ form(formAddNiveau) }}
+
+{% endblock %}
