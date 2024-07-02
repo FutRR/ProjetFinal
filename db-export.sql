@@ -45,7 +45,16 @@ CREATE TABLE IF NOT EXISTS `etape` (
   CONSTRAINT `FK_285F75DDB3E9C81` FOREIGN KEY (`niveau_id`) REFERENCES `niveau` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.etape : ~0 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.etape : ~8 rows (environ)
+INSERT IGNORE INTO `etape` (`id`, `nom_etape`, `pdf`, `video`, `description`, `ordre`, `niveau_id`) VALUES
+	(1, 'laudantium', 'pdf/piano-facile.pdf', NULL, 'lorem ipsum blabla', 1, 1),
+	(2, 'et', NULL, NULL, 'lorem ipsum blabla', 2, 1),
+	(3, 'provident', NULL, NULL, 'lorem ipsum blabla', 3, 1),
+	(4, 'cupiditate', NULL, NULL, 'lorem ipsum blabla', 4, 1),
+	(5, 'ut', NULL, NULL, 'lorem ipsum blabla', 1, 2),
+	(6, 'eos', NULL, NULL, 'lorem ipsum blabla', 2, 2),
+	(7, 'aut', NULL, NULL, 'lorem ipsum blabla', 3, 2),
+	(8, 'assumenda', NULL, NULL, 'lorem ipsum blabla', 4, 2);
 
 -- Listage de la structure de table projet_final_maximefutterer. messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
