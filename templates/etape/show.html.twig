@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ etape.nomEtape }}{% endblock %}
+
+{% block body %}
+
+
+    <div class="sidebar">
+        <h2>{{etape.niveau.nomNiveau}}</h2>
+        <ul>
+            {% for etape in etape.niveau.etapes %}
+                <li>{{etape.nomEtape}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="etape-main">
+        <h1>{{etape.nomEtape}}</h1>
+
+        <p>{{etape.description}}</p>
+
+        <div class="video"></div>
+    </div>
+
+    {% if etape.pdf %}
+        <h2>Document PDF</h2>
+        <iframe src="{{ asset(etape.pdf)}}" width="600" height="800">
+            <p>Votre navigateur ne supporte pas les iframes.</p>
+        </iframe>
+            {% else %}
+        <p>Pas de document PDF disponible.</p>
+    {% endif %}
+
+    {% if etapePrecedente %}
+        <a href="{{ path('show_etape', {'id': etapePrecedente.id})}}">Étape précédente - {{etapePrecedente.nomEtape}}</a>
+    {% endif %}
+
+
+    {% if etapeSuivante %}
+        <a href="{{ path('show_etape', {'id': etapeSuivante.id})}}">Étape suivante - {{etapeSuivante.nomEtape}}</a>
+    {% endif %}
+
+
+
+{% endblock %}
