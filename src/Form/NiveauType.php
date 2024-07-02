@@ -19,10 +19,6 @@ class NiveauType extends AbstractType
                 'label' => 'Nom du niveau',
                 'attr' => ['class' => 'form']
             ])
-            ->add('description', TextareaType::class, [
-                'label' => 'Description du niveau',
-                'attr' => ['class' => 'form']
-            ])
             ->add('valider', SubmitType::class, [
                 "attr" => [
                     'class' => "submit btn"

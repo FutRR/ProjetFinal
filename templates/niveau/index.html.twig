@@ -8,10 +8,9 @@
 
     {% for niveau in niveaux %}
         <h2><a href="{{ path('show_niveau', {'id': niveau.id}) }}">{{niveau.nomNiveau}}</a></h2>
-        <p> {{ niveau.description }} </p>
         <ul>
             {% for etape in niveau.etapes %}
-                <li>{{etape.nomEtape}}</li>
+                <li>{{etape.ordre}} - {{etape.nomEtape}}</li>
             {% endfor %}
         </ul>
     {% endfor %}

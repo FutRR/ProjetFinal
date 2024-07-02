@@ -19,9 +19,6 @@ class Niveau
     #[ORM\Column(length: 50)]
     private ?string $nomNiveau = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
-
     /**
      * @var Collection<int, Etape>
      */
@@ -46,18 +43,6 @@ class Niveau
     public function setNomNiveau(string $nomNiveau): static
     {
         $this->nomNiveau = $nomNiveau;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
 
         return $this;
     }

@@ -58,7 +58,7 @@ class NiveauController extends AbstractController
     public function show(Niveau $niveau, EtapeRepository $etapeRepository): Response
     {
 
-        $etapes = $etapeRepository->findBy(['Niveau' => $niveau->getId()]);
+        $etapes = $etapeRepository->findByNiveauOrderedByOrder($niveau->getId());
         return $this->render("niveau/show.html.twig", [
             'niveau' => $niveau,
             'etapes' => $etapes
