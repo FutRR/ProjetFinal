@@ -129,12 +129,16 @@ main{
     height: fit-content;
     padding: 10px;
     border-radius: 15px;
+    text-decoration: none;
+    font-size: 20px;
 }
 
 .header-btn{
     background-color: rgba(255, 255, 255, 0.8);
     color: var(--blue) !important;
-    text-decoration: none;
     font-weight: 600;
-    font-size: 20px;
+}
+
+.add-btn{
+    border: 3px solid var(--white);
 }
