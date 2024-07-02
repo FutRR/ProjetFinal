@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurRepository;
+use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UtilisateurRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -32,6 +34,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $username = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $registerDate = null;
+
+    public function __construct()
+    {
+        $this->registerDate = new DateTime(); // Initialiser la date d'inscription avec la date actuelle
+    }
 
     public function getId(): ?int
     {
@@ -106,5 +119,41 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getRegisterDate(): ?\DateTimeInterface
+    {
+        return $this->registerDate;
+    }
+
+    public function setRegisterDate(\DateTimeInterface $registerDate): static
+    {
+        $this->registerDate = $registerDate;
+
+        return $this;
+    }
+
+    public function displayRegisterDate()
+    {
+        $date = $this->getRegisterDate();
+        return $date->format('d/m/Y');
+    }
+
+    public function displayRegisterHour()
+    {
+        $date = $this->getRegisterDate();
+        return $date->format('h:i');
     }
 }
