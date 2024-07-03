@@ -4,42 +4,46 @@
 
 {% block body %}
 
-
-    <div class="sidebar">
-        <h2>{{etape.niveau.nomNiveau}}</h2>
+    <section class="sidebar">
+        <h2><a href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau.nomNiveau}}</a></h2>
         <ul>
             {% for etape in etape.niveau.etapes %}
-                <li>{{etape.nomEtape}}</li>
+                <li><a href="{{ path('show_etape', {'id': etape.id})}}">{{etape.nomEtape}}</a></li>
             {% endfor %}
         </ul>
-    </div>
+    </section>
 
-    <div class="etape-main">
+    <section class="etape-main">
         <h1>{{etape.nomEtape}}</h1>
+        <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
+
 
         <p>{{etape.description}}</p>
 
         <div class="video"></div>
-    </div>
+    
 
-    {% if etape.pdf %}
-        <h2>Document PDF</h2>
-        <iframe src="{{ asset(etape.pdf)}}" width="600" height="800">
-            <p>Votre navigateur ne supporte pas les iframes.</p>
-        </iframe>
-            {% else %}
-        <p>Pas de document PDF disponible.</p>
-    {% endif %}
+        {% if etape.pdf %}
+            <h2>Document PDF</h2>
+            <iframe src="{{ asset(etape.pdf)}}" width="600" height="800">
+                <p>Votre navigateur ne supporte pas les iframes.</p>
+            </iframe>
+        {% else %}
+            <p>Pas de document PDF disponible.</p>
+        {% endif %}
 
-    {% if etapePrecedente %}
-        <a href="{{ path('show_etape', {'id': etapePrecedente.id})}}">Étape précédente - {{etapePrecedente.nomEtape}}</a>
-    {% endif %}
+        {% if etapePrecedente %}
+            <a href="{{ path('show_etape', {'id': etapePrecedente.id})}}">Étape précédente - {{etapePrecedente.nomEtape}}</a>
+        {% endif %}
 
 
-    {% if etapeSuivante %}
-        <a href="{{ path('show_etape', {'id': etapeSuivante.id})}}">Étape suivante - {{etapeSuivante.nomEtape}}</a>
-    {% endif %}
+        {% if etapeSuivante %}
+            <a href="{{ path('show_etape', {'id': etapeSuivante.id})}}">Étape suivante - {{etapeSuivante.nomEtape}}</a>
+        {% else %}
+            <a href=""></a>
+        {% endif %}
 
+    </section>
 
 
 {% endblock %}
