@@ -13,7 +13,7 @@
     <div class="progression">
         <h2>Progression</h2>
         {% for progression in progressions %}
-                <p>{{ progression.etape.nomEtape }}</p>
+                <p><a href="{{ path('show_etape', {'id': progression.etape.id})}}">{{ progression.etape.nomEtape }}</a></p>
         {% endfor %}
     </div>
 {% endblock %}

@@ -14,9 +14,10 @@
     </section>
 
     <section class="etape-main">
-        <h1>{{etape.nomEtape}}</h1>
-        <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
-
+        <div class="titre">
+            <h1>{{etape.nomEtape}}</h1>
+            <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
+        </div>
 
         <p>{{etape.description}}</p>
 
@@ -32,16 +33,28 @@
             <p>Pas de document PDF disponible.</p>
         {% endif %}
 
-        {% if etapePrecedente %}
-            <a href="{{ path('show_etape', {'id': etapePrecedente.id})}}">Étape précédente - {{etapePrecedente.nomEtape}}</a>
-        {% endif %}
+        <button class="btn open-btn">Étape finie</button>
 
+        <dialog class="modal" id="modal">
 
-        {% if etapeSuivante %}
-            <a href="{{ path('show_etape', {'id': etapeSuivante.id})}}">Étape suivante - {{etapeSuivante.nomEtape}}</a>
-        {% else %}
-            <a href=""></a>
-        {% endif %}
+            <button class="btn close-btn">X</button>
+
+            <div class="modal-text">
+                <h3>Félicitations!</h3>
+                <p>Vous avez fini cette étape</p>
+            </div>
+
+            <div class="modal-btns">
+                {% if etapePrecedente %}
+                    <a  class="modal-btn" href="{{ path('show_etape', {'id': etapePrecedente.id})}}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
+                {% endif %}
+
+                {% if etapeSuivante %}
+                    <a  class="modal-btn" href="{{ path('show_etape', {'id': etapeSuivante.id})}}">Étape suivante<br>{{etapeSuivante.nomEtape}}</a>
+                {% endif %}
+            </div>
+
+        </dialog>
 
     </section>
 

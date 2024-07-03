@@ -12,6 +12,7 @@ body{
     background: rgb(44,107,142);
     background: linear-gradient(0deg, rgba(44,107,142,1) 0%, rgba(51,77,144,1) 100%);
     height: 100vh;
+    min-height: fit-content;
     margin: 0;
 }
 
@@ -130,6 +131,7 @@ main{
     border-radius: 15px;
     text-decoration: none;
     font-size: 20px;
+    border: 1px solid var(--white);
 }
 
 .header-btn{
@@ -140,4 +142,44 @@ main{
 
 .add-btn{
     border: 3px solid var(--white);
+}
+
+.titre{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+.modal{
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+.modal-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-btn{
+    color: var(--blue) !important;
+    border: 3px solid var(--blue);
+    border-radius: 15px;
+    margin: 15px;
+    padding: 10px;
+    text-align: center;
 }
