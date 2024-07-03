@@ -5,11 +5,12 @@ namespace App\Form;
 use App\Entity\Etape;
 use App\Entity\Niveau;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EtapeType extends AbstractType
@@ -36,6 +37,12 @@ class EtapeType extends AbstractType
                 'class' => Niveau::class,
                 'choice_label' => 'nomNiveau',
             ])
+            ->add('valider', SubmitType::class, [
+                "attr" => [
+                    'class' => "submit btn"
+                ]
+            ])
+
         ;
     }
 

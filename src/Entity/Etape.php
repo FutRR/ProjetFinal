@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EtapeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,6 +34,17 @@ class Etape
     #[ORM\ManyToOne(inversedBy: 'Etapes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Niveau $Niveau = null;
+
+    /**
+     * @var Collection<int, Progression>
+     */
+    #[ORM\OneToMany(targetEntity: Progression::class, mappedBy: 'Etape')]
+    private Collection $progressions;
+
+    public function __construct()
+    {
+        $this->progressions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,6 +119,36 @@ class Etape
     public function setNiveau(?Niveau $Niveau): static
     {
         $this->Niveau = $Niveau;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Progression>
+     */
+    public function getProgressions(): Collection
+    {
+        return $this->progressions;
+    }
+
+    public function addProgression(Progression $progression): static
+    {
+        if (!$this->progressions->contains($progression)) {
+            $this->progressions->add($progression);
+            $progression->setEtape($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgression(Progression $progression): static
+    {
+        if ($this->progressions->removeElement($progression)) {
+            // set the owning side to null (unless already changed)
+            if ($progression->getEtape() === $this) {
+                $progression->setEtape(null);
+            }
+        }
 
         return $this;
     }
