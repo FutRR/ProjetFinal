@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ utilisateur.username }}{% endblock %}
+
+{% block body %}
+    <div class="title">
+        <h1>Profil de {{ utilisateur.username }}</h1> <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
+    </div>
+
+    <p>Email : {{ utilisateur.email }}</p>
+    <p>Date d'inscription : {{ utilisateur.registerDate|date('d/m/Y') }} à {{ utilisateur.registerDate|date('h:i') }}</p>
+
+    <div class="progression">
+        <h2>Progression</h2>
+        {% for progression in progressions %}
+                <p>{{ progression.etape.nomEtape }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

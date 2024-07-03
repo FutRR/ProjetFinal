@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UtilisateurRepository;
@@ -41,9 +43,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $registerDate = null;
 
+    /**
+     * @var Collection<int, Progression>
+     */
+    #[ORM\OneToMany(targetEntity: Progression::class, mappedBy: 'Utilisateur')]
+    private Collection $progressions;
+
     public function __construct()
     {
         $this->registerDate = new DateTime(); // Initialiser la date d'inscription avec la date actuelle
+        $this->progressions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,6 +150,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRegisterDate(\DateTimeInterface $registerDate): static
     {
         $this->registerDate = $registerDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Progression>
+     */
+    public function getProgressions(): Collection
+    {
+        return $this->progressions;
+    }
+
+    public function addProgression(Progression $progression): static
+    {
+        if (!$this->progressions->contains($progression)) {
+            $this->progressions->add($progression);
+            $progression->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgression(Progression $progression): static
+    {
+        if ($this->progressions->removeElement($progression)) {
+            // set the owning side to null (unless already changed)
+            if ($progression->getUtilisateur() === $this) {
+                $progression->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }
