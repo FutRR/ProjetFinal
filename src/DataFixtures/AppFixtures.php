@@ -12,18 +12,18 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-
-        $faker = Factory::create();
-
         $niveauId = 2;
         $niveau = $manager->getRepository(Niveau::class)->find($niveauId);
 
-        // Création d'étapes pour le Niveau 1
-        for ($i = 1; $i <= 4; $i++) {
+        $nomEtapes = ['Lecture', 'Rythme', 'Connaissances théoriques', 'Morceau'];
+
+        // Création d'étapes
+        foreach ($nomEtapes as $i => $nomEtape) {
             $etape = new Etape();
-            $etape->setNomEtape($faker->word);
+            $etape->setNomEtape($nomEtape);
             $etape->setDescription('lorem ipsum blabla');
-            $etape->setOrdre($i);
+            $etape->setPdf('pdf/piano-facile.pdf');
+            $etape->setOrdre($i + 1);
             $etape->setNiveau($niveau);
             $manager->persist($etape);
         }
