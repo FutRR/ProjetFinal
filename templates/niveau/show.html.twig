@@ -4,6 +4,7 @@
 
 {% block body %}
 
+    <a href="{{ path('app_niveau')}}">Liste des niveaux</a>
     <h1>{{niveau.nomNiveau}}</h1>
 
     <a class="btn add-btn" href="{{ path('edit_niveau', {'id': niveau.id})}}">Modifier le niveau</a>
@@ -12,9 +13,8 @@
 
 
     {% for etape in etapes %}
-        <h2> {{ etape.nomEtape }} </h2>
+        <h2>{{ etape.ordre }} - <a href="{{ path('show_etape', {'id': etape.id})}}">{{ etape.nomEtape }}</a> </h2>
         <p> {{ etape.description }} </p>
-        <p> {{ etape.ordre }} </p>
     {% endfor %}
 
 {% endblock %}
