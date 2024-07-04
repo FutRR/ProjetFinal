@@ -148,7 +148,7 @@ main{
 .titre{
     display: flex;
     justify-content: space-between;
-    width: 100vw;
+    width: 100%;
 }
 
 dialog[open]{
@@ -161,10 +161,6 @@ dialog[open]{
     align-items: center;
     width: fit-content;
     height: fit-content;
-}
-
-dialog::backdrop([open]){
-    filter: blur(8px);
 }
 
 dialog:not([open]){
