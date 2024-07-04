@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ utilisateur.username }}{% endblock %}
+{% block title %}{{ utilisateur }}{% endblock %}
 
 {% block body %}
     <div class="title">
-        <h1>Profil de {{ utilisateur.username }}</h1> <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
+        <h1>Profil de {{ utilisateur }}</h1> <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
     </div>
 
     <p>Email : {{ utilisateur.email }}</p>
@@ -13,7 +13,11 @@
     <div class="progression">
         <h2>Progression</h2>
         {% for progression in progressions %}
-                <p><a href="{{ path('show_etape', {'id': progression.etape.id})}}">{{ progression.etape.nomEtape }}</a></p>
+                <p><a href="{{ path('show_etape', {'id': progression.etape.id})}}">{{ progression.etape }}</a>
+                    {% if progression.done == true %}
+                        <i class="fa-solid fa-check"></i>
+                    {% endif %}
+                </p>
         {% endfor %}
     </div>
 {% endblock %}
