@@ -90,9 +90,13 @@ class EtapeController extends AbstractController
 
         $utilisateur = $this->getUser();
         $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $utilisateur]);
+
+        //On récupère les progressions de l'utilisateur sur les différentes étapes
         $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $utilisateur]);
 
+        //On initialise le tableau associatif
         $progressionsMap = [];
+        //Pour chaque étape, on récupère l'id de l'étape en tant que clé et l'état de complétion en tant que valeur
         foreach ($progressionsUtilisateur as $progressions) {
             $progressionsMap[$progressions->getEtape()->getId()] = $progressions->isDone();
         }
