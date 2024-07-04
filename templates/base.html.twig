@@ -9,10 +9,8 @@
         {% endblock %}
 
     </head>
-
-    <body class="{% block body_class %}{% endblock %}"></body>
     
-    <body>
+    <body class="{% block body_class %}{% endblock %}">
         <nav>
             <a class="logo" href="{{ path('app_home')}}"><img src="{{ asset('img/logo-white.png')}}" alt="Maesterclass logo"></a>
             <ul class="nav-links">
@@ -35,7 +33,7 @@
         </main>
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
             <script src="https://kit.fontawesome.com/19a031a4c5.js" crossorigin="anonymous"></script>
             <script src="{{ asset('js/script.js')}}"></script>
         {% endblock %}
