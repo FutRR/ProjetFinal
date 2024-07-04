@@ -57,30 +57,53 @@ class EtapeController extends AbstractController
 
     }
 
-    #[Route('/etape/{id}/{id_utilisateur}/updateProgression', name: 'updateProgression')]
-    public function updateProgression(Etape $etape, int $id_utilisateur, EntityManagerInterface $entityManager): Response
+    #[Route('/etape/{id}/updateProgression', name: 'updateProgression')]
+    public function updateProgression(Etape $etape, EntityManagerInterface $entityManager): Response
     {
-        $progression = $entityManager->getRepository(Progression::class)->findBy(['etape_id' => $etape->getId(), 'utilisateur_id' => $id_utilisateur]);
+        $utilisateur = $this->getUser();
+        $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $utilisateur]);
 
-        if ($progression->isDone() == false) {
+        if ($progression && !$progression->isDone()) {
             $progression->setDone(true);
+            $entityManager->flush();
+        } elseif (!$progression) {
+            $progression = new Progression();
+            $progression->setUtilisateur($utilisateur);
+            $progression->setEtape($etape);
+            $progression->setDone(true);
+            $entityManager->persist($progression);
+            $entityManager->flush();
         }
 
-        return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
+        $etapeSuivante = $entityManager->getRepository(Etape::class)->findEtapeSuivante($etape);
+
+        return $this->redirectToRoute('show_etape', ['id' => $etapeSuivante->getId()]);
     }
 
 
     #[Route('/etape/{id}', name: 'show_etape')]
-    public function show(Etape $etape, EtapeRepository $etapeRepository): Response
+    public function show(Etape $etape, EtapeRepository $etapeRepository, EntityManagerInterface $entityManager): Response
     {
         $etapeSuivante = $etapeRepository->findEtapeSuivante($etape);
         $etapePrecedente = $etapeRepository->findEtapePrecedente($etape);
+
+        $utilisateur = $this->getUser();
+        $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $utilisateur]);
+
+        if (!$progression) {
+            $progression = new Progression();
+            $progression->setUtilisateur($utilisateur);
+            $progression->setEtape($etape);
+            $entityManager->persist($progression);
+            $entityManager->flush();
+        }
 
 
         return $this->render("etape/show.html.twig", [
             'etape' => $etape,
             'etapeSuivante' => $etapeSuivante,
-            'etapePrecedente' => $etapePrecedente
+            'etapePrecedente' => $etapePrecedente,
+            'progression' => $progression
         ]);
     }
 

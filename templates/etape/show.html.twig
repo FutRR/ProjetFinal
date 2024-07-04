@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ etape.nomEtape }}{% endblock %}
+{% block title %}{{ etape }}{% endblock %}
 
 {% block body %}
 
     <section class="sidebar">
-        <h2><a href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau.nomNiveau}}</a></h2>
+        <h2><a href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau}}</a></h2>
         <ul>
             {% for etape in etape.niveau.etapes %}
-                <li><a href="{{ path('show_etape', {'id': etape.id})}}">{{etape.nomEtape}}</a></li>
+                <li>
+                    <a href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
+                    {# {% if condition %}<i class="fa-solid fa-check"></i>{% endif %} #}
+                </li>
             {% endfor %}
         </ul>
     </section>
 
     <section class="etape-main">
+
         <div class="titre">
-            <h1>{{etape.nomEtape}}</h1>
+            <h1>{{etape}}</h1>
             <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
         </div>
 
@@ -23,13 +27,14 @@
 
         <div class="video"></div>
     
-
-        {% if etape.pdf %}
-            <h2>Document PDF</h2>
-            <iframe src="{{ asset(etape.pdf)}}" width="600" height="800"></iframe>
-        {% else %}
-            <p>Pas de document PDF disponible.</p>
-        {% endif %}
+        <div class="pdf">
+            {% if etape.pdf %}
+                <h2>Document PDF</h2>
+                <iframe src="{{ asset(etape.pdf)}}" width="600" height="800"></iframe>
+            {% else %}
+                <p>Pas de document PDF disponible.</p>
+            {% endif %}
+        </div>
 
         <button class="btn open-btn">Étape finie</button>
 
@@ -43,13 +48,13 @@
             </div>
 
             <div class="modal-btns">
-                {% if etapePrecedente %}
+                {# {% if etapePrecedente %}
                     <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id, 'id_utilisateur': app.user.id }) }}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
-                {% endif %}
-
-                {# {% if etapeSuivante %}
-                    <a  class="modal-btn" href="{{ path('show_etape', {'id': etapeSuivante.id})}}">Étape suivante<br>{{etapeSuivante.nomEtape}}</a>
                 {% endif %} #}
+
+                {% if etapeSuivante %}
+                    <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante}}</a>
+                {% endif %}
             </div>
 
         </dialog>
