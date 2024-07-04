@@ -9,8 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EtapeType extends AbstractType
@@ -30,9 +30,9 @@ class EtapeType extends AbstractType
             ->add('description', TextareaType::class, [
                 'attr' => ['class' => 'form']
             ])
-            // ->add('ordre', NumberType::class, [
-            //     'attr' => ['class' => 'form']
-            // ])
+            ->add('ordre', IntegerType::class, [
+                'attr' => ['class' => 'form']
+            ])
             ->add('Niveau', EntityType::class, [
                 'class' => Niveau::class,
                 'choice_label' => 'nomNiveau',

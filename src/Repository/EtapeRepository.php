@@ -36,9 +36,7 @@ class EtapeRepository extends ServiceEntityRepository
     public function findEtapeSuivante(Etape $etape): ?Etape
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.Niveau = :niveau')
             ->andWhere('e.ordre > :ordre')
-            ->setParameter('niveau', $etape->getNiveau())
             ->setParameter('ordre', $etape->getOrdre())
             ->orderBy('e.ordre', 'ASC')
             ->setMaxResults(1)

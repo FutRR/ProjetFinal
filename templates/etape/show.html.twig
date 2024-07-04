@@ -53,7 +53,7 @@
                 {% endif %} #}
 
                 {% if etapeSuivante %}
-                    <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante}}</a>
+                    <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante.niveau}} - {{etapeSuivante}}</a>
                 {% endif %}
             </div>
 

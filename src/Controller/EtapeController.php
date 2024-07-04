@@ -98,13 +98,10 @@ class EtapeController extends AbstractController
             $entityManager->flush();
         }
 
-
         return $this->render("etape/show.html.twig", [
             'etape' => $etape,
             'etapeSuivante' => $etapeSuivante,
-            'etapePrecedente' => $etapePrecedente,
-            'progression' => $progression
+            'etapePrecedente' => $etapePrecedente
         ]);
     }
-
 }

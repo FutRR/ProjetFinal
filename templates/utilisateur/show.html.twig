@@ -13,7 +13,7 @@
     <div class="progression">
         <h2>Progression</h2>
         {% for progression in progressions %}
-                <p><a href="{{ path('show_etape', {'id': progression.etape.id})}}">{{ progression.etape }}</a>
+                <p><a href="{{ path('show_etape', {'id': progression.etape.id})}}">{{ progression.etape.niveau }} - {{ progression.etape }}</a>
                     {% if progression.done == true %}
                         <i class="fa-solid fa-check"></i>
                     {% endif %}
