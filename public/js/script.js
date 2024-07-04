@@ -1,7 +1,14 @@
-const modal = document.querySelector("#modal");
+const modal = document.querySelector(".modal");
 const openModal = document.querySelector(".open-btn");
 const closeModal = document.querySelector(".close-btn");
+const body = document.querySelector("body");
 
 openModal.addEventListener("click", () => {
-  modal.shadowRoot();
+  body.classList.toggle("blur");
+  modal.showModal();
+});
+
+closeModal.addEventListener("click", () => {
+  body.classList.toggle("blur");
+  modal.close();
 });

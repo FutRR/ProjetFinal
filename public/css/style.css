@@ -132,6 +132,7 @@ main{
     text-decoration: none;
     font-size: 20px;
     border: 1px solid var(--white);
+    cursor: pointer;
 }
 
 .header-btn{
@@ -150,7 +151,7 @@ main{
     width: 100vw;
 }
 
-.modal{
+dialog[open]{
     padding: 20px;
     background-color: var(--white);
     border-radius: 15px;
@@ -160,6 +161,14 @@ main{
     align-items: center;
     width: fit-content;
     height: fit-content;
+}
+
+dialog::backdrop([open]){
+    filter: blur(8px);
+}
+
+dialog:not([open]){
+    display: none !important;
 }
 
 .modal-text{
@@ -182,4 +191,8 @@ main{
     margin: 15px;
     padding: 10px;
     text-align: center;
+}
+
+.blur{
+    filter: blur(4px);
 }

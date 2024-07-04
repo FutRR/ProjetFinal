@@ -26,9 +26,7 @@
 
         {% if etape.pdf %}
             <h2>Document PDF</h2>
-            <iframe src="{{ asset(etape.pdf)}}" width="600" height="800">
-                <p>Votre navigateur ne supporte pas les iframes.</p>
-            </iframe>
+            <iframe src="{{ asset(etape.pdf)}}" width="600" height="800"></iframe>
         {% else %}
             <p>Pas de document PDF disponible.</p>
         {% endif %}
@@ -46,12 +44,12 @@
 
             <div class="modal-btns">
                 {% if etapePrecedente %}
-                    <a  class="modal-btn" href="{{ path('show_etape', {'id': etapePrecedente.id})}}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
+                    <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id, 'id_utilisateur': app.user.id }) }}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
                 {% endif %}
 
-                {% if etapeSuivante %}
+                {# {% if etapeSuivante %}
                     <a  class="modal-btn" href="{{ path('show_etape', {'id': etapeSuivante.id})}}">Étape suivante<br>{{etapeSuivante.nomEtape}}</a>
-                {% endif %}
+                {% endif %} #}
             </div>
 
         </dialog>
