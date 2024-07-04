@@ -7,10 +7,10 @@
     <a class="btn add-btn" href="{{ path('new_niveau')}}">Ajouter un niveau</a>
 
     {% for niveau in niveaux %}
-        <h2><a href="{{ path('show_niveau', {'id': niveau.id}) }}">{{niveau.nomNiveau}}</a></h2>
+        <h2><a href="{{ path('show_niveau', {'id': niveau.id}) }}">{{niveau}}</a></h2>
         <ul>
             {% for etape in niveau.etapes %}
-                <li>{{etape.ordre}} - {{etape.nomEtape}}</li>
+                <li>{{etape.ordre}} - {{etape}}</li>
             {% endfor %}
         </ul>
     {% endfor %}
