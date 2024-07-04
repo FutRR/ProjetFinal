@@ -29,7 +29,9 @@
 
         <p>{{etape.description}}</p>
 
-        <div class="video"></div>
+        <div class="video" width="1200">
+            <iframe src="{{etape.video}}"></iframe>
+        </div>
     
         <div class="pdf">
             {% if etape.pdf %}

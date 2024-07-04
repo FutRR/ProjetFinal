@@ -5,11 +5,9 @@ namespace App\Controller;
 use App\Entity\Etape;
 use App\Form\EtapeType;
 use App\Entity\Progression;
-use App\Entity\Utilisateur;
 use App\Repository\EtapeRepository;
 use App\Repository\NiveauRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\ProgressionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,11 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EtapeController extends AbstractController
 {
     #[Route('/etape', name: 'app_etape')]
-    public function index(EtapeRepository $etapeRepository, NiveauRepository $niveauRepository): Response
+    public function index(NiveauRepository $niveauRepository): Response
     {
-        $etapes = $etapeRepository->findAll();
-        return $this->render('etape/indes.html.twig', [
-            'etapes' => $etapes,
+        $niveaux = $niveauRepository->findAll();
+        return $this->render('etape/index.html.twig', [
+            'niveaux' => $niveaux,
         ]);
     }
 
@@ -47,7 +45,7 @@ class EtapeController extends AbstractController
             $entityManager->persist($etape);
             $entityManager->flush();
             $this->addFlash('success', $message);
-            return $this->redirectToRoute('app_etape');
+            return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
         }
 
         return $this->render("etape/new.html.twig", [
