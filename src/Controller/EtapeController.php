@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Etape;
 use App\Form\EtapeType;
+use App\Entity\Progression;
+use App\Entity\Utilisateur;
 use App\Repository\EtapeRepository;
 use App\Repository\NiveauRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ProgressionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -52,6 +55,18 @@ class EtapeController extends AbstractController
             'edit' => $etape->getId()
         ]);
 
+    }
+
+    #[Route('/etape/{id}/{id_utilisateur}/updateProgression', name: 'updateProgression')]
+    public function updateProgression(Etape $etape, int $id_utilisateur, EntityManagerInterface $entityManager): Response
+    {
+        $progression = $entityManager->getRepository(Progression::class)->findBy(['etape_id' => $etape->getId(), 'utilisateur_id' => $id_utilisateur]);
+
+        if ($progression->isDone() == false) {
+            $progression->setDone(true);
+        }
+
+        return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
     }
 
 

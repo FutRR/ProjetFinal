@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Progression;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
 use App\Repository\ProgressionRepository;
