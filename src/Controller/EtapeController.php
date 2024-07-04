@@ -86,9 +86,16 @@ class EtapeController extends AbstractController
     {
         $etapeSuivante = $etapeRepository->findEtapeSuivante($etape);
         $etapePrecedente = $etapeRepository->findEtapePrecedente($etape);
+        $etapes = $etapeRepository->findBy(['Niveau' => $etape->getNiveau()]);
 
         $utilisateur = $this->getUser();
         $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $utilisateur]);
+        $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $utilisateur]);
+
+        $progressionsMap = [];
+        foreach ($progressionsUtilisateur as $progressions) {
+            $progressionsMap[$progressions->getEtape()->getId()] = $progressions->isDone();
+        }
 
         if (!$progression) {
             $progression = new Progression();
@@ -100,8 +107,10 @@ class EtapeController extends AbstractController
 
         return $this->render("etape/show.html.twig", [
             'etape' => $etape,
+            'etapes' => $etapes,
             'etapeSuivante' => $etapeSuivante,
-            'etapePrecedente' => $etapePrecedente
+            'etapePrecedente' => $etapePrecedente,
+            'progressionsMap' => $progressionsMap
         ]);
     }
 }
