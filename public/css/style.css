@@ -192,3 +192,12 @@ dialog:not([open]){
 .blur{
     filter: blur(4px);
 }
+
+.video{
+
+}
+
+.yt-video{
+    width: 600px;
+    aspect-ratio: 16 / 9;
+}
