@@ -17,23 +17,80 @@
     </header>
 
     <div id="home-main">
+
         <section id="why">
-            <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
-            <p>Chez Maesterclass vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.
-                Le chemin ne sera pas facile mais il sera efficace, ce n’est pas en apprenant Au clair de la Lune que vous deviendrez le prochain Bach !</p>
+            <div class="why-text">
+                <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
+                <p>Chez Maesterclass vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.</p>
+                <br>
+                <p>Le chemin ne sera pas facile mais il sera efficace, ce n’est pas en apprenant Au clair de la Lune que vous deviendrez le prochain Bach !</p>
+            </div>
+            <figure>
+                <img src="{{ asset('img/jj.webp')}}" alt="Jean-Jacques Futterer">
+                <figcaption>Jean-Jacques Futterer - 2014</figcaption>
+            </figure>
         </section>
 
         <section id="how">
-            <div id="schema"></div>
+
+            <div id="schema">
+                <h2>Niveau 1</h2>
+                <h3>Étape 1</h3>
+                <i class="fa-solid fa-chevron-down"></i>
+                <h3>Étape 2</h3>
+                <i class="fa-solid fa-chevron-down"></i>
+                <h3>Étape 3</h3>
+                <i class="fa-solid fa-chevron-down"></i>
+                <h3>Étape 4</h3>
+                <div class="chevrons">
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <h2>Niveau 2</h2>
+            </div>
+
+            <div class="separator"></div>
+
             <div id="how-text">
                 <h2>Comment ça marche</h2>
+                <p>C’est très simple, vous avancez par modules et chaque module comporte des étapes.</p>
+                <p>Ces étapes (Lecture, Compréhension théorique, Rythme...) contiennent chacune une vidéo et un PDF (possibilité d’imprimer afin de s’entraîner sans ordinateur/téléphone).
+                </p>
+                <p>Vous passez au module suivant en complétant toutes les étapes d’un module.</p>
+                <p>Les 5 premiers modules sont gratuits</p>
             </div>
+
         </section>
 
         <section id="reviews">
             <h2>Avis d'élèves</h2>
-            <div class="review"></div>
+            <div class="review-wrapper">
+
+                {% for avis in reviews %}
+                    <div class="review">
+                        <h2>{{ avis.utilisateur }}</h2>
+                        <div class="notes">
+                            {% for i in 1..avis.note %}
+                                <i class="fa-solid fa-star"></i>
+                            {% endfor %}
+                        </div>
+                        <p class="review-text">{{ avis.contenu }}</p>
+                        <p class="review-date">{{ avis.dateCreation|date("d/m/Y") }} à {{ avis.dateCreation|date("H:i") }}</p>
+                    </div> 
+                {% endfor %}
+
+            </div>
+
+            <div class="form-wrapper">
+                <h3>Laisser un avis</h3>
+
+                {{ form(formAddAvis) }}
+
+            </div>
+
+            
         </section>
+
     </div>
 
 

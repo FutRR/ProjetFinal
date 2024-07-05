@@ -1,12 +1,124 @@
-#home-main{
-    margin: 0 100px;
-}
-
 .home-page main{
     margin: 0;
 }
+
+#home-main > :not(#how){
+    margin: 0 100px;
+}
+
+/* HEADER */
 
 .home-page nav{
     position: absolute !important;
 }
 
+.header-btn{
+    transition: all 250ms ease !important;
+}
+
+.header-btn:hover{
+    background-color: var(--blue);
+    color: var(--white) !important;
+}
+
+/* WHY */
+
+    #why{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 0;
+    }
+
+    .why-text p{
+        font-size: 20px;
+    }
+
+    #why figure{
+        text-align: center;
+    }
+
+    figure figcaption{
+        margin-top: 10px;
+    }
+
+/* HOW */
+
+    #how{
+        background-color: var(--white);
+        color: var(--blue);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px 100px;
+        height: auto;
+    }
+
+    #how > div{
+        margin: 0 50px;
+    }
+
+    #schema{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: fit-content;
+    }
+
+    #schema h2{
+        margin: 20px 0
+    }
+
+    #schema h3{
+        margin: 10px 0;
+    }
+
+    .chevrons{
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+    }
+
+    .chevrons i{
+        margin: -5px 0;
+    }
+
+    .separator{
+        width: 5px;
+        height: auto;
+        align-self: stretch;
+        background-color: var(--blue);
+    }
+
+/* REVIEWS */
+
+    #reviews{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .review-wrapper{
+
+    }
+
+    .review-wrapper > .review{
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        background-color: var(--white);
+        color: var(--blue);
+        border-radius: 15px;
+        border: 3px solid var(--blue);
+        padding: 10px 15px;
+    }
+
+    .review-date{
+        align-self: flex-end;
+    }
+
+    .notes{
+        display: flex;
+    }
