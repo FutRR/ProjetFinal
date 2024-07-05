@@ -75,7 +75,7 @@
                             {% endfor %}
                         </div>
                         <p class="review-text">{{ avis.contenu }}</p>
-                        <p class="review-date">{{ avis.dateCreation|date("d/m/Y") }} à {{ avis.dateCreation|date("H:i") }}</p>
+                        <p class="review-date">{{ avis.dateCreation|date("d/m/Y", "Europe/Paris") }} à {{ avis.dateCreation|date("H:i", "Europe/Paris") }}</p>
                     </div> 
                 {% endfor %}
 
