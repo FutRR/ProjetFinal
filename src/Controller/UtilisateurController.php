@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Progression;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
-use App\Repository\ProgressionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ProgressionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -46,6 +45,7 @@ class UtilisateurController extends AbstractController
             'edit' => $utilisateur->getId()
         ]);
     }
+
 
     #[Route('/utilisateur/{id}', name: 'show_utilisateur')]
     public function show(Utilisateur $utilisateur, ProgressionRepository $progressionRepository): Response

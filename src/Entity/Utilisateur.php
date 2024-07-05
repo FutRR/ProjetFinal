@@ -49,10 +49,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Progression::class, mappedBy: 'Utilisateur')]
     private Collection $progressions;
 
+    /**
+     * @var Collection<int, Avis>
+     */
+    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'Utilisateur')]
+    private Collection $avis;
+
     public function __construct()
     {
         $this->registerDate = new DateTime(); // Initialiser la date d'inscription avec la date actuelle
         $this->progressions = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -187,6 +194,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->getUsername();
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): static
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): static
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getUtilisateur() === $this) {
+                $avi->setUtilisateur(null);
+            }
+        }
+
+        return $this;
     }
 
 }
