@@ -8,10 +8,12 @@ use App\Entity\Progression;
 use App\Repository\EtapeRepository;
 use App\Repository\NiveauRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class EtapeController extends AbstractController
 {
@@ -26,7 +28,7 @@ class EtapeController extends AbstractController
 
     #[Route('/etape/new', name: 'new_etape')]
     #[Route('/etape/{id}/edit', name: 'edit_etape')]
-    public function new_edit(Etape $etape = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function new_edit(Etape $etape = null, Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $isNewEtape = !$etape;
         $message = $isNewEtape ? 'Étape créé' : 'Étape modifié';
@@ -41,7 +43,38 @@ class EtapeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $etape = $form->getData();
+            $pdfFile = $form->get('pdf')->getData();
+
+            //Le fichier pdf n'est que pris en compte s'il est upload
+            if ($pdfFile) {
+                $originalFilename = pathinfo($pdfFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $extension = $pdfFile->guessExtension();
+                $existingFiles = glob($this->getParameter('pdf_directory') . '/' . $safeFilename . '-*.' . $extension);
+
+                // on vérifie si le fichier existe deja dans le dossier /pdf
+                if (empty($existingFiles)) {
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $extension;
+                    try {
+                        $pdfFile->move($this->getParameter('pdf_directory'), $newFilename);
+                        $etape->setPdf('pdf/' . $newFilename);
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Erreur lors de l\'upload du fichier PDF : ' . $e->getMessage());
+                        return $this->redirectToRoute('form_etape', ['id' => $etape->getId()]);
+                    }
+                } else {
+                    $this->addFlash('info', 'Le fichier existe déjà et n\'a pas été re-téléchargé.');
+                    $etape->setPdf(str_replace($this->getParameter('pdf_directory') . '/', 'pdf/', $existingFiles[0]));
+                }
+
+            } elseif (!$isNewEtape && $form->get('pdf')->isRequired()) {
+                // Si c'est une édition et que le champ PDF est explicitement vidé
+                $etape->setPdf(null);
+            }
+            // Si aucun nouveau fichier n'est uploadé et que ce n'est pas une suppression explicite,
+            // on garde l'ancien PDF (pas besoin de code supplémentaire car l'entité n'est pas modifiée)
+
+
             $entityManager->persist($etape);
             $entityManager->flush();
             $this->addFlash('success', $message);
