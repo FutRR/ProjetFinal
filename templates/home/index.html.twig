@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block body %}
+
     <header>
         <h1>Apprenez le piano comme il faut<br>avec <span class="bleu">MAESTER</span>CLASS</h1>
 
@@ -19,12 +20,14 @@
     <div id="home-main">
 
         <section id="why">
+
             <div class="why-text">
                 <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
                 <p>Chez Maesterclass vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.</p>
                 <br>
                 <p>Le chemin ne sera pas facile mais il sera efficace, ce n’est pas en apprenant Au clair de la Lune que vous deviendrez le prochain Bach !</p>
             </div>
+
             <figure>
                 <img src="{{ asset('img/jj.webp')}}" alt="Jean-Jacques Futterer">
                 <figcaption>Jean-Jacques Futterer - 2014</figcaption>
@@ -63,9 +66,10 @@
         </section>
 
         <section id="reviews">
-            <h2>Avis d'élèves</h2>
-            <div class="review-wrapper">
 
+            <h2>Avis d'élèves</h2>
+
+            <div class="review-wrapper">
                 {% for avis in reviews %}
                     <div class="review">
                         <h2>{{ avis.utilisateur }}</h2>
@@ -78,19 +82,16 @@
                         <p class="review-date">{{ avis.dateCreation|date("d/m/Y", "Europe/Paris") }} à {{ avis.dateCreation|date("H:i", "Europe/Paris") }}</p>
                     </div> 
                 {% endfor %}
-
             </div>
 
-            <div class="form-wrapper">
-                <h3>Laisser un avis</h3>
-
-                {{ form(formAddAvis) }}
-
-            </div>
-
-            
+            {% if app.user %}
+                <div class="form-wrapper">
+                    <h3>Laisser un avis</h3>
+                    {{ form(formAddAvis) }}
+                </div>
+            {% endif %}
+ 
         </section>
-
     </div>
 
 
