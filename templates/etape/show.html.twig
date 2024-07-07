@@ -4,68 +4,76 @@
 
 {% block body %}
 
-    <section class="sidebar">
-        <h2><a href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau}}</a></h2>
-        <ul>
-            {# On boucle à travers les étapes #}
-            {% for etape in etapes %}
-                <li>
-                    <a href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
-                    {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
-                    {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
-                        <i class="fa-solid fa-check"></i>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
+    {% if app.user %}
+            
+        <section class="sidebar">
+            <h2><a href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau}}</a></h2>
+            <ul>
+                {# On boucle à travers les étapes #}
+                {% for etape in etapes %}
+                    <li>
+                        <a href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
+                        {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
+                        {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
+                            <i class="fa-solid fa-check"></i>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
 
-    <section class="etape-main">
+        <section class="etape-main">
 
-        <div class="titre">
-            <h1>{{etape}}</h1>
-            <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
-        </div>
-
-        <p>{{etape.description}}</p>
-
-        <div class="video">
-            <iframe allowfullscreen class="yt-video" src="{{etape.video}}"></iframe>
-        </div>
-    
-        <div class="pdf">
-            {% if etape.pdf %}
-                <h2>Document PDF</h2>
-                <iframe src="{{ asset(etape.pdf)}}" width="600" height="800"></iframe>
-            {% else %}
-                <p>Pas de document PDF disponible.</p>
-            {% endif %}
-        </div>
-
-        <button class="btn open-btn">Étape finie</button>
-
-        <dialog class="modal" id="modal">
-
-            <button class="btn close-btn">X</button>
-
-            <div class="modal-text">
-                <h3>Félicitations!</h3>
-                <p>Vous avez fini cette étape</p>
+            <div class="titre">
+                <h1>{{etape}}</h1>
+                <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
             </div>
 
-            <div class="modal-btns">
-                {# {% if etapePrecedente %}
-                    <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id, 'id_utilisateur': app.user.id }) }}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
-                {% endif %} #}
+            <p>{{etape.description}}</p>
 
-                {% if etapeSuivante %}
-                    <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante.niveau}} - {{etapeSuivante}}</a>
+            <div class="video">
+                <iframe allowfullscreen class="yt-video" src="{{etape.video}}"></iframe>
+            </div>
+        
+            <div class="pdf">
+                {% if etape.pdf %}
+                    <h2>Document PDF</h2>
+                    <iframe src="{{ asset(etape.pdf)}}" width="600" height="800"></iframe>
+                {% else %}
+                    <p>Pas de document PDF disponible.</p>
                 {% endif %}
             </div>
 
-        </dialog>
+            <button class="btn open-btn">Étape finie</button>
 
-    </section>
+            <dialog class="modal" id="modal">
 
+                <button class="btn close-btn">X</button>
+
+                <div class="modal-text">
+                    <h3>Félicitations!</h3>
+                    <p>Vous avez fini cette étape</p>
+                </div>
+
+                <div class="modal-btns">
+                    {# {% if etapePrecedente %}
+                        <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id, 'id_utilisateur': app.user.id }) }}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
+                    {% endif %} #}
+
+                    {% if etapeSuivante %}
+                        <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante.niveau}} - {{etapeSuivante}}</a>
+                    {% endif %}
+                </div>
+
+            </dialog>
+
+        </section>
+    {% else %}
+
+        <p>Connectez vous pour accéder au contenu</p>
+
+        <a class="btn" href="{{ path('app_login')}}">Connexion</a>
+
+    {% endif %}
 
 {% endblock %}
