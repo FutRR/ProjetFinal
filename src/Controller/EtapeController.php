@@ -114,6 +114,34 @@ class EtapeController extends AbstractController
     }
 
 
+    #[Route('/post/reply/{postId}', name: 'post_reply', methods: ["POST"])]
+    public function postReply(Request $request, EntityManagerInterface $entityManager, int $postId): Response
+    {
+        $post = $entityManager->getRepository(Post::class)->find($postId);
+        $utilisateur = $this->getUser();
+
+        if (!$post) {
+            throw $this->createNotFoundException('Post not found');
+        }
+
+        $reply = new Post();
+        $form = $this->createForm(PostType::class, $reply);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reply->setUtilisateur($utilisateur);
+            $reply->setEtape($post->getEtape());
+            $reply->setParent($post);
+            $entityManager->persist($reply);
+            $entityManager->flush();
+            $this->addFlash('success', 'Réponse publiée');
+            return $this->redirectToRoute('show_etape', ['id' => $post->getEtape()->getId()]);
+        }
+
+        return $this->redirectToRoute('show_etape', ['id' => $post->getEtape()->getId()]);
+    }
+
+
     #[Route('/etape/{id}', name: 'show_etape')]
     public function show(Etape $etape, EtapeRepository $etapeRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -134,6 +162,7 @@ class EtapeController extends AbstractController
             $progressionsMap[$progressions->getEtape()->getId()] = $progressions->isDone();
         }
 
+        //S'il n'y à pas de progression, on en créer une et lui attribue l'utilisateur connecté et l'étape concernée
         if (!$progression) {
             $progression = new Progression();
             $progression->setUtilisateur($utilisateur);
@@ -142,33 +171,55 @@ class EtapeController extends AbstractController
             $entityManager->flush();
         }
 
+        $posts = $entityManager->getRepository(Post::class)->findPostsByEtape($etape);
+
         // Formulaire de post
         $message = 'Post publié';
 
         $post = new Post();
-        $form = $this->createForm(PostType::class, $post);
+        $formPost = $this->createForm(PostType::class, $post);
+        $formPost->handleRequest($request);
 
-        $form->handleRequest($request);
-
-        $utilisateur = $this->getUser();
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formPost->isSubmitted() && $formPost->isValid()) {
             $post->setUtilisateur($utilisateur);
             $post->setEtape($etape);
-            $post = $form->getData();
             $entityManager->persist($post);
             $entityManager->flush();
             $this->addFlash('success', $message);
             return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
         }
 
-        $query = $entityManager->getRepository(post::class)->createQueryBuilder('p')
-            ->select('p')
-            ->where('p.Etape = :etape')
-            ->setParameter('etape', $etape)
-            ->orderBy('p.dateCreation', 'DESC')
-            ->getQuery();
-        $posts = $query->getResult();
+        // Formulaire de reponse
+        // $reponse = $this->createForm(PostType::class, $post);
+        // $reponse->handleRequest($request);
+
+        // if ($reponse->isSubmitted() && $reponse->isValid()) {
+        //     $post->setUtilisateur($utilisateur);
+        //     $post->setEtape($etape);
+
+        //     $parentId = $reponse->get('parent')->getData();
+        //     if ($parentId) {
+        //         $parentPost = $entityManager->getRepository(Post::class)->find($parentId);
+        //         if ($parentPost) {
+        //             $post->setParent($parentPost);
+        //         }
+        //     }
+
+        //     $entityManager->persist($post);
+        //     $entityManager->flush();
+        //     $this->addFlash('success', $message);
+        //     return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
+        // }
+
+        // Création des formulaires de réponse pour chaque post
+        $reponseForms = [];
+        foreach ($posts as $post) {
+            $form = $this->createForm(PostType::class, null, [
+                'action' => $this->generateUrl('post_reply', ['postId' => $post->getId()]),
+            ]);
+            $reponseForms[$post->getId()] = $form->createView();
+        }
+
 
         return $this->render("etape/show.html.twig", [
             'etape' => $etape,
@@ -177,7 +228,8 @@ class EtapeController extends AbstractController
             'etapePrecedente' => $etapePrecedente,
             'progressionsMap' => $progressionsMap,
             'posts' => $posts,
-            'formAddPost' => $form,
+            'formAddPost' => $formPost->createView(),
+            'reponseForms' => $reponseForms,
         ]);
     }
 }

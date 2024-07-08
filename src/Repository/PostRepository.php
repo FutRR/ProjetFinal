@@ -40,4 +40,17 @@ class PostRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findPostsByEtape($etape): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.Etape = :etape')
+            ->andWhere('p.parent IS NULL')
+            ->setParameter('etape', $etape)
+            ->orderBy('p.dateCreation', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

@@ -73,11 +73,36 @@
 
             <div class="posts-wrapper">
                 {% for post in posts %}
-                        <div class="post">
-                            <h3>{{post.utilisateur}}</h3>
-                            <p>{{post.contenu}}</p>
-                            <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
+
+                    {# Affichage des posts #}
+                    <div class="post">
+                        <h3>{{post.utilisateur}}</h3>
+                        <p>{{post.contenu}}</p>
+                        <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
+
+                        {# Formulaire de réponse #}
+                        <div class="reponseForm">
+                            {{ form_start(reponseForms[post.id]) }}
+                            {{ form_widget(reponseForms[post.id]) }}
+                            {{ form_end(reponseForms[post.id]) }}
                         </div>
+                        {# Afficher les réponses #}
+                        {% if post.replies|length > 0 %}
+                            <div class="reponses-wrapper">
+                                {% for reply in post.replies %}
+                                    <div class="reponse">
+                                        <h4>{{reply.utilisateur}}</h4>
+                                        <p>{{reply.contenu}}</p>
+                                        <p>{{reply.dateCreation|date("d/m/Y")}} à {{reply.dateCreation|date("H:i")}}</p>
+                                        {% if reply.parent|length > 0 %}
+                                            <p>En réponse à {{ reply.parent.utilisateur}}</p>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                    </div>
                 {% endfor %}
             </div>
 
