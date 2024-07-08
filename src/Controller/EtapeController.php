@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\Etape;
+use App\Form\PostType;
 use App\Form\EtapeType;
 use App\Entity\Progression;
 use App\Repository\EtapeRepository;
 use App\Repository\NiveauRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class EtapeController extends AbstractController
 {
@@ -113,7 +115,7 @@ class EtapeController extends AbstractController
 
 
     #[Route('/etape/{id}', name: 'show_etape')]
-    public function show(Etape $etape, EtapeRepository $etapeRepository, EntityManagerInterface $entityManager): Response
+    public function show(Etape $etape, EtapeRepository $etapeRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $etapeSuivante = $etapeRepository->findEtapeSuivante($etape);
         $etapePrecedente = $etapeRepository->findEtapePrecedente($etape);
@@ -140,12 +142,42 @@ class EtapeController extends AbstractController
             $entityManager->flush();
         }
 
+        // Formulaire de post
+        $message = 'Post publié';
+
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+
+        $form->handleRequest($request);
+
+        $utilisateur = $this->getUser();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setUtilisateur($utilisateur);
+            $post->setEtape($etape);
+            $post = $form->getData();
+            $entityManager->persist($post);
+            $entityManager->flush();
+            $this->addFlash('success', $message);
+            return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
+        }
+
+        $query = $entityManager->getRepository(post::class)->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.Etape = :etape')
+            ->setParameter('etape', $etape)
+            ->orderBy('p.dateCreation', 'DESC')
+            ->getQuery();
+        $posts = $query->getResult();
+
         return $this->render("etape/show.html.twig", [
             'etape' => $etape,
             'etapes' => $etapes,
             'etapeSuivante' => $etapeSuivante,
             'etapePrecedente' => $etapePrecedente,
-            'progressionsMap' => $progressionsMap
+            'progressionsMap' => $progressionsMap,
+            'posts' => $posts,
+            'formAddPost' => $form,
         ]);
     }
 }
