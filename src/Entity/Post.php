@@ -31,20 +31,16 @@ class Post
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
     private ?\DateTimeInterface $dateCreation = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'reponses')]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'replies')]
+    #[ORM\JoinColumn(nullable: true)]
     private ?self $parent = null;
 
-    /**
-     * @var Collection<int, self>
-     */
-    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
-    private Collection $reponses;
-
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
+    private Collection $replies;
     public function __construct()
     {
-        $this->Reponse = new ArrayCollection();
+        $this->replies = new ArrayCollection();
         $this->dateCreation = new DateTime(); // Initialiser la date d'inscription avec la date actuelle
-        $this->reponses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,41 +101,36 @@ class Post
         return $this->parent;
     }
 
-    public function setParent(?self $parent): static
+    public function setParent(?self $parent): self
     {
         $this->parent = $parent;
-
         return $this;
     }
 
     /**
-     * @return Collection<int, self>
+     * @return Collection|self[]
      */
-    public function getReponses(): Collection
+    public function getReplies(): Collection
     {
-        return $this->reponses;
+        return $this->replies;
     }
 
-    public function addReponse(self $reponse): static
+    public function addReply(self $reply): self
     {
-        if (!$this->reponses->contains($reponse)) {
-            $this->reponses->add($reponse);
-            $reponse->setParent($this);
+        if (!$this->replies->contains($reply)) {
+            $this->replies[] = $reply;
+            $reply->setParent($this);
         }
-
         return $this;
     }
 
-    public function removeReponse(self $reponse): static
+    public function removeReply(self $reply): self
     {
-        if ($this->reponses->removeElement($reponse)) {
-            // set the owning side to null (unless already changed)
-            if ($reponse->getParent() === $this) {
-                $reponse->setParent(null);
+        if ($this->replies->removeElement($reply)) {
+            if ($reply->getParent() === $this) {
+                $reply->setParent(null);
             }
         }
-
         return $this;
     }
-
 }
