@@ -31,13 +31,26 @@ CREATE TABLE IF NOT EXISTS `avis` (
   CONSTRAINT `FK_8F91ABF0FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.avis : ~1 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.avis : ~4 rows (environ)
 INSERT IGNORE INTO `avis` (`id`, `utilisateur_id`, `contenu`, `date_creation`, `note`) VALUES
 	(1, 1, 'cool', '2024-07-05 14:20:48', 5),
 	(2, 1, 'test', '2024-07-05 14:30:40', 2),
 	(3, 2, 'exemple', '2024-07-05 14:33:41', 1),
 	(4, 2, 'test 2', '2024-07-05 14:38:28', 5),
 	(5, 2, 'test 3', '2024-07-05 14:41:31', 4);
+
+-- Listage de la structure de table projet_final_maximefutterer. doctrine_migration_versions
+CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
+  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `executed_at` datetime DEFAULT NULL,
+  `execution_time` int DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+-- Listage des données de la table projet_final_maximefutterer.doctrine_migration_versions : ~1 rows (environ)
+INSERT IGNORE INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+	('DoctrineMigrations\\Version20240708095255', '2024-07-08 11:53:13', 103),
+	('DoctrineMigrations\\Version20240708095818', '2024-07-08 11:58:30', 95);
 
 -- Listage de la structure de table projet_final_maximefutterer. etape
 CREATE TABLE IF NOT EXISTS `etape` (
@@ -93,6 +106,31 @@ INSERT IGNORE INTO `niveau` (`id`, `nom_niveau`) VALUES
 	(1, 'Niveau 1'),
 	(2, 'Niveau 2');
 
+-- Listage de la structure de table projet_final_maximefutterer. post
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `utilisateur_id` int NOT NULL,
+  `etape_id` int NOT NULL,
+  `contenu` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_creation` datetime NOT NULL,
+  `parent_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_5A8A6C8DFB88E14F` (`utilisateur_id`),
+  KEY `IDX_5A8A6C8D4A8CA2AD` (`etape_id`),
+  KEY `IDX_5A8A6C8D727ACA70` (`parent_id`),
+  CONSTRAINT `FK_5A8A6C8D4A8CA2AD` FOREIGN KEY (`etape_id`) REFERENCES `etape` (`id`),
+  CONSTRAINT `FK_5A8A6C8D727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `post` (`id`),
+  CONSTRAINT `FK_5A8A6C8DFB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Listage des données de la table projet_final_maximefutterer.post : ~5 rows (environ)
+INSERT IGNORE INTO `post` (`id`, `utilisateur_id`, `etape_id`, `contenu`, `date_creation`, `parent_id`) VALUES
+	(1, 1, 1, 'mon premier post :)', '2024-07-08 09:42:41', NULL),
+	(5, 1, 1, 'reponse', '2024-07-08 14:45:52', 1),
+	(6, 1, 1, 'test', '2024-07-08 16:52:42', 1),
+	(7, 1, 1, 'test2', '2024-07-08 16:57:26', NULL),
+	(8, 1, 1, 'reponse 2', '2024-07-08 16:57:38', 7);
+
 -- Listage de la structure de table projet_final_maximefutterer. progression
 CREATE TABLE IF NOT EXISTS `progression` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -106,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `progression` (
   CONSTRAINT `FK_D5B25073FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.progression : ~0 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.progression : ~7 rows (environ)
 INSERT IGNORE INTO `progression` (`id`, `utilisateur_id`, `etape_id`, `done`) VALUES
 	(1, 1, 1, 1),
 	(2, 1, 2, 1),
@@ -128,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.utilisateur : ~1 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.utilisateur : ~0 rows (environ)
 INSERT IGNORE INTO `utilisateur` (`id`, `email`, `roles`, `password`, `username`, `register_date`) VALUES
 	(1, 'futterermaxime@gmail.com', '[]', '$2y$13$2m0OgmrAHZyvSJ7e0A7m8e623cB4RmOhtQlROVH0DmBovNRjMqUiG', 'FutRR_', '2024-07-02 11:39:12'),
 	(2, 'exemple@exemple.exemple', '[]', '$2y$13$.hS7yk5nrHkeBfPiiDDAVOXGDd4WCNAjC8saH.6dGR6KohqLhzJPu', 'exemple', '2024-07-05 14:33:10');
