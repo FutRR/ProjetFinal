@@ -203,3 +203,12 @@ dialog:not([open]){
     aspect-ratio: 16 / 9;
 }
 
+/* CONNEXION */
+
+    .login{
+        background-color: var(--white);
+        color: var(--blue);
+        width: fit-content;
+        border-radius: 15px;
+        padding: 30px;
+    }
