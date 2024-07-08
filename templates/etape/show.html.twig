@@ -68,6 +68,26 @@
             </dialog>
 
         </section>
+
+        <section class="forum">
+
+            <div class="posts-wrapper">
+                {% for post in posts %}
+                        <div class="post">
+                            <h3>{{post.utilisateur}}</h3>
+                            <p>{{post.contenu}}</p>
+                            <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
+                        </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-wrapper">
+                <h3>Écrire un post</h3>
+                {{ form(formAddPost) }}
+            </div>
+
+        </section>
+
     {% else %}
 
         <p>Connectez vous pour accéder au contenu</p>
