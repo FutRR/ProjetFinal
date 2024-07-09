@@ -8,25 +8,6 @@
 
 /* HEADER */
 
-    header{
-        padding: 100px 0;
-        width: 100vw;
-        background:linear-gradient(rgba(15, 15, 15, 0.7), rgba(15, 15, 15, 0.7)), url(../img/piano.webp) no-repeat;
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-
-    .header-btn{
-        background-color: rgba(255, 255, 255, 0.8);
-        color: var(--blue) !important;
-        font-weight: 600;
-    }
-
-
     .home-page nav{
         position: absolute !important;
     }
@@ -120,13 +101,23 @@
     }
 
     .review-wrapper{
-
-    }
-
-    .review-wrapper > .review{
         display: flex;
         flex-direction: column;
-        width: fit-content;
+        padding: 0 150px;
+        width: 100%;
+    }
+
+    .review-wrapper :nth-child(1){ align-self: flex-start; }
+    .review-wrapper :nth-child(2){ align-self: flex-end; }
+    .review-wrapper :nth-child(3){ align-self: flex-start; }
+    .review-wrapper :nth-child(4){ align-self: flex-end; }
+
+
+
+    .review{
+        display: flex;
+        flex-direction: column;
+        width: 40%;
         background-color: var(--white);
         color: var(--blue);
         border-radius: 15px;

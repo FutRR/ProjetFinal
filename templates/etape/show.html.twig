@@ -35,20 +35,23 @@
                     <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
                 </div>
 
+                <h2>Déscription</h2>
                 <p>{{etape.description}}</p>
 
                 <div class="video">
-                    <iframe allowfullscreen class="yt-video" src="{{etape.video}}"></iframe>
+                    {% if etape.video %}
+                        <h2>Vidéo</h2>
+                        <iframe allowfullscreen class="yt-video" src="{{etape.video}}" frameborder="0"></iframe>
+                    {% endif %}
                 </div>
             
                 <div class="pdf">
                     {% if etape.pdf %}
                         <h2>Document PDF</h2>
-                        <iframe src="{{ asset(etape.pdf)}}" width="600" height="800"></iframe>
-                    {% else %}
-                        <p>Pas de document PDF disponible.</p>
+                        <iframe class="pdf-file" src="{{ asset(etape.pdf)}}" frameborder="0"></iframe>
                     {% endif %}
                 </div>
+
 
                 <button class="btn open-btn">Étape finie</button>
 
@@ -74,6 +77,8 @@
                 </dialog>
 
                 <div id="forum">
+
+                    <h2>Forum</h2>
 
                     <div class="posts">
                         {% for post in posts %}

@@ -147,6 +147,30 @@ body{
         margin: 10px;
     }
 
+    textarea.form{
+        width: 100%;
+    }
+
+/* PAGE D'ACCUEIL */
+
+    header{
+        padding: 100px 0;
+        width: 100vw;
+        background:linear-gradient(rgba(15, 15, 15, 0.7), rgba(15, 15, 15, 0.7)), url(../img/piano.webp) no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-btn{
+        background-color: rgba(255, 255, 255, 0.8);
+        color: var(--blue) !important;
+        font-weight: 600;
+    }
+
 
 
 /* CONNEXION */
@@ -204,7 +228,7 @@ body{
             justify-content: center;
             align-items: center;
             width: 100%;
-            padding: 50px;
+            padding: 50px 150px;
         }
 
         h1{
@@ -218,15 +242,30 @@ body{
                 justify-content: space-between;
                 width: 100%;
             }
-
-        /* PDF */
         
         /* VIDEO */
 
+            .video{
+                width: 100%;
+            }
+
             .yt-video{
-                width: 600px;
+                width: 100%;
                 aspect-ratio: 16 / 9;
             }
+
+        /* PDF */
+
+            .pdf{
+                width: 100%;
+                height: 100%;
+            }
+
+            .pdf-file{
+                width: 100%;
+                height: 1200px;
+            }
+    
         
         /* MODAL */
 
@@ -330,6 +369,11 @@ body{
 
             .reponseForm{
                 display: none;
+                width: 100%;
+            }
+
+            .reponseForm .form{
+                width: 100%;
             }
 
             .post-form{
