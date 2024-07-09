@@ -13,19 +13,19 @@ closeModal.addEventListener("click", () => {
   modal.close();
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const replyButtons = document.querySelectorAll(".reply-button");
+document.addEventListener("DOMContentLoaded", function () {
+  const replyButtons = document.querySelectorAll(".reponse-btn");
 
-//   replyButtons.forEach((button) => {
-//     button.addEventListener("click", function () {
-//       const postId = this.getAttribute("data-post-id");
-//       const replyForm = document.getElementById(`reply-form-${postId}`);
+  replyButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const postId = this.getAttribute("data-post-id");
+      const replyForm = document.getElementById(`reponse-form-${postId}`);
 
-//       if (replyForm.style.display === "none") {
-//         replyForm.style.display = "block";
-//       } else {
-//         replyForm.style.display = "none";
-//       }
-//     });
-//   });
-// });
+      if (replyForm.style.display === "none") {
+        replyForm.style.display = "block";
+      } else {
+        replyForm.style.display = "none";
+      }
+    });
+  });
+});

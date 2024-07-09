@@ -5,113 +5,130 @@
 {% block body %}
 
     {% if app.user %}
-            
-        <section class="sidebar">
-            <h2><a href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau}}</a></h2>
-            <ul>
-                {# On boucle à travers les étapes #}
-                {% for etape in etapes %}
-                    <li>
-                        <a href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
-                        {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
-                        {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
-                            <i class="fa-solid fa-check"></i>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </section>
+    
+        <div id="etape">
+                
+            <section id="sidebar">
 
-        <section class="etape-main">
+                <h2><a class="no-underline" href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau}}</a></h2>
+                <ul>
+                    {# On boucle à travers les étapes #}
+                    {% for etape in etapes %}
+                        <li>
+                            <a class="no-underline" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
+                            {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
+                            {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
+                                <i class="fa-solid fa-check"></i>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
 
-            <div class="titre">
-                <h1>{{etape}}</h1>
-                <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
-            </div>
+            </section>
 
-            <p>{{etape.description}}</p>
+            <div class="separator"></div>
 
-            <div class="video">
-                <iframe allowfullscreen class="yt-video" src="{{etape.video}}"></iframe>
-            </div>
-        
-            <div class="pdf">
-                {% if etape.pdf %}
-                    <h2>Document PDF</h2>
-                    <iframe src="{{ asset(etape.pdf)}}" width="600" height="800"></iframe>
-                {% else %}
-                    <p>Pas de document PDF disponible.</p>
-                {% endif %}
-            </div>
+            <section id="etape-main">
 
-            <button class="btn open-btn">Étape finie</button>
-
-            <dialog class="modal" id="modal">
-
-                <button class="btn close-btn">X</button>
-
-                <div class="modal-text">
-                    <h3>Félicitations!</h3>
-                    <p>Vous avez fini cette étape</p>
+                <div class="titre">
+                    <h1>{{etape}}</h1>
+                    <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
                 </div>
 
-                <div class="modal-btns">
-                    {# {% if etapePrecedente %}
-                        <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id, 'id_utilisateur': app.user.id }) }}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
-                    {% endif %} #}
+                <p>{{etape.description}}</p>
 
-                    {% if etapeSuivante %}
-                        <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante.niveau}} - {{etapeSuivante}}</a>
+                <div class="video">
+                    <iframe allowfullscreen class="yt-video" src="{{etape.video}}"></iframe>
+                </div>
+            
+                <div class="pdf">
+                    {% if etape.pdf %}
+                        <h2>Document PDF</h2>
+                        <iframe src="{{ asset(etape.pdf)}}" width="600" height="800"></iframe>
+                    {% else %}
+                        <p>Pas de document PDF disponible.</p>
                     {% endif %}
                 </div>
 
-            </dialog>
+                <button class="btn open-btn">Étape finie</button>
 
-        </section>
+                <dialog class="modal" id="modal">
 
-        <section class="forum">
+                    <button class="btn close-btn">X</button>
 
-            <div class="posts-wrapper">
-                {% for post in posts %}
-
-                    {# Affichage des posts #}
-                    <div class="post">
-                        <h3>{{post.utilisateur}}</h3>
-                        <p>{{post.contenu}}</p>
-                        <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
-
-                        {# Formulaire de réponse #}
-                        <div class="reponseForm">
-                            {{ form_start(reponseForms[post.id]) }}
-                            {{ form_widget(reponseForms[post.id]) }}
-                            {{ form_end(reponseForms[post.id]) }}
-                        </div>
-                        {# Afficher les réponses #}
-                        {% if post.replies|length > 0 %}
-                            <div class="reponses-wrapper">
-                                {% for reply in post.replies %}
-                                    <div class="reponse">
-                                        <h4>{{reply.utilisateur}}</h4>
-                                        <p>{{reply.contenu}}</p>
-                                        <p>{{reply.dateCreation|date("d/m/Y")}} à {{reply.dateCreation|date("H:i")}}</p>
-                                        {% if reply.parent|length > 0 %}
-                                            <p>En réponse à {{ reply.parent.utilisateur}}</p>
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-
+                    <div class="modal-text">
+                        <h3>Félicitations!</h3>
+                        <p>Vous avez fini cette étape</p>
                     </div>
-                {% endfor %}
-            </div>
 
-            <div class="form-wrapper">
-                <h3>Écrire un post</h3>
-                {{ form(formAddPost) }}
-            </div>
+                    <div class="modal-btns">
+                        {# {% if etapePrecedente %}
+                            <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id, 'id_utilisateur': app.user.id }) }}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
+                        {% endif %} #}
 
-        </section>
+                        {% if etapeSuivante %}
+                            <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante.niveau}} - {{etapeSuivante}}</a>
+                        {% endif %}
+                    </div>
+
+                </dialog>
+
+                <div id="forum">
+
+                    <div class="posts">
+                        {% for post in posts %}
+        
+                            {# Affichage des posts #}
+                            <div class="post-wrapper">
+        
+                                <div class="post op" id="{{ post.id }}">
+                                    <div class="post-top">
+                                        <h3>{{post.utilisateur}}</h3>
+                                        <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
+                                    </div>
+                                    <p>{{post.contenu}}</p>
+                                    <button class="post-bottom reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
+                                </div>
+        
+                                {# Formulaire de réponse #}
+                                <div class="reponseForm" id="reponse-form-{{ post.id }}">
+                                    {{ form_start(reponseForms[post.id]) }}
+                                    {{ form_widget(reponseForms[post.id]) }}
+                                    {{ form_end(reponseForms[post.id]) }}
+                                </div>
+        
+                                {# Afficher les réponses #}
+                                {% if post.replies|length > 0 %}
+                                        {% for reply in post.replies %}
+                                            <div class="reponse post">
+                                                <div class="post-top">
+                                                    <h3>{{reply.utilisateur}}</h3>
+                                                    <p>{{reply.dateCreation|date("d/m/Y")}} à {{reply.dateCreation|date("H:i")}}</p>
+                                                </div>
+                                                <p>{{reply.contenu}}</p>
+                                                {% if reply.parent|length > 0 %}
+                                                    <p class="post-bottom">En réponse à <a href="#{{post.id}}">{{ reply.parent.utilisateur}}</a></p>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                {% endif %}  
+        
+                            </div>
+        
+                        {% endfor %}
+                    </div>
+        
+                    <div class="post-form">
+                        <h3>Écrire un post</h3>
+                        {{ form(formAddPost) }}
+                    </div>
+        
+                </div>
+        
+
+            </section>
+
+        </div>
 
     {% else %}
 

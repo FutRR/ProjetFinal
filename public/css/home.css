@@ -8,18 +8,37 @@
 
 /* HEADER */
 
-.home-page nav{
-    position: absolute !important;
-}
+    header{
+        padding: 100px 0;
+        width: 100vw;
+        background:linear-gradient(rgba(15, 15, 15, 0.7), rgba(15, 15, 15, 0.7)), url(../img/piano.webp) no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 
-.header-btn{
-    transition: all 250ms ease !important;
-}
+    .header-btn{
+        background-color: rgba(255, 255, 255, 0.8);
+        color: var(--blue) !important;
+        font-weight: 600;
+    }
 
-.header-btn:hover{
-    background-color: var(--blue);
-    color: var(--white) !important;
-}
+
+    .home-page nav{
+        position: absolute !important;
+    }
+
+    .header-btn{
+        transition: all 250ms ease !important;
+    }
+
+    .header-btn:hover{
+        background-color: var(--blue);
+        color: var(--white) !important;
+    }
 
 /* WHY */
 

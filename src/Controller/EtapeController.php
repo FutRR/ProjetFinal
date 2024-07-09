@@ -149,26 +149,28 @@ class EtapeController extends AbstractController
         $etapePrecedente = $etapeRepository->findEtapePrecedente($etape);
         $etapes = $etapeRepository->findBy(['Niveau' => $etape->getNiveau()]);
 
-        $utilisateur = $this->getUser();
-        $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $utilisateur]);
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $utilisateur = $this->getUser();
+            $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $utilisateur]);
 
-        //On récupère les progressions de l'utilisateur sur les différentes étapes
-        $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $utilisateur]);
+            //On récupère les progressions de l'utilisateur sur les différentes étapes
+            $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $utilisateur]);
 
-        //On initialise le tableau associatif
-        $progressionsMap = [];
-        //Pour chaque étape, on récupère l'id de l'étape en tant que clé et l'état de complétion en tant que valeur
-        foreach ($progressionsUtilisateur as $progressions) {
-            $progressionsMap[$progressions->getEtape()->getId()] = $progressions->isDone();
-        }
+            //On initialise le tableau associatif
+            $progressionsMap = [];
+            //Pour chaque étape, on récupère l'id de l'étape en tant que clé et l'état de complétion en tant que valeur
+            foreach ($progressionsUtilisateur as $progressions) {
+                $progressionsMap[$progressions->getEtape()->getId()] = $progressions->isDone();
+            }
 
-        //S'il n'y à pas de progression, on en créer une et lui attribue l'utilisateur connecté et l'étape concernée
-        if (!$progression) {
-            $progression = new Progression();
-            $progression->setUtilisateur($utilisateur);
-            $progression->setEtape($etape);
-            $entityManager->persist($progression);
-            $entityManager->flush();
+            //S'il n'y à pas de progression, on en créer une et lui attribue l'utilisateur connecté et l'étape concernée
+            if (!$progression) {
+                $progression = new Progression();
+                $progression->setUtilisateur($utilisateur);
+                $progression->setEtape($etape);
+                $entityManager->persist($progression);
+                $entityManager->flush();
+            }
         }
 
         $posts = $entityManager->getRepository(Post::class)->findPostsByEtape($etape);
