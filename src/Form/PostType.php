@@ -17,7 +17,11 @@ class PostType extends AbstractType
         $builder
             ->add('contenu', TextareaType::class, [
                 'label' => 'Contenu :',
-                'attr' => ['class' => 'form', 'placeholder' => 'Écrivez votre réponse ici']
+                'attr' => [
+                    'class' => 'form',
+                    'id' => 'textarea',
+                    'placeholder' => 'Écrivez votre réponse ici'
+                ]
             ])
             // ->add('parent', HiddenType::class, [
             //     'mapped' => false,
