@@ -155,7 +155,7 @@ body{
 
     header{
         padding: 100px 0;
-        width: 100vw;
+        width: 100%;
         background:linear-gradient(rgba(15, 15, 15, 0.7), rgba(15, 15, 15, 0.7)), url(../img/piano.webp) no-repeat;
         background-size: cover;
         display: flex;
