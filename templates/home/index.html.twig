@@ -72,14 +72,18 @@
             <div class="review-wrapper">
                 {% for avis in reviews %}
                     <div class="review">
-                        <h2>{{ avis.utilisateur }}</h2>
-                        <div class="notes">
-                            {% for i in 1..avis.note %}
-                                <i class="fa-solid fa-star"></i>
-                            {% endfor %}
+                        <div class="review-top">
+                            <h2>{{ avis.utilisateur }}</h2>
+                            <div class="notes">
+                                {% for i in 1..avis.note %}
+                                    <i class="fa-solid fa-star"></i>
+                                {% endfor %}
+                            </div>
                         </div>
-                        <p class="review-text">{{ avis.contenu }}</p>
-                        <p class="review-date">{{ avis.dateCreation|date("d/m/Y", "Europe/Paris") }} à {{ avis.dateCreation|date("H:i", "Europe/Paris") }}</p>
+                        {% if avis.contenu %}
+                            <p class="review-text">{{ avis.contenu|raw }}</p> 
+                        {% endif %}
+                        <p class="review-bottom">{{ avis.dateCreation|date("d/m/Y", "Europe/Paris") }} à {{ avis.dateCreation|date("H:i", "Europe/Paris") }}</p>
                     </div> 
                 {% endfor %}
             </div>

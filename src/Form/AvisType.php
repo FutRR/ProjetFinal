@@ -20,7 +20,8 @@ class AvisType extends AbstractType
                 'label' => 'Avis',
                 'attr' => [
                     'class' => 'tinymce form',
-                ]
+                ],
+                // 'required' => false
             ])
             ->add('note', IntegerType::class, [
                 'label' => 'Note',
