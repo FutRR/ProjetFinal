@@ -143,12 +143,21 @@ body{
     .form{
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         width: fit-content;
-        margin: 10px;
     }
 
     form label{
-        font-size: 20px;
+        font-size: 20px !important;
+    }
+
+    form input{
+        margin: 10px 0 !important;
+    }
+
+    form select{
+        margin: 10px 0 !important;
     }
 
     .checkbox{
@@ -188,10 +197,28 @@ body{
 
     .login{
         background-color: var(--white);
-        color: var(--blue);
+        color: var(--darkblue1);
         width: fit-content;
         border-radius: 15px;
         padding: 30px;
+    }
+
+/* INSCRIPTION */
+
+    .register{
+        background-color: var(--white);
+        color: var(--darkblue1);
+        width: fit-content;
+        border-radius: 15px;
+        padding: 30px;
+    }
+
+    .register-link{
+        color: var(--darkblue1) !important;
+    }
+
+    .register-link :visited{
+        color: var(--darkblue1);
     }
 
 

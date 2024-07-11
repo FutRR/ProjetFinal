@@ -17,7 +17,7 @@ class AvisType extends AbstractType
     {
         $builder
             ->add('contenu', TextareaType::class, [
-                'label' => 'Avis',
+                'label' => false,
                 'attr' => [
                     'class' => 'tinymce form',
                 ],
