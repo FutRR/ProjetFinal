@@ -6,9 +6,7 @@
     --lightblue: #2C6B8E;
     --darkblue1: #334d90;
     --darkblue2: #0a293a;
-
 }
-
 
 *{
     scroll-behavior: smooth;
@@ -144,7 +142,7 @@ body{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         width: fit-content;
     }
 
@@ -162,10 +160,19 @@ body{
 
     .checkbox{
         display: flex;
-        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         width: fit-content;
-        margin: 10px;
+        gap: 5px;
+        margin: 10px 0;
     }
+
+    .checkbox label a{
+        color: var(--darkblue1);
+    }
+
+    .checkbox :nth-child(1) {order: 2;}
+    .checkbox :nth-child(2) {order: 1;}
 
     .select{
         width: 200px;
@@ -201,7 +208,32 @@ body{
         width: fit-content;
         border-radius: 15px;
         padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
     }
+
+    .login-submit{
+        border: 3px solid var(--darkblue1);
+        color: var(--darkblue1);
+        transition: all 250ms ease;
+    }
+
+    .login-submit:hover{
+        background-color: var(--darkblue1);
+        color: var(--white);
+    }
+
+    .login-link{
+        color: var(--darkblue1);
+    }
+
+    .login-link:visited{
+        color: var(--darkblue1);
+    }
+
 
 /* INSCRIPTION */
 
@@ -211,13 +243,28 @@ body{
         width: fit-content;
         border-radius: 15px;
         padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .register-submit{
+        border: 3px solid var(--darkblue1);
+        color: var(--darkblue1);
+        transition: all 250ms ease;
+    }
+    
+    .register-submit:hover{
+        background-color: var(--darkblue1);
+        color: var(--white);
     }
 
     .register-link{
-        color: var(--darkblue1) !important;
+        color: var(--darkblue1);
     }
 
-    .register-link :visited{
+    .register-link:visited{
         color: var(--darkblue1);
     }
 

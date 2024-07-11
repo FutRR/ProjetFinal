@@ -14,9 +14,11 @@
 
     {% else %}
 
-        <form method="post" class="form-wrapper login">
+    <div class="form-wrapper login">
+        
+        <form method="post">
 
-            <h1>Connectez vous</h1>
+            <h1>Connexion</h1>
 
             <div class="form">
                 <label for="username">Email</label>
@@ -35,11 +37,16 @@
                 <input type="checkbox" name="_remember_me" id="_remember_me">
             </div>
 
-            <button class="btn submit" type="submit">
+            <button class="btn login-submit" type="submit">
                 Connexion
             </button>
             
         </form>
+
+        <p>Pas inscrit ? <a class="login-link" href="{{ path('app_register')}}">Inscrivez vous</a></p>
+        <a class="login-link" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+
+    </div>
 
     {% endif %}
 
