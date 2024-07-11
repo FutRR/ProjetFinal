@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -21,22 +22,13 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, [
-                'attr' => ['class' => 'form']
+                'attr' => ['class' => 'form'],
+                'label' => 'Adresse email*',
             ])
             ->add('username', TextType::class, [
                 'attr' => ['class' => 'form'],
-                'label' => "Nom d'utilisateur"
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez accepter les conditions.',
-                    ]),
-                ],
-                'attr' => ['class' => 'checkbox'],
-                'label' => "J'ai lu et j'accepte les <a href='{{ path('app_terms')}}'>termes et conditions</a>",
-                'label_html' => true
+                'label' => "Nom d'utilisateur",
+                'required' => false
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
@@ -46,11 +38,9 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'Les mots de passes doivent être identiques.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'label_attr' => ['class' => 'label'],
-                'attr' => ['class' => 'form', 'autocomplete' => 'new-password'],
                 'row_attr' => ['class' => 'form'],
-                'first_options' => ['label' => 'Mot de passe', 'attr' => ['class' => 'form']],
-                'second_options' => ['label' => 'Répétez le mot de passe', 'attr' => ['class' => 'form']],
+                'first_options' => ['label' => 'Mot de passe*', 'attr' => ['class' => 'form']],
+                'second_options' => ['label' => 'Répétez le mot de passe*', 'attr' => ['class' => 'form']],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez rentrer un mot de papsse',
@@ -61,6 +51,24 @@ class RegistrationFormType extends AbstractType
                     ])
                 ],
             ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'row_attr' => ['class' => 'checkbox'],
+                'label' => "J'ai lu et j'accepte les <a href='{{ path('app_terms')}}' class='terms-link'>termes et conditions</a>",
+                'label_html' => true,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les conditions.',
+                    ]),
+                ],
+            ])
+            ->add('valider', SubmitType::class, [
+                "attr" => [
+                    'class' => "register-submit btn"
+                ]
+            ])
+
+
         ;
     }
 
