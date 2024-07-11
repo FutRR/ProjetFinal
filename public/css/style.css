@@ -3,8 +3,8 @@
 :root{
     --white: #fff;
     --black: #070707;
-    --blue: #2C6B8E;
-    --darkblue1: #13445f;
+    --lightblue: #2C6B8E;
+    --darkblue1: #334d90;
     --darkblue2: #0a293a;
 
 }
@@ -17,7 +17,7 @@
 body{
     font-family: 'League Spartan', sans-serif;
     color: var(--white);
-    background: linear-gradient(0deg, rgba(44,107,142,1) 0%, rgba(51,77,144,1) 100%);
+    background: linear-gradient(0deg, #2c6b8e 0%, #334d90 100%);
     background-repeat: no-repeat;
     height: 100%;
     min-height: 100vh;
@@ -31,6 +31,13 @@ body{
         margin: 0 100px;
     }
 
+    h2{
+        font-size: 32px;
+    }
+
+    p{
+        font-size: 20px;
+    }
 
     a{
         color: var(--white);
@@ -71,7 +78,7 @@ body{
     }
 
     .bleu{
-        color: var(--blue);
+        color: var(--darkblue1);
     }
 
 /* NAVBAR */
@@ -140,6 +147,10 @@ body{
         margin: 10px;
     }
 
+    form label{
+        font-size: 20px;
+    }
+
     .checkbox{
         display: flex;
         flex-direction: row;
@@ -147,31 +158,31 @@ body{
         margin: 10px;
     }
 
+    .select{
+        width: 200px;
+        font-size: 16px;
+    }
+
+    .select select{
+        width: 100%;
+    }
+
     textarea.form{
         width: 100%;
     }
 
-/* PAGE D'ACCUEIL */
-
-    header{
-        padding: 100px 0;
-        width: 100%;
-        background:linear-gradient(rgba(15, 15, 15, 0.7), rgba(15, 15, 15, 0.7)), url(../img/piano.webp) no-repeat;
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+    .submit{
+        background: transparent;
+        color: var(--white);
+        font-weight: 700;
+        font-size: 16px;
+        transition: all ease 250ms;
     }
 
-    .header-btn{
-        background-color: rgba(255, 255, 255, 0.8);
-        color: var(--blue) !important;
-        font-weight: 600;
+    .submit:hover{
+        background-color: var(--white);
+        color: var(--lightblue);
     }
-
-
 
 /* CONNEXION */
 
@@ -334,6 +345,7 @@ body{
             .op{
                 margin: 20px 0;
                 align-self: flex-start;
+                width: 100%;
             }
 
             .reponse{

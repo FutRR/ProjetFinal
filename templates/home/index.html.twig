@@ -67,7 +67,14 @@
 
         <section id="reviews">
 
+
+            <div class="reviews-titre">
             <h2>Avis d'élèves</h2>
+
+                <div class="filtre">
+                    {{ form(filtre) }}
+                </div>
+            </div>
 
             <div class="review-wrapper">
                 {% for avis in reviews %}
@@ -81,7 +88,7 @@
                             </div>
                         </div>
                         {% if avis.contenu %}
-                            <p class="review-text">{{ avis.contenu|raw }}</p> 
+                            <span class="review-text">{{ avis.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw }}</span> 
                         {% endif %}
                         <p class="review-bottom">{{ avis.dateCreation|date("d/m/Y", "Europe/Paris") }} à {{ avis.dateCreation|date("H:i", "Europe/Paris") }}</p>
                     </div> 

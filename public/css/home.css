@@ -12,12 +12,27 @@
         position: absolute !important;
     }
 
+    header{
+        padding: 100px 0;
+        width: 100%;
+        background:linear-gradient(rgba(15, 15, 15, 0.7), rgba(15, 15, 15, 0.7)), url(../img/piano.webp) no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
     .header-btn{
         transition: all 250ms ease !important;
+        background: transparent;
+        color: var(--blue) !important;
+        font-weight: 600;
     }
 
     .header-btn:hover{
-        background-color: var(--blue);
+        background-color: var(--darkblue1);
         color: var(--white) !important;
     }
 
@@ -46,7 +61,7 @@
 
     #how{
         background-color: var(--white);
-        color: var(--blue);
+        color: var(--darkblue1);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -88,7 +103,7 @@
         width: 5px;
         height: auto;
         align-self: stretch;
-        background-color: var(--blue);
+        background-color: var(--darkblue1);
     }
 
 /* REVIEWS */
@@ -98,6 +113,24 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+    }
+
+    #reviews p{
+        font-size: 16px;
+    }
+
+    .reviews-titre{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: 50px;
+    }
+
+    .filtre form #filter{
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
     }
 
     .review-wrapper{
@@ -118,25 +151,34 @@
         flex-direction: column;
         width: 40%;
         background-color: var(--white);
-        color: var(--blue);
+        color: var(--lightblue);
         border-radius: 15px;
-        border: 3px solid var(--blue);
+        border: 3px solid var(--lightblue);
         padding: 10px 15px;
     }
 
     .review-top{
-        margin-top: 10px;
+        margin: 10px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        font-size: 20px;
     }
 
     .review-top h2{
         margin: 0;
+        font-size: 26px;
     }
 
     .review-text{
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .review-text p{
+
     }
 
     .review-bottom{
