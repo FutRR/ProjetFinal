@@ -15,7 +15,7 @@
                     {# On boucle à travers les étapes #}
                     {% for etape in etapes %}
                         <li>
-                            <a class="no-underline" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
+                            <a class="no-underline" title="{}" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
                             {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
                             {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
                                 <i class="fa-solid fa-check"></i>
@@ -78,53 +78,63 @@
 
                 <div id="forum">
 
-                    <h2>Forum</h2>
+                    <div class="titre">
+                        <h2>Forum</h2>
+                    </div>
+                    
 
-                    <div class="posts">
+                    <div class="post-wrapper">
                         {% for post in posts %}
         
-                            {# Affichage des posts #}
-                            <div class="post-wrapper">
-        
-                                <div class="post op" id="{{ post.id }}">
-                                    <div class="post-top">
-                                        <h3>{{post.utilisateur}}</h3>
-                                        <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
-                                    </div>
-                                    <p>{{post.contenu}}</p>
-                                    <button class="post-bottom reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
+                            {# Affichage des posts #}        
+                            <div class="post op" id="{{ post.id }}">
+                                <div class="post-top">
+                                    <h3>{{post.utilisateur}}</h3>
+                                    <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
                                 </div>
-        
+                                <span class="post-text">{{post.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
+                                <div class="post-bottom">
+                                    <button class="reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
+                                    {% if post.parent %}
+                                        <p class="respond-to">En réponse à <a href="#{{post.parent.id}}">{{ post.parent.utilisateur}}</a></p>
+                                    {% endif %}
+                                </div>
+
                                 {# Formulaire de réponse #}
-                                <div class="reponseForm" id="reponse-form-{{ post.id }}">
+                                <div class="reponseForm form-wrapper" id="reponse-form-{{ post.id }}">
                                     {{ form_start(reponseForms[post.id]) }}
                                     {{ form_widget(reponseForms[post.id]) }}
                                     {{ form_end(reponseForms[post.id]) }}
                                 </div>
-        
-                                {# Afficher les réponses #}
-                                {% if post.replies|length > 0 %}
-                                        {% for reply in post.replies %}
-                                            <div class="reponse post">
-                                                <div class="post-top">
-                                                    <h3>{{reply.utilisateur}}</h3>
-                                                    <p>{{reply.dateCreation|date("d/m/Y")}} à {{reply.dateCreation|date("H:i")}}</p>
-                                                </div>
-                                                <p>{{reply.contenu}}</p>
-                                                {% if reply.parent|length > 0 %}
-                                                    <p class="post-bottom">En réponse à <a href="#{{post.id}}">{{ reply.parent.utilisateur}}</a></p>
-                                                {% endif %}
-                                            </div>
-                                        {% endfor %}
-                                {% endif %}  
-        
+                                
+
                             </div>
+        
+        
+                            {# Afficher les réponses #}
+                            {# {% if post.replies|length > 0 %}
+                                    {% for reply in post.replies %}
+                                        <div class="reponse post">
+
+                                            <div class="post-top">
+                                                <h3>{{reply.utilisateur}}</h3>
+                                                <p>{{reply.dateCreation|date("d/m/Y")}} à {{reply.dateCreation|date("H:i")}}</p>
+                                            </div>
+                                            <span>{{reply.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
+
+                                            {% if reply.parent|length > 0 %}
+                                                <p class="post-bottom">En réponse à <a href="#{{post.id}}">{{ reply.parent.utilisateur}}</a></p>
+                                            {% endif %}
+
+                                        </div>
+                                    {% endfor %}
+                            {% endif %}   #}
         
                         {% endfor %}
                     </div>
         
-                    <div class="post-form">
-                        <h3>Écrire un post</h3>
+                    <div class="form-wrapper post-form">
+                        <h2>Écrire un post</h2>
                         {{ form(formAddPost) }}
                     </div>
         

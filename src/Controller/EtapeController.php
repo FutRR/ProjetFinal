@@ -173,7 +173,7 @@ class EtapeController extends AbstractController
             }
         }
 
-        $posts = $entityManager->getRepository(Post::class)->findPostsByEtape($etape);
+        $posts = $entityManager->getRepository(Post::class)->findBy(['Etape' => $etape]);
 
         // Formulaire de post
         $message = 'Post publié';
@@ -190,28 +190,6 @@ class EtapeController extends AbstractController
             $this->addFlash('success', $message);
             return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
         }
-
-        // Formulaire de reponse
-        // $reponse = $this->createForm(PostType::class, $post);
-        // $reponse->handleRequest($request);
-
-        // if ($reponse->isSubmitted() && $reponse->isValid()) {
-        //     $post->setUtilisateur($utilisateur);
-        //     $post->setEtape($etape);
-
-        //     $parentId = $reponse->get('parent')->getData();
-        //     if ($parentId) {
-        //         $parentPost = $entityManager->getRepository(Post::class)->find($parentId);
-        //         if ($parentPost) {
-        //             $post->setParent($parentPost);
-        //         }
-        //     }
-
-        //     $entityManager->persist($post);
-        //     $entityManager->flush();
-        //     $this->addFlash('success', $message);
-        //     return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
-        // }
 
         // Création des formulaires de réponse pour chaque post
         $reponseForms = [];
