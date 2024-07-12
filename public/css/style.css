@@ -3,9 +3,10 @@
 :root{
     --white: #fff;
     --black: #070707;
-    --lightblue: #2C6B8E;
-    --darkblue1: #334d90;
+    --blue: #2C6B8E;
+    --darkblue1: #32538F;
     --darkblue2: #0a293a;
+
 }
 
 *{
@@ -15,7 +16,7 @@
 body{
     font-family: 'League Spartan', sans-serif;
     color: var(--white);
-    background: linear-gradient(0deg, #2c6b8e 0%, #334d90 100%);
+    background: linear-gradient(0deg, rgba(44,107,142,1) 0%, rgba(51,77,144,1) 100%);
     background-repeat: no-repeat;
     height: 100%;
     min-height: 100vh;
@@ -29,13 +30,6 @@ body{
         margin: 0 100px;
     }
 
-    h2{
-        font-size: 32px;
-    }
-
-    p{
-        font-size: 20px;
-    }
 
     a{
         color: var(--white);
@@ -73,9 +67,16 @@ body{
 
     .add-btn{
         border: 3px solid var(--white);
+        transition: all ease 250ms;
     }
 
-    .bleu{
+    .add-btn:hover{
+        background-color: var(--white);
+        color: var(--darkblue1);
+    }
+
+
+    .maester{
         color: var(--darkblue1);
     }
 
@@ -135,137 +136,59 @@ body{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        gap: 10px;
     }
 
     .form{
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
         width: fit-content;
-    }
-
-    form label{
-        font-size: 20px !important;
-    }
-
-    form input{
-        margin: 10px 0 !important;
-    }
-
-    form select{
-        margin: 10px 0 !important;
+        margin: 10px;
+        gap: 10px;
     }
 
     .checkbox{
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: row;
         width: fit-content;
-        gap: 5px;
-        margin: 10px 0;
-    }
-
-    .checkbox label a{
-        color: var(--darkblue1);
-    }
-
-    .checkbox :nth-child(1) {order: 2;}
-    .checkbox :nth-child(2) {order: 1;}
-
-    .select{
-        width: 200px;
-        font-size: 16px;
-    }
-
-    .select select{
-        width: 100%;
+        margin: 10px;
     }
 
     textarea.form{
         width: 100%;
     }
 
-    .submit{
-        background: transparent;
-        color: var(--white);
-        font-weight: 700;
-        font-size: 16px;
-        transition: all ease 250ms;
+/* PAGE D'ACCUEIL */
+
+    header{
+        padding: 100px 0;
+        width: 100%;
+        background:linear-gradient(rgba(15, 15, 15, 0.7), rgba(15, 15, 15, 0.7)), url(../img/piano.webp) no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
 
-    .submit:hover{
-        background-color: var(--white);
-        color: var(--lightblue);
+    .header-btn{
+        background-color: rgba(255, 255, 255, 0.8);
+        color: var(--blue) !important;
+        font-weight: 600;
     }
+
+
 
 /* CONNEXION */
 
     .login{
         background-color: var(--white);
-        color: var(--darkblue1);
+        color: var(--blue);
         width: fit-content;
         border-radius: 15px;
         padding: 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-
-    }
-
-    .login-submit{
-        border: 3px solid var(--darkblue1);
-        color: var(--darkblue1);
-        transition: all 250ms ease;
-    }
-
-    .login-submit:hover{
-        background-color: var(--darkblue1);
-        color: var(--white);
-    }
-
-    .login-link{
-        color: var(--darkblue1);
-    }
-
-    .login-link:visited{
-        color: var(--darkblue1);
-    }
-
-
-/* INSCRIPTION */
-
-    .register{
-        background-color: var(--white);
-        color: var(--darkblue1);
-        width: fit-content;
-        border-radius: 15px;
-        padding: 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-    }
-
-    .register-submit{
-        border: 3px solid var(--darkblue1);
-        color: var(--darkblue1);
-        transition: all 250ms ease;
-    }
-    
-    .register-submit:hover{
-        background-color: var(--darkblue1);
-        color: var(--white);
-    }
-
-    .register-link{
-        color: var(--darkblue1);
-    }
-
-    .register-link:visited{
-        color: var(--darkblue1);
     }
 
 
@@ -289,11 +212,24 @@ body{
             font-size: 20px;
             margin: 10px 0;
             transition: all 250ms ease;
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
         }
 
         #sidebar li:hover{
             font-weight: 700;
         }
+
+        #sidebar a::before {
+            display: block;
+            content: attr(title);
+            font-weight: bold;
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+        }
+    
 
     /* SEPARATEUR */
 
@@ -403,54 +339,73 @@ body{
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                align-items: center;
+                align-items: flex-start;
+                padding: 10px 15px;
+                width: 100%;
             }
 
             .post-wrapper{
                 display: flex;
                 flex-direction: column;
-                width: 100%;
-                background-color: var(--darkblue2);
+                min-width: fit-content;
                 border-radius: 15px;
-                padding: 10px 15px;
-                margin: 50px;
-            }
-
-            .op{
-                margin: 20px 0;
-                align-self: flex-start;
                 width: 100%;
-            }
-
-            .reponse{
-                margin: 10px 0;
-                align-self: flex-end;
+                gap: 20px;
             }
 
             .post{
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                align-items: center;
-                background-color: var(--darkblue1);
+                align-items: flex-start;
                 border-radius: 15px;
-                width: fit-content;
                 padding: 10px 15px;
-            }
-
-            .post h3{
-                align-self: flex-start;
-                margin-right: 10px;
+                width: 50%;
+                background-color: var(--darkblue1);
             }
 
             .post-top{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                width: 100%;
+                font-size: 20px;
+                margin: 10px 0;
+            }
+
+            .post-top h3{
+                margin: 0;
+                font-size: 26px;
+            }
+
+            .post-top p{
+                margin: 0;
+            }
+
+            .post-text{
+                display: flex;
+                align-items: flex-start;
+                width: 100%;        
             }
 
             .post-bottom{
-                align-self: flex-end;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            .reponse-btn{
+                border: none;
+                background: transparent;
+                text-decoration: none;
+                color: var(--white);
+                padding: 0;
+                margin: 16px 0;
+            }
+
+            .reponse-btn:hover{
+                text-decoration: underline;
             }
 
             .reponseForm{
@@ -458,12 +413,29 @@ body{
                 width: 100%;
             }
 
-            .reponseForm .form{
+            .reponseForm .submit{
+                margin-top: 10px;
                 width: 100%;
             }
 
             .post-form{
-                background-color: var(--darkblue1);
-                border-radius: 15px;
-                padding: 10px 15px;
+                gap: 10px;
             }
+
+            .post-form .submit{
+                margin-top: 10px;
+                width: 100%;
+            }
+
+/* PROFIL */
+
+    .profil-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .profil-progression{
+        
+    }

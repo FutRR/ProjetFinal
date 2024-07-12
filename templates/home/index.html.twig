@@ -12,7 +12,7 @@
 {% block body %}
 
     <header>
-        <h1>Apprenez le piano comme il faut<br>avec <span class="bleu">MAESTER</span>CLASS</h1>
+        <h1>Apprenez le piano comme il faut<br>avec <span class="maester">MAESTER</span>CLASS</h1>
 
         <p><a class="btn header-btn" href="">Commencez dès maintenant</a></p>
     </header>
@@ -69,7 +69,7 @@
 
 
             <div class="reviews-titre">
-            <h2>Avis d'élèves</h2>
+                <h2>Avis d'élèves</h2>
 
                 <div class="filtre">
                     {{ form(filtre) }}
@@ -80,7 +80,7 @@
                 {% for avis in reviews %}
                     <div class="review">
                         <div class="review-top">
-                            <h2>{{ avis.utilisateur }}</h2>
+                            <h3>{{ avis.utilisateur }}</h3>
                             <div class="notes">
                                 {% for i in 1..avis.note %}
                                     <i class="fa-solid fa-star"></i>
