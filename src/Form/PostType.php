@@ -16,16 +16,12 @@ class PostType extends AbstractType
     {
         $builder
             ->add('contenu', TextareaType::class, [
-                'label' => 'Contenu :',
+                'label' => false,
                 'attr' => [
                     'class' => 'tinymce form',
                     'placeholder' => 'Écrivez votre réponse ici'
                 ]
             ])
-            // ->add('parent', HiddenType::class, [
-            //     'mapped' => false,
-            //     'required' => false
-            // ])
             ->add('valider', SubmitType::class, [
                 "attr" => [
                     'class' => "submit btn"
