@@ -21,7 +21,7 @@ class AvisType extends AbstractType
                 'attr' => [
                     'class' => 'tinymce form',
                 ],
-                // 'required' => false
+                'required' => false
             ])
             ->add('note', IntegerType::class, [
                 'label' => 'Note',
