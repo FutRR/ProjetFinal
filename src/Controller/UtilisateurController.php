@@ -51,9 +51,27 @@ class UtilisateurController extends AbstractController
     public function show(Utilisateur $utilisateur, ProgressionRepository $progressionRepository): Response
     {
         $progressions = $progressionRepository->findBy(['Utilisateur' => $utilisateur]);
+
+        //Initialisation du tableau pour stocker les progressions par niveau
+        $groupedProgressions = [];
+
+        //Pour chaque progression de l'utilisateur
+        foreach ($progressions as $progression) {
+            // On récupère le niveau et on le transforme en chaîne de caractères
+            $niveau = $progression->getEtape()->getNiveau();
+            $niveau = (string) $niveau;
+
+            //Si le tableau n'existe pas, on le créer
+            if (!isset($groupedProgressions[$niveau])) {
+                $groupedProgressions[$niveau] = [];
+            }
+            //On ajoute la progression de l'utilisateur au tableau
+            $groupedProgressions[$niveau][] = $progression;
+        }
+
         return $this->render("utilisateur/show.html.twig", [
             'utilisateur' => $utilisateur,
-            'progressions' => $progressions
+            'groupedProgressions' => $groupedProgressions
         ]);
     }
 

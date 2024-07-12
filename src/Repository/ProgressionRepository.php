@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Progression;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Utilisateur;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Progression>
@@ -40,4 +41,15 @@ class ProgressionRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    // public function findByUserOrderByNiveau(Utilisateur $utilisateur): array
+    // {
+    //     return $this->createQueryBuilder('p')
+    //         ->join('p.Etape', 'e')
+    //         ->where('p.Utilisateur = :utilisateur')
+    //         ->setParameter('utilisateur', $utilisateur)
+    //         ->orderBy('e.Niveau', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 }
