@@ -32,61 +32,69 @@ class EtapeController extends AbstractController
     #[Route('/etape/{id}/edit', name: 'edit_etape')]
     public function new_edit(Etape $etape = null, Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
-        $isNewEtape = !$etape;
-        $message = $isNewEtape ? 'Étape créé' : 'Étape modifié';
+        $utilisateur = $this->getUser();
+        if (isset($utilisateur) && $utilisateur->getRoles() == 'ROLE_ADMIN') {
 
-        if (!$etape) {
-            $etape = new Etape();
-        }
+            $isNewEtape = !$etape;
+            $message = $isNewEtape ? 'Étape créé' : 'Étape modifié';
 
-        $form = $this->createForm(EtapeType::class, $etape);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $pdfFile = $form->get('pdf')->getData();
-
-            //Le fichier pdf n'est que pris en compte s'il est upload
-            if ($pdfFile) {
-                $originalFilename = pathinfo($pdfFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $extension = $pdfFile->guessExtension();
-                $existingFiles = glob($this->getParameter('pdf_directory') . '/' . $safeFilename . '-*.' . $extension);
-
-                // on vérifie si le fichier existe deja dans le dossier /pdf
-                if (empty($existingFiles)) {
-                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $extension;
-                    try {
-                        $pdfFile->move($this->getParameter('pdf_directory'), $newFilename);
-                        $etape->setPdf('pdf/' . $newFilename);
-                    } catch (FileException $e) {
-                        $this->addFlash('error', 'Erreur lors de l\'upload du fichier PDF : ' . $e->getMessage());
-                        return $this->redirectToRoute('form_etape', ['id' => $etape->getId()]);
-                    }
-                } else {
-                    $this->addFlash('info', 'Le fichier existe déjà et n\'a pas été re-téléchargé.');
-                    $etape->setPdf(str_replace($this->getParameter('pdf_directory') . '/', 'pdf/', $existingFiles[0]));
-                }
-
-            } elseif (!$isNewEtape && $form->get('pdf')->isRequired()) {
-                // Si c'est une édition et que le champ PDF est explicitement vidé
-                $etape->setPdf(null);
+            if (!$etape) {
+                $etape = new Etape();
             }
-            // Si aucun nouveau fichier n'est uploadé et que ce n'est pas une suppression explicite,
-            // on garde l'ancien PDF (pas besoin de code supplémentaire car l'entité n'est pas modifiée)
+
+            $form = $this->createForm(EtapeType::class, $etape);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $pdfFile = $form->get('pdf')->getData();
+
+                //Le fichier pdf n'est que pris en compte s'il est upload
+                if ($pdfFile) {
+                    $originalFilename = pathinfo($pdfFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $extension = $pdfFile->guessExtension();
+                    $existingFiles = glob($this->getParameter('pdf_directory') . '/' . $safeFilename . '-*.' . $extension);
+
+                    // on vérifie si le fichier existe deja dans le dossier /pdf
+                    if (empty($existingFiles)) {
+                        $newFilename = $safeFilename . '-' . uniqid() . '.' . $extension;
+                        try {
+                            $pdfFile->move($this->getParameter('pdf_directory'), $newFilename);
+                            $etape->setPdf('pdf/' . $newFilename);
+                        } catch (FileException $e) {
+                            $this->addFlash('error', 'Erreur lors de l\'upload du fichier PDF : ' . $e->getMessage());
+                            return $this->redirectToRoute('form_etape', ['id' => $etape->getId()]);
+                        }
+                    } else {
+                        $this->addFlash('info', 'Le fichier existe déjà et n\'a pas été re-téléchargé.');
+                        $etape->setPdf(str_replace($this->getParameter('pdf_directory') . '/', 'pdf/', $existingFiles[0]));
+                    }
+
+                } elseif (!$isNewEtape && $form->get('pdf')->isRequired()) {
+                    // Si c'est une édition et que le champ PDF est explicitement vidé
+                    $etape->setPdf(null);
+                }
+                // Si aucun nouveau fichier n'est uploadé et que ce n'est pas une suppression explicite,
+                // on garde l'ancien PDF (pas besoin de code supplémentaire car l'entité n'est pas modifiée)
 
 
-            $entityManager->persist($etape);
-            $entityManager->flush();
-            $this->addFlash('success', $message);
-            return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
+                $entityManager->persist($etape);
+                $entityManager->flush();
+                $this->addFlash('success', $message);
+                return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
+            }
+
+            return $this->render("etape/new.html.twig", [
+                'formAddEtape' => $form,
+                'edit' => $etape->getId()
+            ]);
+
+        } else {
+            $this->addFlash('error', "Vous n'avez pas le rôle admin");
+            return $this->redirectToRoute("app_home");
         }
-
-        return $this->render("etape/new.html.twig", [
-            'formAddEtape' => $form,
-            'edit' => $etape->getId()
-        ]);
 
     }
 

@@ -50,29 +50,42 @@ class UtilisateurController extends AbstractController
     #[Route('/utilisateur/{id}', name: 'show_utilisateur')]
     public function show(Utilisateur $utilisateur, ProgressionRepository $progressionRepository): Response
     {
-        $progressions = $progressionRepository->findBy(['Utilisateur' => $utilisateur]);
+        $user = $this->getUser();
+        if (isset($user)) {
+            if ($user == $utilisateur) {
 
-        //Initialisation du tableau pour stocker les progressions par niveau
-        $groupedProgressions = [];
+                $progressions = $progressionRepository->findBy(['Utilisateur' => $utilisateur]);
 
-        //Pour chaque progression de l'utilisateur
-        foreach ($progressions as $progression) {
-            // On récupère le niveau et on le transforme en chaîne de caractères
-            $niveau = $progression->getEtape()->getNiveau();
-            $niveau = (string) $niveau;
+                //Initialisation du tableau pour stocker les progressions par niveau
+                $groupedProgressions = [];
 
-            //Si le tableau n'existe pas, on le créer
-            if (!isset($groupedProgressions[$niveau])) {
-                $groupedProgressions[$niveau] = [];
+                //Pour chaque progression de l'utilisateur
+                foreach ($progressions as $progression) {
+                    // On récupère le niveau et on le transforme en chaîne de caractères
+                    $niveau = $progression->getEtape()->getNiveau();
+                    $niveau = (string) $niveau;
+
+                    //Si le tableau n'existe pas, on le créer
+                    if (!isset($groupedProgressions[$niveau])) {
+                        $groupedProgressions[$niveau] = [];
+                    }
+                    //On ajoute la progression de l'utilisateur au tableau
+                    $groupedProgressions[$niveau][] = $progression;
+                }
+
+                return $this->render("utilisateur/show.html.twig", [
+                    'utilisateur' => $utilisateur,
+                    'groupedProgressions' => $groupedProgressions
+                ]);
+            } else {
+                $this->addFlash('error', "Ce n'est pas votre profil");
+                return $this->redirectToRoute("app_home");
             }
-            //On ajoute la progression de l'utilisateur au tableau
-            $groupedProgressions[$niveau][] = $progression;
+
+        } else {
+            $this->addFlash('error', "Vous n'êtes pas connecté");
+            return $this->redirectToRoute("app_home");
         }
 
-        return $this->render("utilisateur/show.html.twig", [
-            'utilisateur' => $utilisateur,
-            'groupedProgressions' => $groupedProgressions
-        ]);
     }
-
 }

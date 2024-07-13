@@ -4,8 +4,10 @@
 
 {% block body %}
 
-    <a class="btn add-btn" href="{{ path('new_niveau')}}">Ajouter un niveau</a>
-
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn add-btn" href="{{ path('new_niveau')}}">Ajouter un niveau</a>
+    {% endif %}
+    
     {% for niveau in niveaux %}
         <h2><a href="{{ path('show_niveau', {'id': niveau.id}) }}">{{niveau}}</a></h2>
     {% endfor %}
