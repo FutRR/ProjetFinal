@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `avis` (
   CONSTRAINT `FK_8F91ABF0FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.avis : ~12 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.avis : ~15 rows (environ)
 INSERT IGNORE INTO `avis` (`id`, `utilisateur_id`, `contenu`, `date_creation`, `note`) VALUES
 	(1, 1, 'cool', '2024-07-05 14:20:48', 5),
 	(2, 1, 'test', '2024-07-05 14:30:40', 2),
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.doctrine_migration_versions : ~4 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.doctrine_migration_versions : ~6 rows (environ)
 INSERT IGNORE INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240702114918', '2024-07-02 11:49:51', 41),
 	('DoctrineMigrations\\Version20240703122431', '2024-07-03 12:24:52', 123),
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   CONSTRAINT `FK_5A8A6C8DFB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.post : ~9 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.post : ~2 rows (environ)
 INSERT IGNORE INTO `post` (`id`, `utilisateur_id`, `etape_id`, `contenu`, `date_creation`, `parent_id`) VALUES
 	(15, 3, 1, '<p>Super cour, qu\'est-ce que vous en avez pens&eacute; ?</p>', '2024-07-12 11:50:23', NULL),
 	(16, 1, 1, '<p>Pareil, c\'est vraiment clair et pr&eacute;cis</p>', '2024-07-12 12:48:35', 15);
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `reset_password_request` (
   CONSTRAINT `FK_7CE748AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.reset_password_request : ~0 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.reset_password_request : ~2 rows (environ)
 INSERT IGNORE INTO `reset_password_request` (`id`, `user_id`, `selector`, `hashed_token`, `requested_at`, `expires_at`) VALUES
 	(1, 1, 'HslUAHcarKuLXuaVi8Jb', '8l2rHQwXTbre41vGXRIKyUH9PHgQDyz4b1L/Gw5sKQs=', '2024-07-12 06:59:54', '2024-07-12 07:59:54');
 
@@ -204,8 +204,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 -- Listage des données de la table projet_final_maximefutterer.utilisateur : ~0 rows (environ)
 INSERT IGNORE INTO `utilisateur` (`id`, `email`, `roles`, `password`, `username`, `register_date`) VALUES
-	(1, 'futterermaxime@gmail.com', '[]', '$2y$13$2m0OgmrAHZyvSJ7e0A7m8e623cB4RmOhtQlROVH0DmBovNRjMqUiG', 'FutRR_', '2024-07-02 11:39:12'),
-	(2, 'exemple@exemple.exemple', '[]', '$2y$13$.hS7yk5nrHkeBfPiiDDAVOXGDd4WCNAjC8saH.6dGR6KohqLhzJPu', 'exemple', '2024-07-05 14:33:10'),
+	(1, 'futterermaxime@gmail.com', '["ROLE_ADMIN"]', '$2y$13$2m0OgmrAHZyvSJ7e0A7m8e623cB4RmOhtQlROVH0DmBovNRjMqUiG', 'FutRR_', '2024-07-02 11:39:12'),
+	(2, 'exemple@exemple.exemple', '[]', '$2y$13$.hS7yk5nrHkeBfPiiDDAVOXGDd4WCNAjC8saH.6dGR6KohqLhzJPu', 'Exemple', '2024-07-05 14:33:10'),
 	(3, 'maximefutterer68@gmail.com', '[]', '$2y$13$C2fofrQ62veCow61dlyEtedw67nYYDvJrNtUhTtIg6OmRwBBeziFi', 'Tester67', '2024-07-12 07:18:45');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
