@@ -3,33 +3,38 @@
 {% block title %}{{ utilisateur }}{% endblock %}
 
 {% block body %}
-    <div class="title profil-title">
-        <h1>Profil de {{ utilisateur }}</h1> 
-        <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
-    </div>
 
-    <div class="profil-infos">
-        <h2>Informations</h2>
-        <p>Email : {{ utilisateur.email }}</p>
-        <p>Date d'inscription : {{ utilisateur.registerDate|date('d/m/Y', "Europe/Paris") }} à {{ utilisateur.registerDate|date('H:i', "Europe/Paris") }}</p>
-    </div>
+    {% if (app.user == utilisateur) or (is_granted('ROLE_ADMIN')) %}
+        
+        <div class="title profil-title">
+            <h1>Profil de {{ utilisateur }}</h1> 
+            <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
+        </div>
 
-    <div class="profil-progression">
-        <h2>Progression</h2>
-        {{ dump(groupedProgressions) }}
-        {# Pour chaque niveau + ses progressions de l'utilisateur #}
-        {% for niveau, progressions in groupedProgressions %}
-            <h3>{{niveau}}</h3>
-            {# Pour chaque etape des progression de l'utilisateur #}
-            {% for progression in progressions %}
-                <p>
-                    <a href="{{ path('show_etape', {'id': progression.etape.id}) }}">{{ progression.etape }}</a>
-                    {# Si l'etape est complétée, on affiche l'icone #}
-                    {% if progression.done %}
-                        <i class="fa-solid fa-check"></i>
-                    {% endif %}
-                </p>
+        <div class="profil-infos">
+            <h2>Informations</h2>
+            <p>Email : {{ utilisateur.email }}</p>
+            <p>Date d'inscription : {{ utilisateur.registerDate|date('d/m/Y', "Europe/Paris") }} à {{ utilisateur.registerDate|date('H:i', "Europe/Paris") }}</p>
+        </div>
+
+        <div class="profil-progression">
+            <h2>Progression</h2>
+            {# Pour chaque niveau + ses progressions de l'utilisateur #}
+            {% for niveau, progressions in groupedProgressions %}
+                <h3>{{niveau}}</h3>
+                {# Pour chaque etape des progression de l'utilisateur #}
+                {% for progression in progressions %}
+                    <p>
+                        <a href="{{ path('show_etape', {'id': progression.etape.id}) }}">{{ progression.etape }}</a>
+                        {# Si l'etape est complétée, on affiche l'icone #}
+                        {% if progression.done %}
+                            <i class="fa-solid fa-check"></i>
+                        {% endif %}
+                    </p>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    </div>
+        </div>
+
+    {% endif %}
+
 {% endblock %}
