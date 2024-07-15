@@ -50,7 +50,7 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
-    #[Route(path: '/admin', name: 'admin')]
+    #[Route(path: '/admin', name: 'app_admin')]
     public function admin(EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
