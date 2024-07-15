@@ -9,7 +9,14 @@
 
     {% for utilisateur in utilisateurs %}
         <div class="utilisateur-card">
-            <h2><a href="{{ path('show_utilisateur', {'id': utilisateur.id })}}">{{utilisateur}}</a></h2>
+            <h2>
+                <a href="{{ path('show_utilisateur', {'id': utilisateur.id })}}">{{utilisateur}}</a> 
+                {% if 'ROLE_ADMIN' in utilisateur.roles %}
+                    - Admin
+                {% else %}
+                    - Utilisateur
+                {% endif %}
+            </h2>
             <p>Email : {{utilisateur.email}}</p>
             <p>Date d'inscription : {{ utilisateur.registerDate|date('d/m/Y', "Europe/Paris") }} à {{ utilisateur.registerDate|date('H:i', "Europe/Paris") }}</p>
         </div>
