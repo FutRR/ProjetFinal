@@ -427,6 +427,10 @@ body{
                 width: 100%;
             }
 
+            .admin{
+                color: rgb(255, 94, 0) !important;
+            }
+
 /* PROFIL */
 
     .profil-title{

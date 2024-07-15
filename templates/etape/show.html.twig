@@ -15,7 +15,7 @@
                     {# On boucle à travers les étapes #}
                     {% for etape in etapes %}
                         <li>
-                            <a class="no-underline" title="{}" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
+                            <a class="no-underline" title="{{etape}}" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
                             {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
                             {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
                                 <i class="fa-solid fa-check"></i>
@@ -89,7 +89,14 @@
                             {# Affichage des posts #}        
                             <div class="post op" id="{{ post.id }}">
                                 <div class="post-top">
-                                    <h3>{{post.utilisateur}}</h3>
+                                    {% if 'ROLE_ADMIN' in post.utilisateur.roles %}
+                                        <h3 title="Admin" class="admin">
+                                            <i class="fa-solid fa-lock"></i>
+                                            {{post.utilisateur}}
+                                        </h3>
+                                    {% else %}
+                                        <h3>{{post.utilisateur}}</h3>
+                                    {% endif %}
                                     <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
                                 </div>
                                 <span class="post-text">{{post.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
