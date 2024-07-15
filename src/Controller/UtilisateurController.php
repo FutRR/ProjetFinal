@@ -52,7 +52,7 @@ class UtilisateurController extends AbstractController
     {
         $user = $this->getUser();
         if (isset($user)) {
-            if ($user == $utilisateur) {
+            if ($user == $utilisateur || $this->isGranted('ROLE_ADMIN')) {
 
                 $progressions = $progressionRepository->findBy(['Utilisateur' => $utilisateur]);
 
