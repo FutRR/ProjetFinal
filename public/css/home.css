@@ -6,6 +6,10 @@
     margin: 0 100px;
 }
 
+.home-page p{
+    font-size: 20px;
+}
+
 /* HEADER */
 
     .home-page nav{
@@ -43,10 +47,6 @@
         justify-content: center;
         align-items: center;
         padding: 40px 0;
-    }
-
-    .why-text p{
-        font-size: 20px;
     }
 
     #why figure{
@@ -106,6 +106,13 @@
         background-color: var(--darkblue1);
     }
 
+    #how-text{}
+
+    #how-text h2{
+        font-size: 24px;
+    }
+
+
 /* REVIEWS */
 
     #reviews{
@@ -113,10 +120,6 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-    }
-
-    #reviews p{
-        font-size: 16px;
     }
 
     .reviews-titre{
@@ -168,14 +171,20 @@
 
     .review-top h3{
         margin: 0;
-        font-size: 26px;
+        font-size: 24px;
     }
 
     .review-text{
         display: flex;
         align-items: flex-start;
         width: 100%;
+        font-size: 16px;
     }
+
+    #reviews p{
+        font-size: 16px;
+    }
+
 
     .review-bottom{
         display: flex;
@@ -189,6 +198,10 @@
         flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
+    }
+
+    .review-form #avis{
+        gap: 10px;
     }
 
     .review-form h3{
