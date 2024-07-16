@@ -6,6 +6,7 @@
     --blue: #2C6B8E;
     --darkblue1: #32538F;
     --darkblue2: #0a293a;
+    --gradient: linear-gradient(0deg, rgba(44,107,142,1) 0%, rgba(51,77,144,1) 100%);
 
 }
 
@@ -191,6 +192,43 @@ body{
         padding: 30px;
     }
 
+/* NIVEAU */
+
+    .niveau-wrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        margin: 50px 0;
+    }
+
+    .niveau{
+        display: flex;
+        flex-direction: column;
+        background-color: var(--white);
+        border-radius: 15px;
+        padding: 10px 15px;
+        width: fit-content;
+    }
+
+    .niveau h2 a{
+        color: var(--darkblue1) !important;
+    }
+
+    .etapes-wrapper{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .niveau-etape{
+        display: flex;
+        flex-direction: column;
+        background: var(--darkblue1);
+        border-radius: 15px;
+        color: var(--white);
+        padding: 10px 15px;
+    }
 
 /* ETAPE */
 
@@ -359,9 +397,16 @@ body{
                 justify-content: center;
                 align-items: flex-start;
                 border-radius: 15px;
-                padding: 10px 15px;
+                padding: 15px 15px;
+                gap: 10px;
+                min-width: fit-content;
                 width: 50%;
                 background-color: var(--darkblue1);
+                transition: background-color 1000ms ease-in-out;
+            }
+
+            .post > p{
+                font-size: 16px !important;
             }
 
             .post-top{
@@ -370,16 +415,19 @@ body{
                 align-items: center;
                 width: 100%;
                 font-size: 20px;
-                margin: 10px 0;
+                gap: 5px;
+            }
+
+            .post-top > *{
+                margin: 0;
             }
 
             .post-top h3{
-                margin: 0;
-                font-size: 26px;
+                font-size: 20px;
             }
 
             .post-top p{
-                margin: 0;
+                font-size: 16px !important;
             }
 
             .post-text{
@@ -401,11 +449,14 @@ body{
                 text-decoration: none;
                 color: var(--white);
                 padding: 0;
-                margin: 16px 0;
             }
 
             .reponse-btn:hover{
                 text-decoration: underline;
+            }
+
+            .respond-to{
+                margin: 0;
             }
 
             .reponseForm{
@@ -428,7 +479,16 @@ body{
             }
 
             .admin{
-                color: rgb(255, 94, 0) !important;
+                color: rgb(2, 207, 71) !important;
+            }
+
+            .reply-link{
+                background-color: #ac22229d !important;
+            }
+
+            .temp-color{
+                background-color: #ac22229d !important;
+                transition: none !important;
             }
 
 /* PROFIL */
@@ -442,4 +502,33 @@ body{
 
     .profil-progression{
         
+    }
+
+    .profil-niveaux-wrapper{
+        display: flex;
+        gap: 20px;
+    }
+
+    .profil-niveau{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .profil-posts{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .profil-posts .post{
+        
+    }
+
+    .profil-posts .post h3{
+        font-size: 20px;
     }

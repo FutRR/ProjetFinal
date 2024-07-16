@@ -29,3 +29,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const replyToLink = document.querySelectorAll(".respond-to-link");
+  replyToLink.forEach((button) => {
+    button.addEventListener("click", function () {
+      const replyTo = this.getAttribute("data-reply-id");
+      const post = document.getElementById(`${replyTo}`);
+
+      post.classList.add("temp-color");
+
+      setTimeout(() => {
+        post.classList.remove("temp-color");
+        post.classList.add("reply-link");
+
+        setTimeout(() => {
+          post.classList.remove("reply-link");
+        }, 1000);
+      }, 10);
+
+      // Enlever la classe après 2 secondes
+    });
+  });
+});

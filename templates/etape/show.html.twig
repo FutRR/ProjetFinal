@@ -71,6 +71,8 @@
 
                         {% if etapeSuivante %}
                             <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante.niveau}} - {{etapeSuivante}}</a>
+                        {% else %}
+                            <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Cours fini!</a>
                         {% endif %}
                     </div>
 
@@ -103,7 +105,7 @@
                                 <div class="post-bottom">
                                     <button class="reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
                                     {% if post.parent %}
-                                        <p class="respond-to">En réponse à <a href="#{{post.parent.id}}">{{ post.parent.utilisateur}}</a></p>
+                                        <p class="respond-to">En réponse à <a href="#{{post.parent.id}}" class="respond-to-link" data-reply-id="{{post.parent.id}}">{{post.parent.utilisateur}}</a></p>
                                     {% endif %}
                                 </div>
 
