@@ -33,7 +33,7 @@ class EtapeController extends AbstractController
     public function new_edit(Etape $etape = null, Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $utilisateur = $this->getUser();
-        if (isset($utilisateur) && $utilisateur->getRoles() == 'ROLE_ADMIN') {
+        if (isset($utilisateur) && $this->isGranted('ROLE_ADMIN')) {
 
             $isNewEtape = !$etape;
             $message = $isNewEtape ? 'Étape créé' : 'Étape modifié';
@@ -118,7 +118,11 @@ class EtapeController extends AbstractController
 
         $etapeSuivante = $entityManager->getRepository(Etape::class)->findEtapeSuivante($etape);
 
-        return $this->redirectToRoute('show_etape', ['id' => $etapeSuivante->getId()]);
+        if ($etapeSuivante) {
+            return $this->redirectToRoute('show_etape', ['id' => $etapeSuivante->getId()]);
+        } else {
+            return $this->redirectToRoute('app_home');
+        }
     }
 
 
