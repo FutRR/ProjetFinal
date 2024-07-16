@@ -50,23 +50,4 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
-    #[Route(path: '/admin', name: 'app_admin')]
-    public function admin(EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->getUser();
-        if (isset($user)) {
-            if ($this->isGranted('ROLE_ADMIN')) {
-
-                $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
-
-                return $this->render('security/index.html.twig', [
-                    'utilisateurs' => $utilisateurs
-                ]);
-
-            }
-        }
-
-        return $this->redirectToRoute('app_home');
-    }
-
 }
