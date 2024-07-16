@@ -8,8 +8,19 @@
         <a class="btn add-btn" href="{{ path('new_niveau')}}">Ajouter un niveau</a>
     {% endif %}
     
-    {% for niveau in niveaux %}
-        <h2><a href="{{ path('show_niveau', {'id': niveau.id}) }}">{{niveau}}</a></h2>
-    {% endfor %}
-
+    <div class="niveau-wrapper">
+        {% for niveau in niveaux %}
+            <div class="niveau">
+                <h2><a href="{{ path('show_niveau', {'id': niveau.id}) }}">{{niveau}}</a></h2>
+                <div class="etapes-wrapper">
+                    {% for etape in niveau.etapes %}
+                        <div class="niveau-etape">
+                            <h3><a href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a></h3>
+                            <p>{{etape.description}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
