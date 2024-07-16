@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,7 +49,7 @@ class UtilisateurController extends AbstractController
 
 
     #[Route('/utilisateur/{id}', name: 'show_utilisateur')]
-    public function show(Utilisateur $utilisateur, ProgressionRepository $progressionRepository): Response
+    public function show(Utilisateur $utilisateur, ProgressionRepository $progressionRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         if (isset($user)) {
@@ -73,10 +74,14 @@ class UtilisateurController extends AbstractController
                     $groupedProgressions[$niveau][] = $progression;
                 }
 
+                $posts = $entityManager->getRepository(Post::class)->findBy(['utilisateur' => $utilisateur]);
+
                 return $this->render("utilisateur/show.html.twig", [
                     'utilisateur' => $utilisateur,
-                    'groupedProgressions' => $groupedProgressions
+                    'groupedProgressions' => $groupedProgressions,
+                    'posts' => $posts
                 ]);
+
             } else {
                 $this->addFlash('error', "Ce n'est pas votre profil");
                 return $this->redirectToRoute("app_home");
