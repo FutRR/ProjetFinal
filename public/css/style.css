@@ -228,6 +228,7 @@ body{
         border-radius: 15px;
         color: var(--white);
         padding: 10px 15px;
+        max-width: 40%;
     }
 
 /* ETAPE */
@@ -502,6 +503,15 @@ body{
 
     .profil-progression{
         
+    }
+
+    .profil-list-progression p{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 2px;
+        height: 00%;
     }
 
     .profil-niveaux-wrapper{
