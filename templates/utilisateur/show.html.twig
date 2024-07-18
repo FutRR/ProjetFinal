@@ -24,22 +24,27 @@
                 {% for niveau, progressions in groupedProgressions %}
                     <div class="profil-niveau">
                         <h3>{{niveau}}</h3>
+                        <div class="profil-list-progression">
                         {# Pour chaque etape des progression de l'utilisateur #}
-                        {% for progression in progressions %}
-                            <p>
-                                <a href="{{ path('show_etape', {'id': progression.etape.id}) }}">{{ progression.etape }}</a>
-                                {# Si l'etape est complétée, on affiche l'icone #}
-                                {% if progression.done %}
-                                    <i class="fa-solid fa-check"></i>
-                                {% endif %}
-                            </p>
-                        {% endfor %}
+                            {% for progression in progressions %}
+                                    <p>
+                                        <a href="{{ path('show_etape', {'id': progression.etape.id}) }}">{{ progression.etape }}</a>
+                                        {# Si l'etape est complétée, on affiche l'icone #}
+                                        {% if progression.done %}
+                                            <i class="fa-solid fa-circle-check"></i>
+                                        {% else %}
+                                            <i class="fa-regular fa-circle-check"></i>
+                                        {% endif %}
+                                    </p>
+                            {% endfor %}
+                        </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
 
         <div class="profil-posts">
+            <h2>Derniers posts</h2>
             {% for post in posts %}
                 <div class="post">
                     <div class="post-top">
@@ -57,7 +62,7 @@
                     <span class="post-text">{{post.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
                         
                     <div class="post-bottom">
-                        <a href="{{ path('show_etape', {'id': post.etape.id}) }}">Aller à la discussion</a>
+                        <a href="{{ path('show_etape', {'id': post.etape.id}) }}">Aller à la discussion - {{ post.etape.niveau }} - {{ post.etape }}</a>
                     </div>
                 </div>
                 
