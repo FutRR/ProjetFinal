@@ -74,7 +74,7 @@ class UtilisateurController extends AbstractController
                     $groupedProgressions[$niveau][] = $progression;
                 }
 
-                $posts = $entityManager->getRepository(Post::class)->findBy(['utilisateur' => $utilisateur]);
+                $posts = $entityManager->getRepository(Post::class)->findBy(['utilisateur' => $utilisateur], ['dateCreation' => 'DESC']);
 
                 return $this->render("utilisateur/show.html.twig", [
                     'utilisateur' => $utilisateur,
