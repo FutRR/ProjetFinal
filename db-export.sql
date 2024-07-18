@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `avis` (
   CONSTRAINT `FK_8F91ABF0FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.avis : ~15 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.avis : ~16 rows (environ)
 INSERT IGNORE INTO `avis` (`id`, `utilisateur_id`, `contenu`, `date_creation`, `note`) VALUES
 	(1, 1, 'cool', '2024-07-05 14:20:48', 5),
 	(2, 1, 'test', '2024-07-05 14:30:40', 2),
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.doctrine_migration_versions : ~6 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.doctrine_migration_versions : ~9 rows (environ)
 INSERT IGNORE INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240702114918', '2024-07-02 11:49:51', 41),
 	('DoctrineMigrations\\Version20240703122431', '2024-07-03 12:24:52', 123),
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `messenger_messages` (
   KEY `IDX_75EA56E016BA31DB` (`delivered_at`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.messenger_messages : ~0 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.messenger_messages : ~1 rows (environ)
 INSERT IGNORE INTO `messenger_messages` (`id`, `body`, `headers`, `queue_name`, `created_at`, `available_at`, `delivered_at`) VALUES
 	(1, 'O:36:\\"Symfony\\\\Component\\\\Messenger\\\\Envelope\\":2:{s:44:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0stamps\\";a:1:{s:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\";a:1:{i:0;O:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\":1:{s:55:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\0busName\\";s:21:\\"messenger.bus.default\\";}}}s:45:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0message\\";O:51:\\"Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\":2:{s:60:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0message\\";O:39:\\"Symfony\\\\Bridge\\\\Twig\\\\Mime\\\\TemplatedEmail\\":5:{i:0;s:30:\\"reset_password/email.html.twig\\";i:1;N;i:2;a:1:{s:10:\\"resetToken\\";O:58:\\"SymfonyCasts\\\\Bundle\\\\ResetPassword\\\\Model\\\\ResetPasswordToken\\":4:{s:65:\\"\\0SymfonyCasts\\\\Bundle\\\\ResetPassword\\\\Model\\\\ResetPasswordToken\\0token\\";s:40:\\"HslUAHcarKuLXuaVi8JbUQ5JnhoOReaqSit2DrvN\\";s:69:\\"\\0SymfonyCasts\\\\Bundle\\\\ResetPassword\\\\Model\\\\ResetPasswordToken\\0expiresAt\\";O:17:\\"DateTimeImmutable\\":3:{s:4:\\"date\\";s:26:\\"2024-07-12 07:59:54.966431\\";s:13:\\"timezone_type\\";i:3;s:8:\\"timezone\\";s:3:\\"UTC\\";}s:71:\\"\\0SymfonyCasts\\\\Bundle\\\\ResetPassword\\\\Model\\\\ResetPasswordToken\\0generatedAt\\";i:1720767594;s:73:\\"\\0SymfonyCasts\\\\Bundle\\\\ResetPassword\\\\Model\\\\ResetPasswordToken\\0transInterval\\";i:1;}}i:3;a:6:{i:0;N;i:1;N;i:2;N;i:3;N;i:4;a:0:{}i:5;a:2:{i:0;O:37:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\":2:{s:46:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0headers\\";a:3:{s:4:\\"from\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:4:\\"From\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:22:\\"admin@maesterclass.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:21:\\"Maesterclass Mail Bot\\";}}}}s:2:\\"to\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:2:\\"To\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:24:\\"futterermaxime@gmail.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:0:\\"\\";}}}}s:7:\\"subject\\";a:1:{i:0;O:48:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:7:\\"Subject\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:55:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\0value\\";s:27:\\"Your password reset request\\";}}}s:49:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0lineLength\\";i:76;}i:1;N;}}i:4;N;}s:61:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0envelope\\";N;}}', '[]', 'default', '2024-07-12 06:59:55', '2024-07-12 06:59:55', NULL);
 
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   CONSTRAINT `FK_5A8A6C8DFB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.post : ~2 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.post : ~3 rows (environ)
 INSERT IGNORE INTO `post` (`id`, `utilisateur_id`, `etape_id`, `contenu`, `date_creation`, `parent_id`) VALUES
 	(15, 3, 1, '<p>Super cour, qu\'est-ce que vous en avez pens&eacute; ?</p>', '2024-07-12 11:50:23', NULL),
 	(16, 1, 1, '<p>Pareil, c\'est vraiment clair et pr&eacute;cis</p>', '2024-07-12 12:48:35', 15),
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `progression` (
   CONSTRAINT `FK_D5B25073FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.progression : ~9 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.progression : ~12 rows (environ)
 INSERT IGNORE INTO `progression` (`id`, `utilisateur_id`, `etape_id`, `done`) VALUES
 	(1, 1, 1, 1),
 	(2, 1, 2, 1),
@@ -170,12 +170,12 @@ INSERT IGNORE INTO `progression` (`id`, `utilisateur_id`, `etape_id`, `done`) VA
 	(4, 1, 4, 1),
 	(5, 1, 5, 1),
 	(6, 1, 6, 1),
-	(7, 1, 7, 1),
+	(7, 1, 7, 0),
 	(8, 2, 1, 1),
 	(9, 2, 3, 0),
 	(10, 2, 2, 0),
 	(11, 3, 1, 0),
-	(12, 1, 8, 1);
+	(12, 1, 8, 0);
 
 -- Listage de la structure de table projet_final_maximefutterer. reset_password_request
 CREATE TABLE IF NOT EXISTS `reset_password_request` (
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `reset_password_request` (
   CONSTRAINT `FK_7CE748AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.reset_password_request : ~2 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.reset_password_request : ~1 rows (environ)
 INSERT IGNORE INTO `reset_password_request` (`id`, `user_id`, `selector`, `hashed_token`, `requested_at`, `expires_at`) VALUES
 	(1, 1, 'HslUAHcarKuLXuaVi8Jb', '8l2rHQwXTbre41vGXRIKyUH9PHgQDyz4b1L/Gw5sKQs=', '2024-07-12 06:59:54', '2024-07-12 07:59:54');
 
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.utilisateur : ~0 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.utilisateur : ~3 rows (environ)
 INSERT IGNORE INTO `utilisateur` (`id`, `email`, `roles`, `password`, `username`, `register_date`) VALUES
 	(1, 'futterermaxime@gmail.com', '["ROLE_ADMIN"]', '$2y$13$2m0OgmrAHZyvSJ7e0A7m8e623cB4RmOhtQlROVH0DmBovNRjMqUiG', 'FutRR_', '2024-07-02 11:39:12'),
 	(2, 'exemple@exemple.exemple', '[]', '$2y$13$.hS7yk5nrHkeBfPiiDDAVOXGDd4WCNAjC8saH.6dGR6KohqLhzJPu', 'Exemple', '2024-07-05 14:33:10'),
