@@ -20,22 +20,31 @@
 
             <h1>Connexion</h1>
 
-            <div class="form">
-                <label for="username">Email</label>
-                <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
+            <div class="form login-input-box">
+                <label for="username" style="display: none;">Email</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" placeholder="Email" autocomplete="email" required autofocus>
+                <i class="fa-solid fa-user"></i>
             </div>
 
-            <div class="form">
-                <label for="password">Mot de passe</label>
-                <input type="password" name="_password" id="password" autocomplete="current-password" required>
+            <div class="form login-input-box">
+                <label for="password" style="display: none;">Mot de passe</label>
+                <input type="password" name="_password" id="password" placeholder="Mot de passe" autocomplete="current-password" required>
+                <i class="fa-solid fa-lock"></i>
             </div>
         
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <div class="checkbox">
-                <label for="_remember_me">Se souvenir de moi</label>
-                <input type="checkbox" name="_remember_me" id="_remember_me">
+            <div class="login-options">
+            
+                <div class="checkbox login-checkbox">
+                    <label for="_remember_me">Se souvenir de moi</label>
+                    <input type="checkbox" name="_remember_me" id="_remember_me">
+                </div>
+
+                <a class="login-link" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+
             </div>
+
 
             <button class="btn login-submit" type="submit">
                 Connexion
@@ -43,8 +52,7 @@
             
         </form>
 
-        <p>Pas inscrit ? <a class="login-link" href="{{ path('app_register')}}">Inscrivez vous</a></p>
-        <a class="login-link" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+        <p>Pas encore inscrit ? <a class="login-link" href="{{ path('app_register')}}" style="font-weight: 700;">Créez un compte</a></p>
 
     </div>
 
