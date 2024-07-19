@@ -17,7 +17,7 @@
 
                         <div class="niveau-etape">
                             <h3>{{etape}}</h3>
-                            <p>{{ etape.description|u.truncate(200, '...', false) }}</p>
+                            <p class="niveau-etape-desc">{{ etape.description|u.truncate(200, '...', false) }}</p>
                             <a href="{{ path('show_etape', {'id': etape.id})}}">En savoir plus</a>
                         </div>
                         
