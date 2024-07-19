@@ -4,10 +4,11 @@
 
 {% block body %}
 
-    <div class="form-wrapper register">
+    <div class="form-wrapper login-register">
         <h1>Inscription</h1>
 
         {{ form_start(registrationForm) }}
+
             {{ form_row(registrationForm.email) }}
 
             {{ form_row(registrationForm.username) }}
@@ -22,6 +23,6 @@
 
         {{ form_end(registrationForm) }}
 
-        <p>Déjà inscrit ? <a class="register-link" href="{{ path('app_login')}}">Connectez vous</a></p>
+        <p>Déjà inscrit ? <a class="login-register-link" href="{{ path('app_login')}}" style="font-weight: 700;">Connectez vous</a></p>
     </div>
 {% endblock %}

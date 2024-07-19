@@ -22,12 +22,14 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, [
-                'attr' => ['class' => 'form'],
-                'label' => 'Adresse email*',
+                'row_attr' => ['class' => 'input-box'],
+                'label' => 'Adresse Email',
+                'label_attr' => ['class' => 'floating-label'],
             ])
             ->add('username', TextType::class, [
-                'attr' => ['class' => 'form'],
+                'row_attr' => ['class' => 'input-box'],
                 'label' => "Nom d'utilisateur",
+                'label_attr' => ['class' => 'floating-label'],
                 'required' => false
             ])
             ->add('plainPassword', RepeatedType::class, [
@@ -35,15 +37,14 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'invalid_message' => 'Les mots de passes doivent être identiques.',
-                'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'row_attr' => ['class' => 'form'],
-                'first_options' => ['label' => 'Mot de passe*', 'attr' => ['class' => 'form']],
-                'second_options' => ['label' => 'Répétez le mot de passe*', 'attr' => ['class' => 'form']],
+                'invalid_message' => 'Les mots de passes doivent être identiques.',
+                'options' => ['row_attr' => ['class' => 'input-box'], 'label_attr' => ['class' => 'floating-label']],
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Répetez le mot de passe'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez rentrer un mot de papsse',
+                        'message' => 'Veuillez rentrer un mot de passe',
                     ]),
                     new Regex([
                         'pattern' => "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",
@@ -53,7 +54,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                'row_attr' => ['class' => 'checkbox'],
+                'row_attr' => ['class' => 'checkbox login-register-checkbox'],
                 'label' => "J'ai lu et j'accepte les <a href='{{ path('app_terms')}}' class='terms-link'>termes et conditions</a>",
                 'label_html' => true,
                 'constraints' => [
@@ -63,9 +64,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('valider', SubmitType::class, [
-                "attr" => [
-                    'class' => "register-submit btn"
-                ]
+                "attr" => ['class' => "login-register-submit btn"],
+                'label' => "S'inscrire"
             ])
 
 
