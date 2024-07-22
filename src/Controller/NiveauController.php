@@ -28,7 +28,7 @@ class NiveauController extends AbstractController
     public function new_edit(Niveau $niveau = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         $utilisateur = $this->getUser();
-        if (isset($utilisateur) && $utilisateur->getRoles() == 'ROLE_ADMIN') {
+        if (isset($utilisateur) && $this->isGranted("ROLE_ADMIN")) {
 
             $isNewNiveau = !$niveau;
             $message = $isNewNiveau ? 'Niveau créé' : 'Niveau modifié';
