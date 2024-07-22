@@ -93,6 +93,11 @@
                         <p class="review-bottom">{{ avis.dateCreation|date("d/m/Y", "Europe/Paris") }} à {{ avis.dateCreation|date("H:i", "Europe/Paris") }}</p>
                     </div> 
                 {% endfor %}
+
+                {% if maxResults < reviews|length %}
+                    <a href="{{ path('app_home', {'maxResults': maxResults + 5}) }}">Voir plus</a>
+                {% endif %}
+
             </div>
 
             {% if app.user %}

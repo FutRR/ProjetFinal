@@ -34,7 +34,7 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        // Filtrage
+        // Filtrage | Réslutats max
 
         $filtre = $this->createForm(FilterType::class);
         $filtre->handleRequest($request);
@@ -43,6 +43,8 @@ class HomeController extends AbstractController
         if ($filtre->isSubmitted() && $filtre->isValid()) {
             $ordre = $filtre->get('ordre')->getData();
         }
+
+        $maxResults = $request->query->getInt('maxResults', 5);
 
         $queryBuilder = $entityManager->getRepository(Avis::class)->createQueryBuilder('a');
 
@@ -63,21 +65,15 @@ class HomeController extends AbstractController
                 break;
         }
 
-        $queryBuilder->setMaxResults(4);
+        $queryBuilder->setMaxResults($maxResults);
         $reviews = $queryBuilder->getQuery()->getResult();
 
-
-        // $query = $entityManager->getRepository(Avis::class)->createQueryBuilder('a')
-        //     ->select('a')
-        //     ->orderBy('a.dateCreation', 'DESC')
-        //     ->setMaxResults(4)
-        //     ->getQuery();
-        // $reviews = $query->getResult();
 
         return $this->render('home/index.html.twig', [
             'formAddAvis' => $form,
             'filtre' => $filtre,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'maxResults' => $maxResults
         ]);
     }
 
