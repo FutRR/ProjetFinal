@@ -16,9 +16,31 @@
     <h1>Editer un etape</h1>
           
     {% else %}
-    <h1>Ajouter un etape</h1>
+    <h1>Ajouter un étape</h1>
     {% endif %}
 
-    {{ form(formAddEtape) }}
+    <div class="form-wrapper">
+        {# {{ form(formAddEtape) }} #}
 
+        {{ form_start(formAddEtape)}}
+
+            {{ form_row(formAddEtape.nomEtape)}}
+
+            {{ form_row(formAddEtape.description)}}
+
+            {{ form_row(formAddEtape.video)}}
+
+            {{ form_row(formAddEtape.pdf)}}
+
+            {{ form_row(formAddEtape.ordre)}}
+
+            {{ form_row(formAddEtape.Niveau)}}
+
+
+            {{ form_widget(formAddEtape.valider)}}
+
+
+        {{ form_end(formAddEtape)}}
+
+    </div>
 {% endblock %}

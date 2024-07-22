@@ -21,13 +21,19 @@ class EtapeType extends AbstractType
     {
         $builder
             ->add('nomEtape', TextType::class, [
-                'attr' => ['class' => 'form']
+                'row_attr' => ['class' => 'form'],
+                'label' => "Nom de l'étape :"
+            ])
+            ->add('description', TextareaType::class, [
+                'row_attr' => ['class' => 'form', 'placeholder' => "Description de l'étape"],
+                'label' => 'Description :'
+
             ])
             ->add('pdf', FileType::class, [
                 'data_class' => null,
                 'mapped' => false,
-                'attr' => ['class' => 'form'],
-                'label' => 'PDF',
+                'row_attr' => ['class' => 'form'],
+                'label' => 'PDF :',
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -41,19 +47,18 @@ class EtapeType extends AbstractType
                 ]
             ])
             ->add('video', TextType::class, [
-                'attr' => ['class' => 'form', 'placeholder' => 'ID Youtube - ex : n7RjlO-beJA'],
+                'row_attr' => ['class' => 'form', 'placeholder' => 'ID Youtube - ex : n7RjlO-beJA'],
+                'label' => "ID de la vidéo Youtube :",
                 'empty_data' => 'https://www.youtube.com/embed/',
                 'required' => false,
             ])
-            ->add('description', TextareaType::class, [
-                'attr' => ['class' => 'form']
-            ])
             ->add('ordre', IntegerType::class, [
-                'attr' => ['class' => 'form']
+                'row_attr' => ['class' => 'form']
             ])
             ->add('Niveau', EntityType::class, [
                 'class' => Niveau::class,
                 'choice_label' => 'nomNiveau',
+                'row_attr' => ['class' => 'select form']
             ])
             ->add('valider', SubmitType::class, [
                 "attr" => [
