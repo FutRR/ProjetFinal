@@ -142,11 +142,8 @@
         width: 100%;
     }
 
-    .review-wrapper :nth-child(1){ align-self: flex-start; }
-    .review-wrapper :nth-child(2){ align-self: flex-end; }
-    .review-wrapper :nth-child(3){ align-self: flex-start; }
-    .review-wrapper :nth-child(4){ align-self: flex-end; }
-
+    .review-wrapper > :nth-child(odd){ align-self: flex-start; }
+    .review-wrapper > :nth-child(even){ align-self: flex-end; }
 
 
     .review{
@@ -156,9 +153,8 @@
         background-color: var(--white);
         color: var(--blue) !important;
         border-radius: 15px;
-        border: 3px solid var(--blue);
         padding: 10px 15px;
-    }
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;    }
 
     .review-top{
         margin: 10px 0;
