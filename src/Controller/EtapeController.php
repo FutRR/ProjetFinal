@@ -153,6 +153,22 @@ class EtapeController extends AbstractController
         return $this->redirectToRoute('show_etape', ['id' => $post->getEtape()->getId()]);
     }
 
+    #[Route("/post/{id}/delete", name: 'post_delete')]
+    public function deletePost(Post $post, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if ($post->getUtilisateur() == $user) {
+
+            $entityManager->remove($post);
+            $entityManager->flush();
+            noty()->success('Post supprimé');
+            return $this->redirectToRoute('show_etape', ['id' => $post->getEtape()->getId()]);
+        } else {
+            noty()->success("Vous n'êtes pas l'auteur de ce post");
+            return $this->redirectToRoute('app_home');
+        }
+    }
+
 
     #[Route('/etape/{id}', name: 'show_etape')]
     public function show(Etape $etape, EtapeRepository $etapeRepository, EntityManagerInterface $entityManager, Request $request): Response
