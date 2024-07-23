@@ -47,6 +47,12 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
+    #[Route('utilisateur/{id}/changePassword', name: 'change_password')]
+    public function changePassword(Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
+    {
+
+    }
+
 
     #[Route('/utilisateur/{id}', name: 'show_utilisateur')]
     public function show(Utilisateur $utilisateur, ProgressionRepository $progressionRepository, EntityManagerInterface $entityManager): Response
