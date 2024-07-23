@@ -11,18 +11,21 @@
             <section id="sidebar">
 
                 <h2><a class="no-underline" href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau}}</a></h2>
-                <ul>
-                    {# On boucle à travers les étapes #}
-                    {% for etape in etapes %}
-                        <li>
-                            <a class="no-underline" title="{{etape}}" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
-                            {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
-                            {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
-                                <i class="fa-solid fa-check"></i>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
+                <div class="etape-progression-wrapper">
+                    <div class="progression-line"></div>
+                    <ul>
+                        {# On boucle à travers les étapes #}
+                        {% for etape in etapes %}
+                            <li>
+                                <a class="no-underline" title="{{etape}}" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
+                                {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
+                                {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
+                                    <i class="fa-solid fa-check"></i>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
 
             </section>
 
@@ -53,11 +56,11 @@
                 </div>
 
 
-                <button class="btn open-btn">Étape finie</button>
+                <button class="btn" id="open-btn-etape">Étape finie</button>
 
-                <dialog class="modal" id="modal">
+                <dialog class="modal" id="modal-etape">
 
-                    <button class="btn close-btn">X</button>
+                    <button class="btn close-btn" id="close-btn-etape">X</button>
 
                     <div class="modal-text">
                         <h3>Félicitations!</h3>
@@ -65,14 +68,10 @@
                     </div>
 
                     <div class="modal-btns">
-                        {# {% if etapePrecedente %}
-                            <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id, 'id_utilisateur': app.user.id }) }}">Étape précédente<br>{{etapePrecedente.nomEtape}}</a>
-                        {% endif %} #}
-
                         {% if etapeSuivante %}
-                            <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Étape suivante<br>{{etapeSuivante.niveau}} - {{etapeSuivante}}</a>
+                            <a class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">{{etapeSuivante.niveau}} - {{etapeSuivante}}</a>
                         {% else %}
-                            <a  class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Cours fini!</a>
+                            <a class="modal-btn" href="{{ path('updateProgression', {'id': etape.id }) }}">Cours fini!</a>
                         {% endif %}
                     </div>
 
@@ -103,10 +102,29 @@
                                 </div>
                                 <span class="post-text">{{post.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
                                 <div class="post-bottom">
-                                    <button class="reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
+                                    <div>
+                                        <button class="reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
+
+                                        {% if app.user == post.utilisateur %}
+                                            <button class="open-btn" id="open-btn-post">Supprimer</button>
+                                            <dialog class="modal" id="modal-post">
+                                                <button class="btn close-btn" id="close-btn-post">X</button>
+                            
+                                                <div class="modal-text">
+                                                    <h3>Êtes-vous sur de vouloir supprimer ce post ?</h3>
+                                                </div>
+                            
+                                                <div class="modal-btns">
+                                                    <a class="modal-btn delete-btn" href="{{ path('post_delete', {'id': post.id }) }}">Supprimer</a>
+                                                </div>
+                                            </dialog>
+                                        {% endif %}
+                                    </div>
+
                                     {% if post.parent %}
                                         <p class="respond-to">En réponse à <a href="#{{post.parent.id}}" class="respond-to-link" data-reply-id="{{post.parent.id}}">{{post.parent.utilisateur}}</a></p>
                                     {% endif %}
+
                                 </div>
 
                                 {# Formulaire de réponse #}
