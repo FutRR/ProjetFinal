@@ -4,9 +4,10 @@
     --white: #fff;
     --black: #070707;
     --blue: #2C6B8E;
-    --darkblue1: #32538F;
+    --darkblue1: #1a3270;
     --darkblue2: #0a293a;
-    --gradient: linear-gradient(0deg, rgb(75, 141, 177) 0%, rgb(26, 50, 112) 100%);
+    --red: #9c1f1f;
+    --gradient: linear-gradient(0deg, #4b8db1 0%, #1a3270 100%);
 
 }
 
@@ -34,6 +35,7 @@ body{
 
     a{
         color: var(--white);
+        text-decoration: none;
     }
 
     a:visited{
@@ -62,8 +64,14 @@ body{
         border-radius: 15px;
         text-decoration: none;
         font-size: 20px;
-        border: 1px solid var(--white);
+        border: 3px solid var(--white);
         cursor: pointer;
+        transition: all 250ms ease;
+    }
+
+    .btn:hover{
+        background-color: transparent;
+        color: var(--white);
     }
 
     .add-btn{
@@ -74,6 +82,10 @@ body{
     .add-btn:hover{
         background-color: var(--white);
         color: var(--darkblue1);
+    }
+
+    button{
+        cursor: pointer;
     }
 
 
@@ -158,6 +170,16 @@ body{
 
     textarea.form{
         width: 100%;
+    }
+
+    .submit{
+        border: 3px solid var(--white);
+        transition: all 250ms ease;
+    }
+
+    .submit:hover{
+        background: transparent;
+        color: var(--white);
     }
 
     input:-webkit-autofill,
@@ -282,7 +304,9 @@ body{
 		transition: all 250ms ease;
 	}
 
-	.input-box > .floating-label:has(+input:focus){
+	.input-box > .floating-label:has(+input:focus),
+    .input-box > .floating-label:has(+input:not(:focus):valid)
+    {
         top: 25%;
 		transform: translateY(-50%);
         font-size: 16px;
@@ -373,10 +397,24 @@ body{
 
     /* SIDEBAR */
 
-        #sidebar{
+        .etape-progression-wrapper{
+            display: flex;
+            align-items: center;
+            height: fit-content;
+            gap: 5px;
         }
 
-        #sidebar ul{}
+        .progression-line{
+            width: 2.5px;
+            height: auto;
+            align-self: stretch;
+            background-color: var(--white);
+        }
+
+        #sidebar ul{
+            margin: 0;
+            padding: 0;
+        }
 
         #sidebar li{
             list-style: none;
@@ -461,6 +499,29 @@ body{
         
         /* MODAL */
 
+            .open-btn{
+                background: transparent;
+                border: none;
+                color: var(--white);
+            }
+
+            .close-btn{
+                align-self: flex-end;
+                background: transparent;
+                border: 3px solid var(--blue);
+                border-radius: 5000px;
+                transition: all 250ms ease;
+                padding: 5px 7.5px;
+            }
+
+            .close-btn:hover{
+                background-color: var(--blue);
+            }
+
+            .open-btn:hover{
+                text-decoration: underline;
+            }
+
             dialog[open]{
                 padding: 20px;
                 background-color: var(--white);
@@ -469,7 +530,7 @@ body{
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: fit-content;
+                width: 25%;
                 height: fit-content;
             }
             
@@ -482,12 +543,22 @@ body{
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                text-align: center;
+            }
+
+            .modal-text h3{
+                font-size: 26px;
+            }
+
+            .modal-text p{
+                font-size: 20px;
             }
             
             .modal-btns{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                width: 100%;
             }
             
             .modal-btn{
@@ -497,6 +568,23 @@ body{
                 margin: 15px;
                 padding: 10px;
                 text-align: center;
+                font-weight: 600;
+                transition: all 250ms ease;
+                width: 100%;
+            }
+
+            .modal-btn:hover{
+                background-color: var(--blue);
+                color: var(--white) !important;
+            }
+
+            .delete-btn{
+                border-color: var(--red) !important;
+                color: var(--red) !important;
+            }
+
+            .delete-btn:hover{
+                background-color: var(--red) !important;
             }
             
             .blur{
