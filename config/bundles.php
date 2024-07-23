@@ -15,4 +15,5 @@ return [
     Flasher\Symfony\FlasherSymfonyBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
+    Flasher\Noty\Symfony\FlasherNotySymfonyBundle::class => ['all' => true],
 ];
