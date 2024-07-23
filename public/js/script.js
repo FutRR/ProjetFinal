@@ -1,18 +1,36 @@
-const modal = document.querySelector(".modal");
-const openModal = document.querySelector(".open-btn");
-const closeModal = document.querySelector(".close-btn");
 const body = document.querySelector("body");
 
-openModal.addEventListener("click", () => {
+//Etape fini modal
+const modalEtape = document.getElementById("modal-etape");
+const openModalEtape = document.getElementById("open-btn-etape");
+const closeModalEtape = document.getElementById("close-btn-etape");
+
+openModalEtape.addEventListener("click", () => {
   body.classList.toggle("blur");
-  modal.showModal();
+  modalEtape.showModal();
 });
 
-closeModal.addEventListener("click", () => {
+closeModalEtape.addEventListener("click", () => {
   body.classList.toggle("blur");
-  modal.close();
+  modalEtape.close();
 });
 
+//Post delete modal
+const modalPost = document.getElementById("modal-post");
+const openModalPost = document.getElementById("open-btn-post");
+const closeModalPost = document.getElementById("close-btn-post");
+
+openModalPost.addEventListener("click", () => {
+  body.classList.toggle("blur");
+  modalPost.showModal();
+});
+
+closeModalPost.addEventListener("click", () => {
+  body.classList.toggle("blur");
+  modalPost.close();
+});
+
+//Post reply
 document.addEventListener("DOMContentLoaded", function () {
   const replyButtons = document.querySelectorAll(".reponse-btn");
 
@@ -30,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+//Replied-to post color
 document.addEventListener("DOMContentLoaded", function () {
   const replyToLink = document.querySelectorAll(".respond-to-link");
   replyToLink.forEach((button) => {
@@ -47,8 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
           post.classList.remove("reply-link");
         }, 1000);
       }, 10);
-
-      // Enlever la classe après 2 secondes
     });
   });
 });
