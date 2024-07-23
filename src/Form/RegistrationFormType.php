@@ -22,12 +22,12 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, [
-                'row_attr' => ['class' => 'input-box'],
+                'row_attr' => ['class' => 'form input-box'],
                 'label' => 'Adresse Email',
                 'label_attr' => ['class' => 'floating-label'],
             ])
             ->add('username', TextType::class, [
-                'row_attr' => ['class' => 'input-box'],
+                'row_attr' => ['class' => 'form input-box'],
                 'label' => "Nom d'utilisateur",
                 'label_attr' => ['class' => 'floating-label'],
                 'required' => false
@@ -39,7 +39,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'invalid_message' => 'Les mots de passes doivent être identiques.',
-                'options' => ['row_attr' => ['class' => 'input-box'], 'label_attr' => ['class' => 'floating-label']],
+                'options' => ['row_attr' => ['class' => 'form input-box'], 'label_attr' => ['class' => 'floating-label']],
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Répetez le mot de passe'],
                 'constraints' => [
