@@ -218,7 +218,8 @@ body{
         border-radius: 50px;
         align-self: center !important;
         background: transparent;
-        padding: 20px;        
+        padding: 20px;  
+        padding-top: 30px;      
         font-size: 18px;
         color: var(--white);
     }
@@ -274,16 +275,18 @@ body{
 		color: var(--white);
 		position: absolute;
 		top: 50%;
-		transform: translateY(-50%);
         left: 5%;
-        opacity: 0.5;
+		transform: translateY(-50%);
+        opacity: 1;
         pointer-events: none;
 		transition: all 250ms ease;
 	}
 
-	.input-box input:focus + .floating-label{
-        top: 0;
+	.input-box > .floating-label:has(+input:focus){
+        top: 25%;
 		transform: translateY(-50%);
+        font-size: 16px;
+        opacity: .5;
 	}
 
 /* PAGE D'ACCUEIL */
