@@ -82,7 +82,7 @@ class EtapeController extends AbstractController
 
                 $entityManager->persist($etape);
                 $entityManager->flush();
-                $this->addFlash('success', $message);
+                noty()->success($message);
                 return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
             }
 
@@ -146,7 +146,7 @@ class EtapeController extends AbstractController
             $reply->setParent($post);
             $entityManager->persist($reply);
             $entityManager->flush();
-            $this->addFlash('success', 'Réponse publiée');
+            noty()->success('Réponse publiée');
             return $this->redirectToRoute('show_etape', ['id' => $post->getEtape()->getId()]);
         }
 
@@ -161,7 +161,9 @@ class EtapeController extends AbstractController
         $etapePrecedente = $etapeRepository->findEtapePrecedente($etape);
         $etapes = $etapeRepository->findBy(['Niveau' => $etape->getNiveau()]);
 
-        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        $user = $this->getUser();
+
+        if (isset($user)) {
             $utilisateur = $this->getUser();
             $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $utilisateur]);
 
@@ -183,45 +185,50 @@ class EtapeController extends AbstractController
                 $entityManager->persist($progression);
                 $entityManager->flush();
             }
-        }
 
-        $posts = $entityManager->getRepository(Post::class)->findBy(['Etape' => $etape]);
+            $posts = $entityManager->getRepository(Post::class)->findBy(['Etape' => $etape]);
 
-        // Formulaire de post
-        $message = 'Post publié';
+            // Formulaire de post
+            $message = 'Post publié';
 
-        $post = new Post();
-        $formPost = $this->createForm(PostType::class, $post);
-        $formPost->handleRequest($request);
+            $post = new Post();
+            $formPost = $this->createForm(PostType::class, $post);
+            $formPost->handleRequest($request);
 
-        if ($formPost->isSubmitted() && $formPost->isValid()) {
-            $post->setUtilisateur($utilisateur);
-            $post->setEtape($etape);
-            $entityManager->persist($post);
-            $entityManager->flush();
-            $this->addFlash('success', $message);
-            return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
-        }
+            if ($formPost->isSubmitted() && $formPost->isValid()) {
+                $post->setUtilisateur($utilisateur);
+                $post->setEtape($etape);
+                $entityManager->persist($post);
+                $entityManager->flush();
+                noty()->success($message);
+                return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
+            }
 
-        // Création des formulaires de réponse pour chaque post
-        $reponseForms = [];
-        foreach ($posts as $post) {
-            $form = $this->createForm(PostType::class, null, [
-                'action' => $this->generateUrl('post_reply', ['postId' => $post->getId()]),
+            // Création des formulaires de réponse pour chaque post
+            $reponseForms = [];
+            foreach ($posts as $post) {
+                $form = $this->createForm(PostType::class, null, [
+                    'action' => $this->generateUrl('post_reply', ['postId' => $post->getId()]),
+                ]);
+                $reponseForms[$post->getId()] = $form->createView();
+            }
+
+
+            return $this->render("etape/show.html.twig", [
+                'etape' => $etape,
+                'etapes' => $etapes,
+                'etapeSuivante' => $etapeSuivante,
+                'etapePrecedente' => $etapePrecedente,
+                'progressionsMap' => $progressionsMap,
+                'posts' => $posts,
+                'formAddPost' => $formPost->createView(),
+                'reponseForms' => $reponseForms,
             ]);
-            $reponseForms[$post->getId()] = $form->createView();
+
+        } else {
+            noty()->error("Vous n'êtes pas connecté");
+            return $this->redirectToRoute("app_home");
         }
 
-
-        return $this->render("etape/show.html.twig", [
-            'etape' => $etape,
-            'etapes' => $etapes,
-            'etapeSuivante' => $etapeSuivante,
-            'etapePrecedente' => $etapePrecedente,
-            'progressionsMap' => $progressionsMap,
-            'posts' => $posts,
-            'formAddPost' => $formPost->createView(),
-            'reponseForms' => $reponseForms,
-        ]);
     }
 }
