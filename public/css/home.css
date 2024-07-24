@@ -133,7 +133,20 @@
     .filtre form #filter{
         display: flex;
         flex-flow: row nowrap;
+        align-items: center;
         width: 100%;
+    }
+
+    select{
+        font-size: 18px !important;
+    }
+
+    .select label{
+        font-size: 18px !important;
+    }
+
+    .select-submit{
+        font-size: 18px !important;
     }
 
     .review-wrapper{
