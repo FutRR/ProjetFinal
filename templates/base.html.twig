@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
@@ -37,24 +38,52 @@
         {% endblock %}
         </main>
 
+        {% if show_footer is not defined %}
+            <footer>
+
+                <div class="footer-general">
+                    <h2>Maesterclass</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus mi libero, a vehicula nulla faucibus non. Nulla porta bibendum scelerisque. Nam scelerisque massa sit amet nibh mattis bibendum.</p>
+
+                    <div class="footer-follow">
+                        <h3>Suivez nous !</h3>
+                        <ul>
+                            {# <li><i class="fa-solid fa-envelope"></i></li> #}
+                            <li><i class="fa-brands fa-instagram"></i></li>
+                            <li><i class="fa-brands fa-x-twitter"></i></li>
+                            <li><i class="fa-brands fa-facebook"></i></li>
+                        </ul>
+                    </div>
+    
+                </div>
+
+
+                <div class="footer-navigation">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="{{ path('app_home')}}">Accueil</a></li>
+                        <li><a href="{{ path('app_niveau')}}">Niveaux</a></li>
+                        <li><a href="{{ path('app_login')}}">Connexion</a></li>
+                        <li><a href="{{ path('app_register')}}">Inscription</a></li>
+                    </ul>
+                </div>
+
+                <div class="support">
+                    <h3>Support</h3>
+                    <ul>
+                        <li class="footer-support-links">Termes et conditions</li>
+                        <li class="footer-support-links">Politique de confidentialité</li>
+                        <li class="footer-support-links">Contact</li>
+                        <li class="footer-support-links">Services</li>
+                    </ul>
+                </div>
+
+            </footer>
+        {% endif %}
+
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
-            <script src="{{ asset('js/tinymce/tinymce.min.js')}}" referrerpolicy="origin"></script>
-            <script>
-                tinymce.init({
-                    selector: '.tinymce',
-                    placeholder: 'Écrivez ici...',
-                    force_br_newlines : true,
-                    force_p_newlines : false,
-                    forced_root_block : '',
-                    setup: function (editor) {
-                        editor.on('change', function () {
-                            tinymce.triggerSave();
-                        });
-                    }
-                });
-            </script>    
             <script src="https://kit.fontawesome.com/19a031a4c5.js" crossorigin="anonymous"></script>
             <script src="{{ asset('js/script.js')}}"></script>
         {% endblock %}
