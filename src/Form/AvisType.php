@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Avis;
-use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +18,7 @@ class AvisType extends AbstractType
             ->add('contenu', TextareaType::class, [
                 'label' => false,
                 'attr' => [
-                    'class' => 'tinymce form',
+                    'class' => 'form',
                 ],
                 'required' => false
             ])

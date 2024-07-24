@@ -17,7 +17,7 @@ class PostType extends AbstractType
             ->add('contenu', TextareaType::class, [
                 'label' => false,
                 'attr' => [
-                    'class' => 'tinymce form',
+                    'class' => 'form',
                     'placeholder' => 'Écrivez votre réponse ici'
                 ]
             ])
