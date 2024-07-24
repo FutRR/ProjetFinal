@@ -14,7 +14,7 @@
     <header>
         <h1>Apprenez le piano comme il faut<br>avec <span class="maester">MAESTER</span>CLASS</h1>
 
-        <p><a class="btn header-btn" href="">Commencez dès maintenant</a></p>
+        <p><a class="btn header-btn" href="{{ path('app_niveau')}}">Commencez dès maintenant</a></p>
     </header>
 
     <div id="home-main">
@@ -101,10 +101,14 @@
             </div>
 
             {% if app.user %}
-                <div class="form-wrapper review-form">
-                    <h3>Laisser un avis</h3>
-                    {{ form(formAddAvis) }}
-                </div>
+                <details class="form-wrapper review-form">
+                    <summary>Laisser un avis</summary>
+                    {{ form_start(formAddAvis) }}
+                        {{ form_row(formAddAvis.contenu) }}
+                        {{ form_widget(formAddAvis.note) }}
+                        {{ form_widget(formAddAvis.valider) }}
+                    {{ form_end(formAddAvis) }}
+                </details>
             {% endif %}
  
         </section>
