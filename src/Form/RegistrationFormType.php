@@ -30,7 +30,6 @@ class RegistrationFormType extends AbstractType
                 'row_attr' => ['class' => 'form input-box'],
                 'label' => "Nom d'utilisateur",
                 'label_attr' => ['class' => 'floating-label'],
-                'required' => false
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
@@ -55,7 +54,7 @@ class RegistrationFormType extends AbstractType
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'row_attr' => ['class' => 'checkbox login-register-checkbox'],
-                'label' => "J'ai lu et j'accepte les <a href='{{ path('app_terms')}}' class='terms-link'>termes et conditions</a>",
+                'label' => "J'ai lu et j'accepte les <a href='{{ path('app_terms')}}' class='login-register-link terms-link'>termes et conditions</a>",
                 'label_html' => true,
                 'constraints' => [
                     new IsTrue([
@@ -64,7 +63,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('valider', SubmitType::class, [
-                "attr" => ['class' => "login-register-submit btn"],
+                "attr" => ['class' => "login-register-submit"],
                 'label' => "S'inscrire"
             ])
 
