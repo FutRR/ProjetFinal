@@ -1,5 +1,10 @@
 const body = document.querySelector("body");
 
+function textAreaAdjust(element) {
+  element.style.height = "1px";
+  element.style.height = 25 + element.scrollHeight + "px";
+}
+
 //Etape fini modal
 const modalEtape = document.getElementById("modal-etape");
 const openModalEtape = document.getElementById("open-btn-etape");
