@@ -3,12 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Niveau;
+use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class NiveauType extends AbstractType
 {
@@ -17,7 +17,11 @@ class NiveauType extends AbstractType
         $builder
             ->add('nomNiveau', TextType::class, [
                 'label' => 'Nom du niveau',
-                'attr' => ['class' => 'form']
+                'row_attr' => ['class' => 'form']
+            ])
+            ->add('prix', FloatType::class, [
+                'label' => 'Prix',
+                'row_attr' => ['class' => 'prix form']
             ])
             ->add('valider', SubmitType::class, [
                 "attr" => [

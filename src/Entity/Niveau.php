@@ -25,6 +25,9 @@ class Niveau
     #[ORM\OneToMany(targetEntity: Etape::class, mappedBy: 'Niveau')]
     private Collection $Etapes;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $prix = null;
+
     public function __construct()
     {
         $this->Etapes = new ArrayCollection();
@@ -80,6 +83,18 @@ class Niveau
     public function __toString()
     {
         return $this->getNomNiveau();
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
     }
 
 }
