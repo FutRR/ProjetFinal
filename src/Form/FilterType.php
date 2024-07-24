@@ -21,11 +21,12 @@ class FilterType extends AbstractType
                     'Les moins bien notés' => 'note_asc'
                 ],
                 'label' => 'Trier par',
-                'attr' => ['class' => 'form select']
+                'row_attr' => ['class' => 'form select']
             ])
             ->add('valider', SubmitType::class, [
+                "label" => "Filtrer",
                 "attr" => [
-                    'class' => "submit btn"
+                    'class' => "btn"
                 ]
             ])
         ;
