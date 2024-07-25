@@ -45,36 +45,44 @@
                     <h2>Maesterclass</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus mi libero, a vehicula nulla faucibus non. Nulla porta bibendum scelerisque. Nam scelerisque massa sit amet nibh mattis bibendum.</p>
 
-                    <div class="footer-follow">
-                        <h3>Suivez nous !</h3>
-                        <ul>
-                            {# <li><i class="fa-solid fa-envelope"></i></li> #}
-                            <li><i class="fa-brands fa-instagram"></i></li>
-                            <li><i class="fa-brands fa-x-twitter"></i></li>
-                            <li><i class="fa-brands fa-facebook"></i></li>
-                        </ul>
+                    <div class="footer-general-bottom">
+                        <div class="footer-follow">
+                            <h3>Suivez nous !</h3>
+                            <ul>
+                                {# <li><i class="fa-solid fa-envelope"></i></li> #}
+                                <li class="footer-links"><i class="fa-brands fa-instagram"></i></li>
+                                <li class="footer-links"><i class="fa-brands fa-x-twitter"></i></li>
+                                <li class="footer-links"><i class="fa-brands fa-facebook"></i></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-contact">
+                            <h3>Contact</h3>
+                            <a href="mailto:futterermaxime@gmail.com">Envoyer un mail</a>
+                        </div>
                     </div>
+
     
                 </div>
 
 
-                <div class="footer-navigation">
+                <div class="footer-list footer-navigation">
                     <h3>Navigation</h3>
                     <ul>
-                        <li><a href="{{ path('app_home')}}">Accueil</a></li>
-                        <li><a href="{{ path('app_niveau')}}">Niveaux</a></li>
-                        <li><a href="{{ path('app_login')}}">Connexion</a></li>
-                        <li><a href="{{ path('app_register')}}">Inscription</a></li>
+                        <li class="footer-links"><a href="{{ path('app_home')}}">Accueil</a></li>
+                        <li class="footer-links"><a href="{{ path('app_niveau')}}">Niveaux</a></li>
+                        <li class="footer-links"><a href="{{ path('app_login')}}">Connexion</a></li>
+                        <li class="footer-links"><a href="{{ path('app_register')}}">Inscription</a></li>
                     </ul>
                 </div>
 
-                <div class="support">
+                <div class="footer-list footer-support">
                     <h3>Support</h3>
                     <ul>
-                        <li class="footer-support-links">Termes et conditions</li>
-                        <li class="footer-support-links">Politique de confidentialité</li>
-                        <li class="footer-support-links">Contact</li>
-                        <li class="footer-support-links">Services</li>
+                        <li class="footer-links"><a href="">Termes et conditions</a></li>
+                        <li class="footer-links"><a href="">Politique de confidentialité</a></li>
+                        <li class="footer-links"><a href="">Contact</a></li>
+                        <li class="footer-links"><a href="">Services</a></li>
                     </ul>
                 </div>
 
