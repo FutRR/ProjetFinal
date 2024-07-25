@@ -17,7 +17,7 @@
         <nav>
             <a class="logo" href="{{ path('app_home')}}"><img src="{{ asset('img/logo-white.png')}}" alt="Maesterclass logo"></a>
             <ul class="nav-links">
-                <li class="nav-link"><a title="Acccueil" href="{{ path('app_home')}}">Accueil</a></li>
+                <li class="nav-link"><a title="Accueil" href="{{ path('app_home')}}">Accueil</a></li>
                 <li class="nav-link"><a title="Niveaux" href="{{ path('app_niveau')}}">Niveaux</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-link"><a title="Admin" href="{{ path('app_admin')}}">Admin</a></li>
