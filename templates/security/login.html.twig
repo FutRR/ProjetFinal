@@ -15,16 +15,14 @@
         </div>
 
     {% else %}
-
-    <div class="form-wrapper login-register">
         
-        <form method="post">
+        <form method="post" class="login-register">
 
             <h1>Connexion</h1>
 
             <div class="form input-box">
                 <label class="floating-label" for="username">Email</label>
-                <input type="email" value="{{ last_username }}" name="_username" id="username"  autocomplete="email" required autofocus>
+                <input type="email" value="{{ last_username }}" name="_username" id="username"  autocomplete="email" required>
                 <i class="fa-solid fa-envelope"></i>
             </div>
 
@@ -51,12 +49,10 @@
             <button class="login-register-submit" type="submit">
                 Connexion
             </button>
+
+            <p>Pas encore inscrit ? <a class="login-register-link" href="{{ path('app_register')}}" style="font-weight: 700;">Créez un compte</a></p>
             
         </form>
-
-        <p>Pas encore inscrit ? <a class="login-register-link" href="{{ path('app_register')}}" style="font-weight: 700;">Créez un compte</a></p>
-
-    </div>
 
     {% endif %}
 

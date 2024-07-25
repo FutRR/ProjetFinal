@@ -8,6 +8,7 @@
     --darkblue2: #0a293a;
     --red: #9c1f1f;
     --grey: #adadad;
+    --offwhite: #e0e0e0;
     --gradient: linear-gradient(0deg, #4b8db1 0%, #1a3270 100%);
 
 }
@@ -140,8 +141,9 @@ body{
     }
 
     .nav-link:hover{
-        background-color: #575757c0;
-        border-radius: 5px;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 2px;
     }
 
     .logo{
@@ -243,6 +245,10 @@ body{
         gap: 10px;
     }
 
+    input[type=checkbox]{
+        transform: scale(1.2);
+    }
+
     .checkbox{
         display: flex;
         flex-direction: row;
@@ -280,28 +286,16 @@ body{
     }
                                                                                                                                 
     .login-register{
-        backdrop-filter: blur(20px);
-        color: var(--white);
-        width: 50vw;
-        min-width: fit-content;
-        border-radius: 15px;
-        padding: 30px;
-        font-size: 18px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        justify-self: center;
-    }
-
-    .login-register form{
-        width: 100%;
-        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 10px;
+        height: 100%;
+        width: 30vw;
+        backdrop-filter: blur(20px);
+        color: var(--white);
+        font-size: 20px;
     }
 
     .input-box{
@@ -347,7 +341,8 @@ body{
         width: fit-content;
         display: flex;
         align-items: center;
-        justify-content: baseline;
+        justify-content: baseline; 
+        gap: 10px;
     }
 
     .login-register-checkbox label{
@@ -361,7 +356,7 @@ body{
     .login-register-submit{
         width: 100%;
         height: fit-content;
-        padding: 10px;
+        padding: 15px;
         border: none;
         border-radius: 15px;
         text-decoration: none;
@@ -370,8 +365,8 @@ body{
     }
 
     .login-register-submit:hover{
-        transform: translateY(-5%);
         box-shadow: #313131 0px 10px 10px -10px;
+        background-color: var(--offwhite);
     }
 
     .login-register-link{

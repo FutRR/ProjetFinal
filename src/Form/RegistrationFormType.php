@@ -38,9 +38,12 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'invalid_message' => 'Les mots de passes doivent être identiques.',
-                'options' => ['row_attr' => ['class' => 'form input-box'], 'label_attr' => ['class' => 'floating-label']],
+                'options' => [
+                    'row_attr' => ['class' => 'form input-box'],
+                    'label_attr' => ['class' => 'floating-label']
+                ],
                 'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Répetez le mot de passe'],
+                'second_options' => ['label' => 'Comfirmation du mot de passe'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez rentrer un mot de passe',
