@@ -16,7 +16,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $utilisateur = $this->getUser();
-        if (isset($utilisateur)) {
+        if (!isset($utilisateur)) {
 
             // get the login error if there is one
             $error = $authenticationUtils->getLastAuthenticationError();
