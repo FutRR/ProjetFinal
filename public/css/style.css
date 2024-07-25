@@ -26,6 +26,7 @@ body{
     margin: 0;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 /* GENERAL */
@@ -112,12 +113,12 @@ body{
 /* NAVBAR */
 
     nav{
-        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        min-width: 100%;
         width: 100vw;
-        margin-bottom: 50px;
+        max-width: 100vw;
     }
 
     .nav-links{
@@ -125,10 +126,11 @@ body{
         justify-content: center;
         align-items: center;
         list-style-type: none;
+        padding: 0 20px;
     }
 
     .nav-link{
-        margin: 0 10px;
+        padding: 10px 15px;
         transition: all 300ms ease;
     }
 
@@ -138,16 +140,8 @@ body{
     }
 
     .nav-link:hover{
-        font-weight: 600;
-    }
-
-    .nav-link a::before {
-        display: block;
-        content: attr(title);
-        font-weight: bold;
-        height: 0;
-        overflow: hidden;
-        visibility: hidden;
+        background-color: #575757c0;
+        border-radius: 5px;
     }
 
     .logo{
