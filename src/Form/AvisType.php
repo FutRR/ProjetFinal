@@ -17,17 +17,13 @@ class AvisType extends AbstractType
     {
         $builder
             ->add('contenu', TextareaType::class, [
-                'label' => "Description",
+                'label' => "Description :",
                 'attr' => [
                     'class' => 'form',
                     'onkeyup' => 'textAreaAdjust(this)'
                 ],
                 'required' => false
             ])
-            // ->add('note', IntegerType::class, [
-            //     'label' => 'Note',
-            //     'attr' => ['class' => 'form', 'min' => '1', 'max' => '5']
-            // ])
             ->add('note', ChoiceType::class, [
                 'choices' => [
                     '1' => 1,
@@ -40,20 +36,20 @@ class AvisType extends AbstractType
                     // Vous pouvez définir du HTML pour chaque label ici
                     switch ($value) {
                         case 1:
-                            return '<div class="dot"></div><span>1</span>';
+                            return '<span>1</span>';
                         case 2:
-                            return '<div class="dot"></div><span>2</span>';
+                            return '<span>2</span>';
                         case 3:
-                            return '<div class="dot"></div><span>3</span>';
+                            return '<span>3</span>';
                         case 4:
-                            return '<div class="dot"></div><span>4</span>';
+                            return '<span>4</span>';
                         case 5:
-                            return '<div class="dot"></div><span>5</span>';
+                            return '<span>5</span>';
                     }
                 },
                 'label_html' => true,
-                'label' => 'Note',
-                'label_attr' => ['class' => 'note-option'],
+                'label' => 'Note :',
+                'label_attr' => ['class' => 'note-label'],
                 'attr' => ['class' => 'form radio'],
                 'expanded' => true
             ])

@@ -101,11 +101,16 @@
             </div>
 
             {% if app.user %}
-                <details class="form-wrapper review-form">
+                <details open class="form-wrapper review-form">
                     <summary>Laisser un avis</summary>
                     {{ form_start(formAddAvis) }}
                         {{ form_row(formAddAvis.contenu) }}
+                        {{ form_label(formAddAvis.note)}}
                         {{ form_widget(formAddAvis.note) }}
+                        <div class="note-desc">
+                            <p>Très insatisfait</p>
+                            <p>Très satisfait</p>
+                        </div>
                         {{ form_widget(formAddAvis.valider) }}
                     {{ form_end(formAddAvis) }}
                 </details>
