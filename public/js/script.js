@@ -5,7 +5,9 @@ const menuburger = document.querySelector(".menuburger");
 const navlinks = document.querySelector(".nav-links");
 const line = document.querySelector(".line");
 const main = document.querySelector("main");
+const navTitle = document.querySelector(".nav-title");
 const logo = document.querySelector(".logo");
+let hasToggle = false;
 
 function menuChange(x) {
   x.classList.toggle("change");
@@ -13,6 +15,14 @@ function menuChange(x) {
   line.classList.toggle("line-change");
   main.classList.toggle("blur");
   logo.classList.toggle("blur");
+  if (!hasToggle) {
+    setTimeout(() => {
+      navTitle.classList.toggle("display");
+      hasToggle = !hasToggle;
+    }, 1000);
+  } else {
+    navTitle.classList.toggle("display");
+  }
 }
 
 // TEXTAREA RESIZE
