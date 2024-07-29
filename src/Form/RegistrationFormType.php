@@ -43,7 +43,7 @@ class RegistrationFormType extends AbstractType
                     'label_attr' => ['class' => 'floating-label']
                 ],
                 'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Comfirmation du mot de passe'],
+                'second_options' => ['label' => 'Confirmation du mot de passe'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez rentrer un mot de passe',
