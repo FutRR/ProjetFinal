@@ -6,6 +6,10 @@
     margin: 0 100px;
 }
 
+.home-page h2{
+    font-size: 24px;
+}
+
 .home-page p{
     font-size: 20px;
 }
@@ -29,15 +33,20 @@
     }
 
     .header-btn{
-        transition: all 250ms ease !important;
+        transition: all 250ms ease;
         background: transparent;
         color: var(--white) !important;
         font-weight: 600;
     }
 
     .header-btn:hover{
-        background-color: var(--white);
-        color: var(--darkblue1) !important;
+        border-color: var(--blue);
+        color: var(--blue) !important;
+        box-shadow: inset 0px 0px 100px -50px #ffffff80;
+    }
+
+    .maester{
+        color: var(--blue);
     }
 
 /* WHY */
@@ -61,7 +70,7 @@
 
     #how{
         background-color: var(--white);
-        color: var(--blue);
+        color: var(--darkblue1);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -99,17 +108,11 @@
         margin: -5px 0;
     }
 
-    .separator{
+    #how > .separator{
         width: 5px;
         height: auto;
         align-self: stretch;
         background-color: var(--darkblue1);
-    }
-
-    #how-text{}
-
-    #how-text h2{
-        font-size: 24px;
     }
 
 
@@ -313,3 +316,50 @@
         border: 1px solid var(--white);
         width: 100%;
     }
+
+/* MOBILE CSS */
+@media only screen and (max-width: 768px) {
+
+    #why{
+        flex-direction: column;
+    }
+
+    #how{
+        flex-direction: column;
+    }
+
+    #how #schema{
+        margin: 25px 0;
+    }
+
+    #how > .separator{
+        width: 100%;
+        height: 5px;
+        align-self: center;
+        background-color: var(--darkblue1);
+
+    }
+
+    .reviews-titre{
+        flex-direction: column !important;
+        flex-wrap: wrap;
+        width: fit-content;
+    }
+
+    .review-wrapper{
+        width: fit-content;
+        gap: 20px;
+    }
+
+    .review-wrapper > :nth-child(n){ align-self: center !important;}
+
+
+    .review{
+        min-width: fit-content;
+        width: 100%;
+    }
+
+    .review-form{
+        align-self: center;
+    }
+}
