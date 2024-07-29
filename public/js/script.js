@@ -1,5 +1,21 @@
 const body = document.querySelector("body");
 
+// MENU BURGER
+const menuburger = document.querySelector(".menuburger");
+const navlinks = document.querySelector(".nav-links");
+const line = document.querySelector(".line");
+const main = document.querySelector("main");
+const logo = document.querySelector(".logo");
+
+function menuChange(x) {
+  x.classList.toggle("change");
+  navlinks.classList.toggle("mobile-menu");
+  line.classList.toggle("line-change");
+  main.classList.toggle("blur");
+  logo.classList.toggle("blur");
+}
+
+// TEXTAREA RESIZE
 function textAreaAdjust(element) {
   element.style.height = "1px";
   element.style.height = 25 + element.scrollHeight + "px";
