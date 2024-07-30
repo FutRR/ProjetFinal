@@ -18,7 +18,8 @@ class PostType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'class' => 'form',
-                    'placeholder' => 'Écrivez votre réponse ici'
+                    'placeholder' => 'Écrivez ici',
+                    'onkeyup' => 'textAreaAdjust(this)'
                 ]
             ])
             ->add('valider', SubmitType::class, [
