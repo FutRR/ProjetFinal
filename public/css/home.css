@@ -233,20 +233,16 @@
         padding: 20px 0;
     }
 
-    .details > div{
+    .avis-textarea{
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        width: fit-content;
+        width: 100%;
     }
 
-    .details > div *{
-        margin: 0 !important;
-    }
-
-    .review-form textarea{
+    .avis-textarea textarea{
         width: 100%;
         margin: 0 !important;
+        padding: 0 !important;
     }
 
     .note-label{
