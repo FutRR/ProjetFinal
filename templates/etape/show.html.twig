@@ -50,8 +50,11 @@
             
                 <div class="pdf">
                     {% if etape.pdf %}
-                        <h2>Document PDF</h2>
-                        <iframe class="pdf-file" src="{{ asset(etape.pdf)}}" frameborder="0"></iframe>
+                        {# <h2>Document PDF</h2>
+                        <iframe class="pdf-file" src="{{ asset(etape.pdf)}}" frameborder="0"></iframe> #}
+
+                        {# <object class="pdf-file" data="{{ asset(etape.pdf) }}" type="application/pdf"></object> #}
+                        <embed src="{{ asset(etape.pdf) }}" frameborder="0" width="100%" height="1000px"
                     {% endif %}
                 </div>
 
