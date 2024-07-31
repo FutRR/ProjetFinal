@@ -28,7 +28,9 @@ class UtilisateurController extends AbstractController
     {
         $message = 'utilisateur modifié';
 
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $disabled = $utilisateur->isGoogleUser();
+
+        $form = $this->createForm(UtilisateurType::class, $utilisateur, ['user_is_google' => $disabled]);
 
         $form->handleRequest($request);
 

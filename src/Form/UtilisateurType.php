@@ -16,7 +16,8 @@ class UtilisateurType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => ['class' => 'form']
+                'attr' => ['class' => 'form'],
+                'disabled' => $options['user_is_google'],
             ])
             ->add('username', TextType::class, [
                 'attr' => ['class' => 'form'],
@@ -24,7 +25,7 @@ class UtilisateurType extends AbstractType
             ])
             ->add('valider', SubmitType::class, [
                 "attr" => [
-                    'class' => "submit btn"
+                    'class' => "btn"
                 ]
             ])
 
@@ -35,6 +36,7 @@ class UtilisateurType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Utilisateur::class,
+            'user_is_google' => false,
         ]);
     }
 }
