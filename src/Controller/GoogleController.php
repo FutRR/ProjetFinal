@@ -45,7 +45,7 @@ class GoogleController extends AbstractController
                 $user->setRoles([]);
                 $user->setPassword(bin2hex(random_bytes(16)));
                 $user->setGoogleUser(true);
-                $user->setUsername("Salut");
+                $user->setUsername(explode("@", $googleUser->getEmail())[0]);
 
                 $entityManager->persist($user);
                 $entityManager->flush();
