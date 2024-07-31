@@ -61,6 +61,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'utilisateur')]
     private Collection $posts;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $googleUser = null;
+
     public function __construct()
     {
         $this->registerDate = new DateTime(); // Initialiser la date d'inscription avec la date actuelle
@@ -259,6 +262,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $post->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isGoogleUser(): ?bool
+    {
+        return $this->googleUser;
+    }
+
+    public function setGoogleUser(?bool $googleUser): static
+    {
+        $this->googleUser = $googleUser;
 
         return $this;
     }
