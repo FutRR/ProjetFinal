@@ -51,24 +51,6 @@ INSERT IGNORE INTO `avis` (`id`, `utilisateur_id`, `contenu`, `date_creation`, `
 	(16, 3, '', '2024-07-12 07:44:54', 5),
 	(17, 1, 'bof bof', '2024-07-29 14:32:14', 3);
 
--- Listage de la structure de table projet_final_maximefutterer. doctrine_migration_versions
-CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
-  `executed_at` datetime DEFAULT NULL,
-  `execution_time` int DEFAULT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-
--- Listage des données de la table projet_final_maximefutterer.doctrine_migration_versions : ~6 rows (environ)
-INSERT IGNORE INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-	('DoctrineMigrations\\Version20240702114918', '2024-07-02 11:49:51', 41),
-	('DoctrineMigrations\\Version20240703122431', '2024-07-03 12:24:52', 123),
-	('DoctrineMigrations\\Version20240708095255', '2024-07-08 11:53:13', 103),
-	('DoctrineMigrations\\Version20240708095818', '2024-07-08 11:58:30', 95),
-	('DoctrineMigrations\\Version20240712065914', '2024-07-12 06:59:44', 132),
-	('DoctrineMigrations\\Version20240712074351', '2024-07-12 07:44:09', 88),
-	('DoctrineMigrations\\Version20240729125412', '2024-07-29 14:54:44', 259);
-
 -- Listage de la structure de table projet_final_maximefutterer. etape
 CREATE TABLE IF NOT EXISTS `etape` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -212,15 +194,17 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `register_date` datetime NOT NULL,
+  `google_user` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.utilisateur : ~0 rows (environ)
-INSERT IGNORE INTO `utilisateur` (`id`, `email`, `roles`, `password`, `username`, `register_date`) VALUES
-	(1, 'futterermaxime@gmail.com', '["ROLE_ADMIN"]', '$2y$13$2m0OgmrAHZyvSJ7e0A7m8e623cB4RmOhtQlROVH0DmBovNRjMqUiG', 'FutRR_', '2024-07-02 11:39:12'),
-	(2, 'exemple@exemple.exemple', '[]', '$2y$13$.hS7yk5nrHkeBfPiiDDAVOXGDd4WCNAjC8saH.6dGR6KohqLhzJPu', 'exemple', '2024-07-05 14:33:10'),
-	(3, 'maximefutterer68@gmail.com', '[]', '$2y$13$C2fofrQ62veCow61dlyEtedw67nYYDvJrNtUhTtIg6OmRwBBeziFi', 'Tester67', '2024-07-12 07:18:45');
+-- Listage des données de la table projet_final_maximefutterer.utilisateur : ~4 rows (environ)
+INSERT IGNORE INTO `utilisateur` (`id`, `email`, `roles`, `password`, `username`, `register_date`, `google_user`) VALUES
+	(1, 'admin@admin.com', '["ROLE_ADMIN"]', '$2y$13$2m0OgmrAHZyvSJ7e0A7m8e623cB4RmOhtQlROVH0DmBovNRjMqUiG', 'FutRR_', '2024-07-02 11:39:12', 0),
+	(2, 'exemple@exemple.exemple', '[]', '$2y$13$.hS7yk5nrHkeBfPiiDDAVOXGDd4WCNAjC8saH.6dGR6KohqLhzJPu', 'exemple', '2024-07-05 14:33:10', 0),
+	(3, 'maximefutterer68@gmail.com', '[]', '$2y$13$C2fofrQ62veCow61dlyEtedw67nYYDvJrNtUhTtIg6OmRwBBeziFi', 'Tester67', '2024-07-12 07:18:45', 0),
+	(4, 'futterermaxime@gmail.com', '[]', 'f456f8d380dd972f38fd26abb43da626', 'Salut', '2024-07-31 11:51:00', 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
