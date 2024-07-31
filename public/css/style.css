@@ -676,29 +676,6 @@ body{
         
         /* MODAL */
 
-            .open-btn{
-                background: transparent;
-                border: none;
-                color: var(--white);
-            }
-
-            .close-btn{
-                align-self: flex-end;
-                background: transparent;
-                border: 3px solid var(--blue);
-                border-radius: 5000px;
-                transition: all 250ms ease;
-                padding: 5px 7.5px;
-            }
-
-            .close-btn:hover{
-                background-color: var(--blue);
-            }
-
-            .open-btn:hover{
-                text-decoration: underline;
-            }
-
             dialog[open]{
                 padding: 20px;
                 background-color: var(--white);
@@ -763,6 +740,30 @@ body{
             .delete-btn:hover{
                 background-color: var(--red) !important;
             }
+
+            .open-btn{
+                background: transparent;
+                border: none;
+                color: var(--white);
+            }
+
+            .close-btn{
+                align-self: flex-end;
+                background: transparent;
+                border: 3px solid var(--blue);
+                border-radius: 5000px;
+                transition: all 250ms ease;
+                padding: 5px 7.5px;
+            }
+
+            .close-btn:hover{
+                background-color: var(--blue);
+            }
+
+            .open-btn:hover{
+                text-decoration: underline;
+            }
+
             
             .blur{
                 filter: blur(4px);
@@ -868,7 +869,11 @@ body{
             }
 
             .post-form{
+                margin-top: 20px !important;
                 gap: 10px;
+            }
+
+            .post-form textarea{
             }
 
             .post-form .submit{
@@ -1077,8 +1082,17 @@ body{
         padding: 0;
     }
 
+    #etape .titre{
+        align-items: center;
+    }
+
     .pdf-file{
         width: 100%;
         height: 500px;
+    }
+
+    .post-form textarea{
+        width: 100%;
+        margin: 0 !important;
     }
 }

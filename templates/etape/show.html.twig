@@ -41,12 +41,12 @@
                 <h2>Description</h2>
                 <p>{{etape.description}}</p>
 
-                <div class="video">
+                {# <div class="video">
                     {% if etape.video %}
                         <h2>Vidéo</h2>
                         <iframe allowfullscreen class="yt-video" src="{{etape.video}}" frameborder="0"></iframe>
                     {% endif %}
-                </div>
+                </div> #}
             
                 <div class="pdf">
                     {% if etape.pdf %}
@@ -59,11 +59,11 @@
                 </div>
 
 
-                <button class="btn" id="open-btn-etape">Étape finie</button>
+                <button class="btn open-btn">Étape finie</button>
 
-                <dialog class="modal" id="modal-etape">
+                <dialog class="modal">
 
-                    <button class="btn close-btn" id="close-btn-etape">X</button>
+                    <button class="btn close-btn">X</button>
 
                     <div class="modal-text">
                         <h3>Félicitations!</h3>
@@ -109,9 +109,9 @@
                                         <button class="reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
 
                                         {% if app.user == post.utilisateur %}
-                                            <button class="open-btn" id="open-btn-post">Supprimer</button>
-                                            <dialog class="modal" id="modal-post">
-                                                <button class="btn close-btn" id="close-btn-post">X</button>
+                                            <button class="open-btn">Supprimer</button>
+                                            <dialog class="modal">
+                                                <button class="btn close-btn">X</button>
                             
                                                 <div class="modal-text">
                                                     <h3>Êtes-vous sur de vouloir supprimer ce post ?</h3>
@@ -163,10 +163,10 @@
                         {% endfor %}
                     </div>
         
-                    <div class="form-wrapper post-form">
-                        <h2>Écrire un post</h2>
+                    <details open class="form-wrapper post-form">
+                        <summary>Écrire un post</summary>
                         {{ form(formAddPost) }}
-                    </div>
+                    </details>
         
                 </div>
         

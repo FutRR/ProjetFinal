@@ -31,37 +31,26 @@ function textAreaAdjust(element) {
   element.style.height = 25 + element.scrollHeight + "px";
 }
 
-//Etape fini modal
-const modalEtape = document.getElementById("modal-etape");
-const openModalEtape = document.getElementById("open-btn-etape");
-const closeModalEtape = document.getElementById("close-btn-etape");
+//MODAL GESTION
+const modals = document.querySelectorAll(".modal");
+const openModals = document.querySelectorAll(".open-btn");
+const closeModals = document.querySelectorAll(".close-btn");
 
-openModalEtape.addEventListener("click", () => {
-  body.classList.toggle("blur");
-  modalEtape.showModal();
+openModals.forEach((btn, index) => {
+  btn.addEventListener("click", function () {
+    body.classList.toggle("blur");
+    modals[index].showModal();
+  });
 });
 
-closeModalEtape.addEventListener("click", () => {
-  body.classList.toggle("blur");
-  modalEtape.close();
+closeModals.forEach((btn, index) => {
+  btn.addEventListener("click", () => {
+    body.classList.toggle("blur");
+    modals[index].close();
+  });
 });
 
-//Post delete modal
-const modalPost = document.getElementById("modal-post");
-const openModalPost = document.getElementById("open-btn-post");
-const closeModalPost = document.getElementById("close-btn-post");
-
-openModalPost.addEventListener("click", () => {
-  body.classList.toggle("blur");
-  modalPost.showModal();
-});
-
-closeModalPost.addEventListener("click", () => {
-  body.classList.toggle("blur");
-  modalPost.close();
-});
-
-//Post reply
+//POST REPLY
 document.addEventListener("DOMContentLoaded", function () {
   const replyButtons = document.querySelectorAll(".reponse-btn");
 
@@ -79,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-//Replied-to post color
+//REPLIED-TO POST COLOR
 document.addEventListener("DOMContentLoaded", function () {
   const replyToLink = document.querySelectorAll(".respond-to-link");
   replyToLink.forEach((button) => {
