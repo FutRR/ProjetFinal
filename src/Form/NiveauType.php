@@ -25,7 +25,7 @@ class NiveauType extends AbstractType
             ])
             ->add('valider', SubmitType::class, [
                 "attr" => [
-                    'class' => "submit btn"
+                    'class' => "btn"
                 ]
             ])
         ;

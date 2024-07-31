@@ -17,57 +17,66 @@
             <p>Date d'inscription : {{ utilisateur.registerDate|date('d/m/Y', "Europe/Paris") }} à {{ utilisateur.registerDate|date('H:i', "Europe/Paris") }}</p>
         </div>
 
-        <div class="profil-progression">
-            <h2>Progression</h2>
-            <div class="profil-niveaux-wrapper">
-                {# Pour chaque niveau + ses progressions de l'utilisateur #}
-                {% for niveau, progressions in groupedProgressions %}
-                    <div class="profil-niveau">
-                        <h3>{{niveau}}</h3>
-                        <div class="profil-list-progression">
-                        {# Pour chaque etape des progression de l'utilisateur #}
-                            {% for progression in progressions %}
-                                    <p>
-                                        <a href="{{ path('show_etape', {'id': progression.etape.id}) }}">{{ progression.etape }}</a>
-                                        {# Si l'etape est complétée, on affiche l'icone #}
-                                        {% if progression.done %}
-                                            <i class="fa-solid fa-circle-check"></i>
-                                        {% else %}
-                                            <i class="fa-regular fa-circle-check"></i>
-                                        {% endif %}
-                                    </p>
-                            {% endfor %}
+        {% if groupedProgressions|length > 0 %}
+            <div class="profil-progression">
+                <h2>Progression</h2>
+                <div class="profil-niveaux-wrapper">
+                    {# Pour chaque niveau + ses progressions de l'utilisateur #}
+                    {% for niveau, progressions in groupedProgressions %}
+                        <div class="profil-niveau">
+                            <h3>{{niveau}}</h3>
+                            <div class="profil-list-progression">
+                            {# Pour chaque etape des progression de l'utilisateur #}
+                                {% for progression in progressions %}
+                                        <p>
+                                            <a href="{{ path('show_etape', {'id': progression.etape.id}) }}">{{ progression.etape }}</a>
+                                            {# Si l'etape est complétée, on affiche l'icone #}
+                                            {% if progression.done %}
+                                                <i class="fa-solid fa-circle-check"></i>
+                                            {% else %}
+                                                <i class="fa-regular fa-circle-check"></i>
+                                            {% endif %}
+                                        </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <h2>Aucune progression disponible</h2>
+        {% endif %}
+
+        {% if posts|length > 0 %}
+            <div class="profil-posts">
+                <h2>Derniers posts</h2>
+                {% for post in posts %}
+                    <div class="post">
+                        <div class="post-top">
+                            {% if 'ROLE_ADMIN' in post.utilisateur.roles %}
+                                <h3 title="Admin">
+                                    <i class="fa-solid fa-lock admin"></i>
+                                    {{post.utilisateur}}
+                                </h3>
+                            {% else %}
+                                <h3>{{post.utilisateur}}</h3>
+                            {% endif %}
+                            <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
+                        </div>
+
+                        <span class="post-text">{{post.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
+                            
+                        <div class="post-bottom">
+                            <a href="{{ path('show_etape', {'id': post.etape.id}) }}">Aller à la discussion - {{ post.etape.niveau }} - {{ post.etape }}</a>
                         </div>
                     </div>
+                    
                 {% endfor %}
-            </div>
-        </div>
+            </div>                    
+        {% else %}
+            <h2>Aucun post disponible</h2>
+        {% endif %}
 
-        <div class="profil-posts">
-            <h2>Derniers posts</h2>
-            {% for post in posts %}
-                <div class="post">
-                    <div class="post-top">
-                        {% if 'ROLE_ADMIN' in post.utilisateur.roles %}
-                            <h3 title="Admin">
-                                <i class="fa-solid fa-lock admin"></i>
-                                {{post.utilisateur}}
-                            </h3>
-                        {% else %}
-                            <h3>{{post.utilisateur}}</h3>
-                        {% endif %}
-                        <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
-                    </div>
-
-                    <span class="post-text">{{post.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
-                        
-                    <div class="post-bottom">
-                        <a href="{{ path('show_etape', {'id': post.etape.id}) }}">Aller à la discussion - {{ post.etape.niveau }} - {{ post.etape }}</a>
-                    </div>
-                </div>
-                
-            {% endfor %}
-        </div>
 
     {% endif %}
 

@@ -66,7 +66,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('valider', SubmitType::class, [
-                "attr" => ['class' => "login-register-submit"],
+                "attr" => ['class' => "btn login-register-submit"],
                 'label' => "S'inscrire"
             ])
 

@@ -53,7 +53,7 @@ class AvisType extends AbstractType
             ])
             ->add('valider', SubmitType::class, [
                 "attr" => [
-                    'class' => "avis-submit btn"
+                    'class' => "btn"
                 ]
             ])
 
