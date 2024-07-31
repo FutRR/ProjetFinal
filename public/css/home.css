@@ -35,14 +35,14 @@
     .header-btn{
         transition: all 250ms ease;
         background: transparent;
+        border: 2px solid var(--white);
         color: var(--white) !important;
         font-weight: 600;
     }
 
     .header-btn:hover{
         border-color: var(--blue);
-        color: var(--blue) !important;
-        box-shadow: inset 0px 0px 100px -50px #ffffff80;
+        background-color: transparent !important;
     }
 
     .maester{
@@ -133,10 +133,17 @@
         margin: 50px;
     }
 
+    .filtre{
+        border: 2px solid var(--white);
+        border-radius: 15px;
+        padding: 10px 15px;
+    }
+
     .filtre form #filter{
         display: flex;
-        flex-flow: row nowrap;
+        justify-content: space-between;
         align-items: center;
+        gap: 10px;
         width: 100%;
     }
 
