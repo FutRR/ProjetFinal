@@ -59,11 +59,13 @@
                 </div>
 
 
-                <button class="btn open-btn">Étape finie</button>
+                <button class="btn open-btn add-btn">Étape finie</button>
 
                 <dialog class="modal">
 
-                    <button class="btn close-btn">X</button>
+                    <button class="btn close-btn">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
 
                     <div class="modal-text">
                         <h3>Félicitations!</h3>
@@ -109,9 +111,11 @@
                                         <button class="reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
 
                                         {% if app.user == post.utilisateur %}
-                                            <button class="open-btn">Supprimer</button>
+                                            <button class="open-btn open-delete-btn">Supprimer</button>
                                             <dialog class="modal">
-                                                <button class="btn close-btn">X</button>
+                                                <button class="btn close-btn">
+                                                    <i class="fa-solid fa-x"></i>
+                                                </button>
                             
                                                 <div class="modal-text">
                                                     <h3>Êtes-vous sur de vouloir supprimer ce post ?</h3>
