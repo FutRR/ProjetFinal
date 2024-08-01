@@ -16,16 +16,22 @@ class UtilisateurType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => ['class' => 'form'],
+                'row_attr' => ['class' => 'form input-box'],
+                'label' => 'Adresse Email',
+                'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' '],
                 'disabled' => $options['user_is_google'],
             ])
             ->add('username', TextType::class, [
-                'attr' => ['class' => 'form'],
-                'label' => "Nom d'utilisateur"
+                'row_attr' => ['class' => 'form input-box'],
+                'label' => "Nom d'utilisateur",
+                'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' '],
             ])
             ->add('valider', SubmitType::class, [
+                "label" => "Modifier",
                 "attr" => [
-                    'class' => "btn"
+                    'class' => "btn submit-btn",
                 ]
             ])
 

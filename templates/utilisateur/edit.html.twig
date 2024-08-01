@@ -5,8 +5,20 @@ Modification du Profil
 {% endblock %}
 
 {% block body %}
-    <h1>Modifier le profil</h1>
           
-    {{ form(formAddUtilisateur) }}
+    {{ form_start(formAddUtilisateur, {'attr' : {'class': 'form-wrapper'}}) }}
+
+        <h1>Modifier le profil</h1>
+
+        {% if app.user.googleUser != 1 %}
+            {{ form_row(formAddUtilisateur.email)}}
+        {% endif %}
+
+        {{ form_row(formAddUtilisateur.username)}}
+
+        {{form_widget(formAddUtilisateur.valider)}}
+
+    {{ form_end(formAddUtilisateur, {'render_rest': false}) }}
+
 
 {% endblock %}
