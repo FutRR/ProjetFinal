@@ -11,6 +11,7 @@ use App\Repository\ProgressionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -104,6 +105,41 @@ class UtilisateurController extends AbstractController
                     return $this->redirectToRoute('show_utilisateur', ['id' => $utilisateur->getId()]);
 
                 }
+            } else {
+                $this->addFlash('error', "Ce n'est pas votre profil");
+                return $this->redirectToRoute("app_home");
+            }
+
+        } else {
+            $this->addFlash('error', "Vous n'êtes pas connecté");
+            return $this->redirectToRoute("app_home");
+        }
+
+    }
+
+    #[Route('/utilisateur/{id}/delete', name: 'delete_utilisateur')]
+    public function deleteUtilisateur(Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if (isset($user)) {
+            if ($user->getId() == $utilisateur->getId() || $this->isGranted('ROLE_ADMIN')) {
+
+                if (!$utilisateur) {
+                    $this->addFlash('error', "Utilisateur non trouvé");
+                    return $this->redirectToRoute("app_home");
+                }
+
+                if ($user->getId() == $utilisateur->getId()) {
+                    $session = new Session();
+                    $session->invalidate();
+                }
+
+                $entityManager->remove($utilisateur);
+                $entityManager->flush();
+
+                $this->addFlash('success', "Utilisateur supprimé");
+                return $this->redirectToRoute("app_logout");
+
             } else {
                 $this->addFlash('error', "Ce n'est pas votre profil");
                 return $this->redirectToRoute("app_home");

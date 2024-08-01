@@ -46,19 +46,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Progression>
      */
-    #[ORM\OneToMany(targetEntity: Progression::class, mappedBy: 'Utilisateur')]
+    #[ORM\OneToMany(targetEntity: Progression::class, mappedBy: 'Utilisateur', cascade: ['remove'])]
     private Collection $progressions;
 
     /**
      * @var Collection<int, Avis>
      */
-    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'Utilisateur')]
+    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'Utilisateur', cascade: ['remove'])]
     private Collection $avis;
 
     /**
      * @var Collection<int, Post>
      */
-    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'utilisateur')]
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'utilisateur', cascade: ['persist'])]
     private Collection $posts;
 
     #[ORM\Column(nullable: true)]

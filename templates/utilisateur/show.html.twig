@@ -13,6 +13,23 @@
                 {% if utilisateur.googleUser == 0 %}
                     <a class="btn add-btn" href="{{ path('change_password', {'id': utilisateur.id})}}">Modifier le mot de passe</a>
                 {% endif %}
+                <button class="btn open-btn delete-btn">Étape finie</button>
+
+                <dialog class="modal">
+
+                    <button class="btn close-btn">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+
+                    <div class="modal-text">
+                        <h3>Êtes vous sur de vouloir continuer ?</h3>
+                        <p>La suppression de compte est irréversible,<br> le compte ne pourra pas être récupéré</p>
+                    </div>
+
+                    <a class="modal-btn delete-btn utilisateur-delete-btn" href="{{ path('delete_utilisateur', {'id': utilisateur.id }) }}">Supprimer</a>
+
+                </dialog>
+
             </div>
         </div>
 

@@ -95,13 +95,17 @@
                             {# Affichage des posts #}        
                             <div class="post op" id="{{ post.id }}">
                                 <div class="post-top">
-                                    {% if 'ROLE_ADMIN' in post.utilisateur.roles %}
-                                        <h3 title="Admin" class="admin">
-                                            <i class="fa-solid fa-lock"></i>
-                                            {{post.utilisateur}}
-                                        </h3>
+                                    {% if post.utilisateur %}
+                                        {% if 'ROLE_ADMIN' in post.utilisateur.roles %}
+                                            <h3 title="Admin" class="admin">
+                                                <i class="fa-solid fa-lock"></i>
+                                                {{post.utilisateur}}
+                                            </h3>
+                                        {% else %}
+                                            <h3>{{post.utilisateur}}</h3>
+                                        {% endif %}
                                     {% else %}
-                                        <h3>{{post.utilisateur}}</h3>
+                                            <h3 class="deleted">Compte supprimé</h3>
                                     {% endif %}
                                     <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
                                 </div>
