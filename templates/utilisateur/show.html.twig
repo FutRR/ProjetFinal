@@ -7,7 +7,7 @@
     {% if (app.user == utilisateur) or (is_granted('ROLE_ADMIN')) %}
         
         <div class="title profil-title">
-            <h1>Profil de {{ utilisateur }}</h1>
+            <h1>Profil de <span>{{ utilisateur }}</span></h1>
             <div class="add-btn-wrapper">
                 <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
                 {% if utilisateur.googleUser == 0 %}
