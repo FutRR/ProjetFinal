@@ -25,11 +25,13 @@ class RegistrationFormType extends AbstractType
                 'row_attr' => ['class' => 'form input-box'],
                 'label' => 'Adresse Email',
                 'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' ']
             ])
             ->add('username', TextType::class, [
                 'row_attr' => ['class' => 'form input-box'],
                 'label' => "Nom d'utilisateur",
                 'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' ']
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
@@ -37,10 +39,12 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'required' => true,
+                // 'error_bubbling' => true,
                 'invalid_message' => 'Les mots de passes doivent être identiques.',
                 'options' => [
                     'row_attr' => ['class' => 'form input-box'],
-                    'label_attr' => ['class' => 'floating-label']
+                    'label_attr' => ['class' => 'floating-label'],
+                    'attr' => ['placeholder' => ' ']
                 ],
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
@@ -50,7 +54,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Regex([
                         'pattern' => "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",
-                        'message' => 'Votre mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 caractère spécial, 1 chiffre et doit contenir 8 caractères'
+                        'message' => '1 majuscule, 1 minuscule, 1 caractère spécial, 1 chiffre et 8 caractères'
                     ])
                 ],
             ])

@@ -18,7 +18,9 @@
 
             {{ form_row(registrationForm.plainPassword) }}
             
-            {{ form_errors(registrationForm) }}
+            <div class="form-errors">
+                {{ form_errors(registrationForm) }}
+            </div>
             
             {{ form_row(registrationForm.agreeTerms) }}
 
