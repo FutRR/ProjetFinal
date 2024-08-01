@@ -79,9 +79,18 @@ body{
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;    
     }
 
+    .add-btn-wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 10px;
+    }
+
     .add-btn{
         border: 2px solid var(--white);
         transition: all 250ms ease;
+        background-color: transparent;
     }
 
     .add-btn:hover{

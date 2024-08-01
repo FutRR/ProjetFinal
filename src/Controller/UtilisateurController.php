@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Form\PasswordUpdateType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ProgressionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UtilisateurController extends AbstractController
 {
@@ -50,8 +52,47 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('utilisateur/{id}/changePassword', name: 'change_password')]
-    public function changePassword(Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
+    public function changePassword(Utilisateur $utilisateur, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, Request $request): Response
     {
+        $user = $this->getUser();
+        if (isset($user)) {
+            if ($user == $utilisateur) {
+
+                $form = $this->createForm(PasswordUpdateType::class);
+
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+
+                    $currentPassword = $form->get('currentPassword')->getData();
+                    $match = $userPasswordHasher->isPasswordValid($utilisateur, $currentPassword);
+
+                    if ($match) {
+
+                        $hashedpassword = $userPasswordHasher->hashPassword(
+                            $utilisateur,
+                            $form->get('plainPassword')->getData()
+                        );
+                        $utilisateur->setPassword($hashedpassword);
+
+                        $entityManager->flush();
+                        $this->addFlash('success', 'Mot de passe mis à jour');
+                        return $this->redirectToRoute('show_utilisateur', ['id' => $utilisateur->getId()]);
+                    }
+                }
+
+                return $this->render("utilisateur/password.html.twig", [
+                    'formChangePassword' => $form,
+                ]);
+            } else {
+                $this->addFlash('error', "Ce n'est pas votre profil");
+                return $this->redirectToRoute("app_home");
+            }
+
+        } else {
+            $this->addFlash('error', "Vous n'êtes pas connecté");
+            return $this->redirectToRoute("app_home");
+        }
 
     }
 

@@ -7,8 +7,11 @@
     {% if (app.user == utilisateur) or (is_granted('ROLE_ADMIN')) %}
         
         <div class="title profil-title">
-            <h1>Profil de {{ utilisateur }}</h1> 
-            <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
+            <h1>Profil de {{ utilisateur }}</h1>
+            <div class="add-btn-wrapper">
+                <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
+                <a class="btn add-btn" href="{{ path('change_password', {'id': utilisateur.id})}}">Modifier le mot de passe</a>
+            </div>
         </div>
 
         <div class="profil-infos">
