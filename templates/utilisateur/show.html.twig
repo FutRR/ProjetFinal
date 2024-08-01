@@ -10,7 +10,9 @@
             <h1>Profil de {{ utilisateur }}</h1>
             <div class="add-btn-wrapper">
                 <a class="btn add-btn" href="{{ path('edit_utilisateur', {'id': utilisateur.id})}}">Modifier le profil</a>
-                <a class="btn add-btn" href="{{ path('change_password', {'id': utilisateur.id})}}">Modifier le mot de passe</a>
+                {% if utilisateur.googleUser == 0 %}
+                    <a class="btn add-btn" href="{{ path('change_password', {'id': utilisateur.id})}}">Modifier le mot de passe</a>
+                {% endif %}
             </div>
         </div>
 

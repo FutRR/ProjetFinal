@@ -57,33 +57,39 @@ class UtilisateurController extends AbstractController
         $user = $this->getUser();
         if (isset($user)) {
             if ($user == $utilisateur) {
+                if (!$user->isGoogleUser) {
 
-                $form = $this->createForm(PasswordUpdateType::class);
+                    $form = $this->createForm(PasswordUpdateType::class);
 
-                $form->handleRequest($request);
+                    $form->handleRequest($request);
 
-                if ($form->isSubmitted() && $form->isValid()) {
+                    if ($form->isSubmitted() && $form->isValid()) {
 
-                    $currentPassword = $form->get('currentPassword')->getData();
-                    $match = $userPasswordHasher->isPasswordValid($utilisateur, $currentPassword);
+                        $currentPassword = $form->get('currentPassword')->getData();
+                        $match = $userPasswordHasher->isPasswordValid($utilisateur, $currentPassword);
 
-                    if ($match) {
+                        if ($match) {
 
-                        $hashedpassword = $userPasswordHasher->hashPassword(
-                            $utilisateur,
-                            $form->get('plainPassword')->getData()
-                        );
-                        $utilisateur->setPassword($hashedpassword);
+                            $hashedpassword = $userPasswordHasher->hashPassword(
+                                $utilisateur,
+                                $form->get('plainPassword')->getData()
+                            );
+                            $utilisateur->setPassword($hashedpassword);
 
-                        $entityManager->flush();
-                        $this->addFlash('success', 'Mot de passe mis à jour');
-                        return $this->redirectToRoute('show_utilisateur', ['id' => $utilisateur->getId()]);
+                            $entityManager->flush();
+                            $this->addFlash('success', 'Mot de passe mis à jour');
+                            return $this->redirectToRoute('show_utilisateur', ['id' => $utilisateur->getId()]);
+                        }
                     }
-                }
 
-                return $this->render("utilisateur/password.html.twig", [
-                    'formChangePassword' => $form,
-                ]);
+                    return $this->render("utilisateur/password.html.twig", [
+                        'formChangePassword' => $form,
+                    ]);
+                } else {
+                    $this->addFlash('error', "Un utilisateur connecté via compte google ne peut pas changer son mot de passe.");
+                    return $this->redirectToRoute('show_utilisateur', ['id' => $utilisateur->getId()]);
+
+                }
             } else {
                 $this->addFlash('error', "Ce n'est pas votre profil");
                 return $this->redirectToRoute("app_home");
