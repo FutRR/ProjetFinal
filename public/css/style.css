@@ -290,8 +290,14 @@ body{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
+        height: 100%;
+        width: fit-content;
+        max-width: 40vw;
+        backdrop-filter: blur(20px);
+        color: var(--white);
+        font-size: 20px;
     }
 
     .form{
@@ -317,7 +323,8 @@ body{
         margin: 10px !important;
     }
 
-    .submit{
+    .submit-btn{
+        width: 100%;
         border: 3px solid var(--white);
         transition: all 250ms ease;
     }
@@ -405,10 +412,6 @@ body{
         order: 1;
     }
 
-    .login-register-submit{
-        width: 100%;
-    }
-
     .login-register-link{
         text-decoration: none;
 
@@ -454,6 +457,10 @@ body{
         font-size: 16px;
         opacity: .5;
 	}
+
+    .login-register-submit{
+        width: 100%;
+    }
 
     .login-with-google-btn {
         transition: all 250ms ease;
@@ -827,7 +834,7 @@ body{
 
     .niveau-wrapper{
         display: flex;
-        flex-direction: column;
+        flex-flow: row wrap;
         gap: 50px;
         margin: 50px 0;
     }
@@ -837,12 +844,16 @@ body{
         flex-direction: column;
         background-color: var(--white);
         border-radius: 15px;
-        padding: 10px 15px;
-        width: 100%;
+        padding: 10px 20px;
+        width: fit-content;
     }
 
     .niveau h2 a{
         color: var(--darkblue) !important;
+    }
+
+    .niveau h2 a:hover{
+        text-decoration: underline;
     }
 
     .etapes-wrapper{
@@ -861,19 +872,24 @@ body{
         border-radius: 15px;
         color: var(--blue);
         padding: 10px 15px;
-        width: 30%;
+        width: fit-content;
         height: 100%;
-        transition: all 500ms ease;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
 
-    .niveau-etape:hover{
-        width: 50%;
+    .niveau-etape a{
+        align-self: flex-end;
+        color: var(--white);
+        background-color: var(--blue);
+        padding: 6px 7.5px;
+        border-radius: 5000px;
+        width: fit-content;
+        transform: rotate(-45deg);
+        transition: all 250ms ease;
     }
 
-    .niveau-etape a{
-        color: var(--blue);
-        width: fit-content;
+    .niveau-etape a:hover{
+        transform: scale(1.2);
     }
 
 
