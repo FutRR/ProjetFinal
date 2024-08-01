@@ -157,7 +157,7 @@ class EtapeController extends AbstractController
     public function deletePost(Post $post, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        if ($post->getUtilisateur() == $user) {
+        if ($post->getUtilisateur() == $user || $this->isGranted('ROLE_ADMIN')) {
 
             $entityManager->remove($post);
             $entityManager->flush();

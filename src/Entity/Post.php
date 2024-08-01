@@ -17,11 +17,11 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $contenu = null;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Utilisateur $utilisateur = null;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
