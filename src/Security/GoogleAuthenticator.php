@@ -53,7 +53,7 @@ class GoogleAuthenticator extends OAuth2Authenticator implements AuthenticationE
                 } else {
                     $user = new Utilisateur();
                     $user->setEmail($googleUser->getEmail());
-                    $user->setRoles([]);
+                    $user->setRoles(['ROLE_USER']);
                     $user->setPassword(bin2hex(random_bytes(16)));
                     $user->setGoogleUser(true);
                     $user->setUsername(explode("@", $googleUser->getEmail())[0]);
