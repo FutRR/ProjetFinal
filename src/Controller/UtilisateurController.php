@@ -28,27 +28,41 @@ class UtilisateurController extends AbstractController
     #[Route('/utilisateur/{id}/edit', name: 'edit_utilisateur')]
     public function edit(Utilisateur $utilisateur = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $message = 'utilisateur modifié';
+        $user = $this->getUser();
+        if (isset($user)) {
+            if ($user == $utilisateur) {
 
-        $disabled = $utilisateur->isGoogleUser();
+                $message = 'Utilisateur modifié';
 
-        $form = $this->createForm(UtilisateurType::class, $utilisateur, ['user_is_google' => $disabled]);
+                $disabled = $utilisateur->isGoogleUser();
 
-        $form->handleRequest($request);
+                $form = $this->createForm(UtilisateurType::class, $utilisateur, ['user_is_google' => $disabled]);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+                $form->handleRequest($request);
 
-            $utilisateur = $form->getData();
-            $entityManager->persist($utilisateur);
-            $entityManager->flush();
-            $this->addFlash('success', $message);
-            return $this->redirectToRoute('show_utilisateur', ['id' => $utilisateur->getId()]);
+                if ($form->isSubmitted() && $form->isValid()) {
+
+                    $utilisateur = $form->getData();
+                    $entityManager->persist($utilisateur);
+                    $entityManager->flush();
+                    $this->addFlash('success', $message);
+                    return $this->redirectToRoute('show_utilisateur', ['id' => $utilisateur->getId()]);
+                }
+
+                return $this->render("utilisateur/edit.html.twig", [
+                    'formAddUtilisateur' => $form,
+                    'edit' => $utilisateur->getId()
+                ]);
+            } else {
+                $this->addFlash('error', "Ce n'est pas votre profil");
+                return $this->redirectToRoute("app_home");
+            }
+
+        } else {
+            $this->addFlash('error', "Vous n'êtes pas connecté");
+            return $this->redirectToRoute("app_home");
         }
 
-        return $this->render("utilisateur/edit.html.twig", [
-            'formAddUtilisateur' => $form,
-            'edit' => $utilisateur->getId()
-        ]);
     }
 
     #[Route('utilisateur/{id}/changePassword', name: 'change_password')]
@@ -57,7 +71,7 @@ class UtilisateurController extends AbstractController
         $user = $this->getUser();
         if (isset($user)) {
             if ($user == $utilisateur) {
-                if (!$user->isGoogleUser) {
+                if (!$user->isGoogleUser()) {
 
                     $form = $this->createForm(PasswordUpdateType::class);
 
