@@ -111,9 +111,9 @@ INSERT IGNORE INTO `niveau` (`id`, `nom_niveau`, `prix`) VALUES
 -- Listage de la structure de table projet_final_maximefutterer. post
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `utilisateur_id` int NOT NULL,
+  `utilisateur_id` int DEFAULT NULL,
   `etape_id` int NOT NULL,
-  `contenu` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contenu` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `date_creation` datetime NOT NULL,
   `parent_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -129,17 +129,10 @@ CREATE TABLE IF NOT EXISTS `post` (
 INSERT IGNORE INTO `post` (`id`, `utilisateur_id`, `etape_id`, `contenu`, `date_creation`, `parent_id`) VALUES
 	(1, 1, 1, 'mon premier post :)', '2024-07-08 09:42:41', NULL),
 	(5, 1, 1, 'reponse', '2024-07-08 14:45:52', 1),
-	(6, 1, 1, 'test', '2024-07-08 16:52:42', 1),
-	(7, 1, 1, 'test2', '2024-07-08 16:57:26', NULL),
-	(8, 1, 1, 'reponse 2', '2024-07-08 16:57:38', 7),
 	(9, 2, 1, 'encore un test', '2024-07-09 08:15:19', NULL),
-	(10, 2, 1, 'super', '2024-07-09 08:15:27', 7),
 	(11, 2, 1, 'et voila', '2024-07-09 12:02:32', 9),
 	(12, 2, 1, 'et voila', '2024-07-09 12:02:35', 9),
-	(13, 2, 1, 'yes', '2024-07-09 13:41:51', 1),
-	(14, 1, 1, '<p>ntm</p>', '2024-07-11 09:24:31', 9),
-	(15, 3, 1, '<p>Super cour, qu\'est-ce que vous en avez pens&eacute; ?</p>', '2024-07-12 11:50:23', NULL),
-	(16, 1, 1, '<p>Pareil, c\'est vraiment clair et pr&eacute;cis</p>', '2024-07-12 12:48:35', 15);
+	(13, 2, 1, 'yes', '2024-07-09 13:41:51', 1);
 
 -- Listage de la structure de table projet_final_maximefutterer. progression
 CREATE TABLE IF NOT EXISTS `progression` (
