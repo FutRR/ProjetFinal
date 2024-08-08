@@ -496,12 +496,31 @@ body{
         flex-direction: column;
         justify-content: center;
         gap: 20px;
-        width: 100%;       
+        width: 100%;
+    }
+
+    .admin-wrapper > details{
+        width: 100% !important;
+    }
+
+    .admin-wrapper > details[open]{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: fit-content;
+        gap: 10px;
+    }
+
+    .admin-wrapper ul{
+    }
+
+    .admin-wrapper li{
+        list-style-type: none;
+        height: fit-content;
     }
 
     .utilisateur-card{
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-
     }
 
     .utilisateur-card h2 a:hover{

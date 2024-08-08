@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Niveau;
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +19,11 @@ class AdminController extends AbstractController
             if ($this->isGranted('ROLE_ADMIN')) {
 
                 $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
+                $niveaux = $entityManager->getRepository(Niveau::class)->findAll();
 
                 return $this->render('admin/index.html.twig', [
-                    'utilisateurs' => $utilisateurs
+                    'utilisateurs' => $utilisateurs,
+                    'niveaux' => $niveaux
                 ]);
 
             }

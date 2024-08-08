@@ -26,7 +26,19 @@
         </details>
 
         <details>
-            <summary>Niveau</summary>
+            <summary>Niveaux</summary>
+            <a class="btn add-btn" href="{{ path('new_niveau')}}">Ajouter un niveau</a>
+            <h3>Liste des niveaux</h3>
+            <ul>
+                {% for niveau in niveaux %}
+                    <li>
+                        <a href="{{ path('show_niveau', {'id': niveau.id})}}">{{niveau}}</a>
+                        <a class="btn add-btn" href="{{ path('edit_niveau', {'id': niveau.id})}}">Modifier le niveau</a>
+                    </li>
+                    
+
+                {% endfor %}
+            </ul>
         </details>
 
         <details>
