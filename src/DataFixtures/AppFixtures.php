@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use Faker\Factory;
 use App\Entity\Etape;
 use App\Entity\Niveau;
 use Doctrine\Persistence\ObjectManager;
@@ -12,10 +11,10 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $niveauId = 2;
+        $niveauId = 3;
         $niveau = $manager->getRepository(Niveau::class)->find($niveauId);
 
-        $nomEtapes = ['Lecture', 'Rythme', 'Connaissances théoriques', 'Morceau'];
+        $nomEtapes = ['Lecture', 'Rythme', 'Théorie', 'Morceau'];
 
         // Création d'étapes
         foreach ($nomEtapes as $i => $nomEtape) {

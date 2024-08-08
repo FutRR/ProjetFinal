@@ -19,10 +19,10 @@ class NiveauType extends AbstractType
                 'label' => 'Nom du niveau',
                 'row_attr' => ['class' => 'form']
             ])
-            ->add('prix', FloatType::class, [
-                'label' => 'Prix',
-                'row_attr' => ['class' => 'prix form']
-            ])
+            // ->add('prix', FloatType::class, [
+            //     'label' => 'Prix',
+            //     'row_attr' => ['class' => 'prix form']
+            // ])
             ->add('valider', SubmitType::class, [
                 "attr" => [
                     'class' => "btn"
