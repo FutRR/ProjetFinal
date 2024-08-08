@@ -13,7 +13,7 @@
                 {% if utilisateur.googleUser == 0 %}
                     <a class="btn add-btn" href="{{ path('change_password', {'id': utilisateur.id})}}">Modifier le mot de passe</a>
                 {% endif %}
-                <button class="btn open-btn delete-btn">Étape finie</button>
+                <button class="btn open-btn profil-delete-btn">Supprimer le compte</button>
 
                 <dialog class="modal">
 

@@ -115,7 +115,7 @@
                                         <button class="reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
 
                                         {% if (app.user == post.utilisateur) or (is_granted('ROLE_ADMIN')) %}
-                                            <button class="open-btn open-delete-btn">Supprimer</button>
+                                            <button class="open-btn post-delete-btn">Supprimer</button>
                                             <dialog class="modal">
                                                 <button class="btn close-btn">
                                                     <i class="fa-solid fa-x"></i>

@@ -268,16 +268,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.8.6",
+            "version": "3.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "b7411825cf7efb7e51f9791dea19d86e43b399a1"
+                "reference": "2093d670ca17f634f3c095ec10a20687eccebd99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/b7411825cf7efb7e51f9791dea19d86e43b399a1",
-                "reference": "b7411825cf7efb7e51f9791dea19d86e43b399a1",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2093d670ca17f634f3c095ec10a20687eccebd99",
+                "reference": "2093d670ca17f634f3c095ec10a20687eccebd99",
                 "shasum": ""
             },
             "require": {
@@ -293,12 +293,12 @@
                 "doctrine/coding-standard": "12.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.1",
-                "phpstan/phpstan": "1.11.5",
+                "phpstan/phpstan": "1.11.7",
                 "phpstan/phpstan-strict-rules": "^1.6",
-                "phpunit/phpunit": "9.6.19",
+                "phpunit/phpunit": "9.6.20",
                 "psalm/plugin-phpunit": "0.18.4",
                 "slevomat/coding-standard": "8.13.1",
-                "squizlabs/php_codesniffer": "3.10.1",
+                "squizlabs/php_codesniffer": "3.10.2",
                 "symfony/cache": "^5.4|^6.0|^7.0",
                 "symfony/console": "^4.4|^5.4|^6.0|^7.0",
                 "vimeo/psalm": "4.30.0"
@@ -361,7 +361,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.8.6"
+                "source": "https://github.com/doctrine/dbal/tree/3.8.7"
             },
             "funding": [
                 {
@@ -377,7 +377,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-19T10:38:17+00:00"
+            "time": "2024-08-07T11:57:25+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1256,16 +1256,16 @@
         },
         {
             "name": "doctrine/sql-formatter",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/sql-formatter.git",
-                "reference": "d1ac84aef745c69ea034929eb6d65a6908b675cc"
+                "reference": "7f83911cc5eba870de7ebb11283972483f7e2891"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/d1ac84aef745c69ea034929eb6d65a6908b675cc",
-                "reference": "d1ac84aef745c69ea034929eb6d65a6908b675cc",
+                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/7f83911cc5eba870de7ebb11283972483f7e2891",
+                "reference": "7f83911cc5eba870de7ebb11283972483f7e2891",
                 "shasum": ""
             },
             "require": {
@@ -1305,9 +1305,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/sql-formatter/issues",
-                "source": "https://github.com/doctrine/sql-formatter/tree/1.4.0"
+                "source": "https://github.com/doctrine/sql-formatter/tree/1.4.1"
             },
-            "time": "2024-05-08T08:12:09+00:00"
+            "time": "2024-08-05T20:32:22+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -3137,16 +3137,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v15.4.0",
+            "version": "v15.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "13581553ea8725b9d0cfff93d24462c4149abec9"
+                "reference": "d20fbbf2557773106c0ec2198b1b16b40f5081bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/13581553ea8725b9d0cfff93d24462c4149abec9",
-                "reference": "13581553ea8725b9d0cfff93d24462c4149abec9",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/d20fbbf2557773106c0ec2198b1b16b40f5081bc",
+                "reference": "d20fbbf2557773106c0ec2198b1b16b40f5081bc",
                 "shasum": ""
             },
             "require": {
@@ -3190,9 +3190,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v15.4.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v15.5.0"
             },
-            "time": "2024-07-25T21:00:20+00:00"
+            "time": "2024-08-01T21:25:52+00:00"
         },
         {
             "name": "symfony/asset",
@@ -4586,16 +4586,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v2.4.5",
+            "version": "v2.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "b0a405f40614c9f584b489d54f91091817b0e26e"
+                "reference": "4dc11919791f81d087a12db2ab4c7e044431ef6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/b0a405f40614c9f584b489d54f91091817b0e26e",
-                "reference": "b0a405f40614c9f584b489d54f91091817b0e26e",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/4dc11919791f81d087a12db2ab4c7e044431ef6b",
+                "reference": "4dc11919791f81d087a12db2ab4c7e044431ef6b",
                 "shasum": ""
             },
             "require": {
@@ -4631,7 +4631,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v2.4.5"
+                "source": "https://github.com/symfony/flex/tree/v2.4.6"
             },
             "funding": [
                 {
@@ -4647,7 +4647,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-02T08:16:47+00:00"
+            "time": "2024-04-27T10:22:22+00:00"
         },
         {
             "name": "symfony/form",
@@ -8415,16 +8415,16 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "7.2.1",
+            "version": "7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "db05d34dd0964dd241045cfc319c3a1bd45773e8"
+                "reference": "e92ab7adaa3db1752639361ded41a7abb2d28996"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/db05d34dd0964dd241045cfc319c3a1bd45773e8",
-                "reference": "db05d34dd0964dd241045cfc319c3a1bd45773e8",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/e92ab7adaa3db1752639361ded41a7abb2d28996",
+                "reference": "e92ab7adaa3db1752639361ded41a7abb2d28996",
                 "shasum": ""
             },
             "type": "component",
@@ -8468,9 +8468,9 @@
                 "wysiwyg"
             ],
             "support": {
-                "source": "https://github.com/tinymce/tinymce-dist/tree/7.2.1"
+                "source": "https://github.com/tinymce/tinymce-dist/tree/7.3.0"
             },
-            "time": "2024-07-03T05:25:26+00:00"
+            "time": "2024-08-07T06:30:33+00:00"
         },
         {
             "name": "twig/extra-bundle",

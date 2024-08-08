@@ -112,6 +112,7 @@ body{
 
     summary{
         font-weight: 700;
+        font-size: 24px;
     }
 
     details[open]{
@@ -498,6 +499,11 @@ body{
         width: 100%;       
     }
 
+    .utilisateur-card{
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+    }
+
     .utilisateur-card h2 a:hover{
         text-decoration: underline;
     }
@@ -539,18 +545,18 @@ body{
         }
     
         .header-btn{
-            transition: all 500ms ease;
-            background: transparent;
+            transition: all 350ms ease;
             border: 2px solid var(--white);
-            color: var(--white) !important;
-            font-weight: 600;
+            color: var(--blue) !important;
+            font-weight: 700;
         }
     
         .header-btn:hover{
-            color: var(--blue) !important;
+            background: transparent;
+            color: var(--white) !important;
         }
     
-        .maester{
+        header h1 span{
             color: var(--blue);
         }
     
@@ -1006,8 +1012,7 @@ body{
         
         /* MODAL */
 
-            dialog[open]{
-                padding: 20px;
+            dialog{
                 border: none;
                 background-color: var(--white);
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -1018,28 +1023,18 @@ body{
                 align-items: center;
                 width: fit-content;
                 height: fit-content;
+                padding: 0;
+                transform: scaleY(0);
+                opacity: 0;
+                transition: all 250ms;
+            }
+            
+            dialog[open]{
                 opacity: 1;
                 transform: scaleY(1);
-            }
-            
-            dialog:not([open]){
-                opacity: 0;
-                transition: 250ms;
+                padding: 20px;
             }
 
-            dialog{
-                opacity: 0;
-                transform: scaleY(0);
-                transition: all 250ms
-            }
-
-            @starting-style {
-                dialog[open] {
-                  opacity: 0;
-                  transform: scaleY(0);
-                }
-              }
-            
             .modal-text{
                 display: flex;
                 flex-direction: column;
@@ -1080,10 +1075,6 @@ body{
                 color: var(--white) !important;
             }
 
-            .utilisateur-delete-btn{
-                width: 50% !important;
-            }
-
             .delete-btn{
                 width: 100%;
                 border-color: var(--red) !important;
@@ -1108,7 +1099,7 @@ body{
                 background-color: transparent;
             }
 
-            .open-delete-btn{
+            .post-delete-btn{
                 background-color: transparent;
                 border: none;
                 color: var(--white);
@@ -1116,7 +1107,7 @@ body{
                 padding: 0;
             }
 
-            .open-delete-btn:hover{
+            .post-delete-btn:hover{
                 text-decoration: underline;
             }
 
@@ -1264,8 +1255,31 @@ body{
         width: 100%;
     }
 
+    .profil-title h1{
+        width: fit-content;
+    }
+
     .profil-title span{
         display: block;
+    }
+
+    .profil-title .add-btn-wrapper{
+        flex-direction: row;
+    }
+
+    .profil-delete-btn{
+        border: 3px solid var(--red);
+        color: var(--white);
+        background-color: transparent;
+    }
+
+    .profil-delete-btn:hover{
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;    
+        background-color: transparent;    
+    }
+
+    .utilisateur-delete-btn{
+        width: 50% !important;
     }
 
     .profil-progression{
