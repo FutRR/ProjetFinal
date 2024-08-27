@@ -118,8 +118,10 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/utilisateur/{id}/delete', name: 'delete_utilisateur')]
-    public function deleteUtilisateur(Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
+    public function deleteUtilisateur(Utilisateur $utilisateur, EntityManagerInterface $entityManager, Request $request): Response
     {
+        $submittedToken = $request->getPayload()->get('token');
+
         $user = $this->getUser();
         if (isset($user)) {
             if ($user->getId() == $utilisateur->getId() || $this->isGranted('ROLE_ADMIN')) {
@@ -129,16 +131,18 @@ class UtilisateurController extends AbstractController
                     return $this->redirectToRoute("app_home");
                 }
 
-                if ($user->getId() == $utilisateur->getId()) {
-                    $session = new Session();
-                    $session->invalidate();
+                if ($this->isCsrfTokenValid('delete_utilisateur', $submittedToken)) {
+                    if ($user->getId() == $utilisateur->getId()) {
+                        $session = new Session();
+                        $session->invalidate();
+                    }
+
+                    $entityManager->remove($utilisateur);
+                    $entityManager->flush();
+
+                    $this->addFlash('success', "Utilisateur supprimé");
+                    return $this->redirectToRoute("app_logout");
                 }
-
-                $entityManager->remove($utilisateur);
-                $entityManager->flush();
-
-                $this->addFlash('success', "Utilisateur supprimé");
-                return $this->redirectToRoute("app_logout");
 
             } else {
                 $this->addFlash('error', "Ce n'est pas votre profil");

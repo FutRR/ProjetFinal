@@ -26,7 +26,14 @@
                         <p>La suppression de compte est irréversible,<br> le compte ne pourra pas être récupéré</p>
                     </div>
 
-                    <a class="modal-btn delete-btn utilisateur-delete-btn" href="{{ path('delete_utilisateur', {'id': utilisateur.id }) }}">Supprimer</a>
+                    <form action="{{ path('delete_utilisateur', {'id': utilisateur.id }) }}" method="post">
+
+                        <input type="hidden" name="token" value="{{ csrf_token('delete_utilisateur') }}">
+
+                        <button class="modal-btn delete-btn utilisateur-delete-btn" type="submit">Supprimer</button>
+                    </form>
+
+                    {# <a class="modal-btn delete-btn utilisateur-delete-btn" href="{{ path('delete_utilisateur', {'id': utilisateur.id }) }}">Supprimer</a> #}
 
                 </dialog>
 
