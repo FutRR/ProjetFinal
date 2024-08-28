@@ -17,9 +17,9 @@ class AvisType extends AbstractType
     {
         $builder
             ->add('contenu', TextareaType::class, [
-                'label' => "Avis :",
+                'label' => "Commentaire :",
                 'row_attr' => ['class' => 'avis-textarea'],
-                'attr' => ['onkeyup' => 'textAreaAdjust(this)'],
+                'attr' => ['onkeyup' => 'textAreaAdjust(this)', 'placeholder' => 'Écrivez votre avis...'],
                 'required' => false
             ])
             ->add('note', ChoiceType::class, [

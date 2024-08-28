@@ -48,7 +48,10 @@
 
         {% if groupedProgressions|length > 0 %}
             <div class="profil-progression">
-                <h2>Progression</h2>
+                <div class="profil-progression-titre">
+                    <h2>Progression</h2>
+                    <p><i class="fa-regular fa-circle-check"></i> = Étape commencée | <i class="fa-solid fa-circle-check"></i> = Étape finie</p>
+                </div>
                 <div class="profil-niveaux-wrapper">
                     {# Pour chaque niveau + ses progressions de l'utilisateur #}
                     {% for niveau, progressions in groupedProgressions %}

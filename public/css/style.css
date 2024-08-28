@@ -55,10 +55,6 @@ body{
         color: var(--white);
     }
 
-    .no-underline{
-        text-decoration: none;
-    }
-
     .btn {
         height: fit-content;
         background-color: var(--white);
@@ -189,6 +185,7 @@ body{
         height: 5px;
         background-color: var( --white);
         margin: 5px;
+        box-shadow: rgba(0, 0, 0, 0.637) 0px 5px 15px;           
         transition: 250ms;
     }
 
@@ -564,13 +561,14 @@ body{
         .header-btn{
             transition: all 350ms ease;
             border: 2px solid var(--white);
-            color: var(--blue) !important;
+            background-color: transparent;
+            color: var(--white) !important;
             font-weight: 700;
         }
     
         .header-btn:hover{
-            background: transparent;
-            color: var(--white) !important;
+            background-color: var(--white);
+            color: var(--blue) !important;
         }
     
         header h1 span{
@@ -773,11 +771,12 @@ body{
             display: flex;
             flex-direction: column;
             width: 100%;
+            gap: 10px;
         }
     
         .avis-textarea textarea{
             width: 100%;
-            margin: 0 !important;
+            margin: 10px 0 !important;
             padding: 0 !important;
         }
     
@@ -926,6 +925,10 @@ body{
     }
 
     /* SIDEBAR */
+
+        #sidebar{
+            min-width: fit-content;
+        }
 
         .etape-progression-wrapper{
             display: flex;
@@ -1301,6 +1304,12 @@ body{
 
     .profil-progression{
         
+    }
+
+    .profil-progression-titre{
+        display: flex;
+        align-items: center;
+        gap: 20px;
     }
 
     .profil-list-progression p{

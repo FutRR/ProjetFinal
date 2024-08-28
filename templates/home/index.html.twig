@@ -89,7 +89,9 @@
                     </div> 
                 {% endfor %}
 
-                {% if maxResults < reviews|length %}
+                {{ dump(maxResults) }}
+
+                {% if (maxResults < reviews|length) or (maxResults == reviews|length) %}
                     <a href="{{ path('app_home', {'maxResults': maxResults + 5}) }}">Voir plus</a>
                 {% endif %}
 
