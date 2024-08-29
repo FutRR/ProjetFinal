@@ -120,7 +120,6 @@ class UtilisateurController extends AbstractController
     #[Route('/utilisateur/{id}/delete', name: 'delete_utilisateur')]
     public function deleteUtilisateur(Utilisateur $utilisateur, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $submittedToken = $request->getPayload()->get('token');
 
         $user = $this->getUser();
         if (isset($user)) {
@@ -131,6 +130,7 @@ class UtilisateurController extends AbstractController
                     return $this->redirectToRoute("app_home");
                 }
 
+                $submittedToken = $request->getPayload()->get('token');
                 if ($this->isCsrfTokenValid('delete_utilisateur', $submittedToken)) {
                     if ($user->getId() == $utilisateur->getId()) {
                         $session = new Session();

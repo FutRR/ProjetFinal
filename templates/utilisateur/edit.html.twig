@@ -14,9 +14,11 @@ Modification du Profil
             {{ form_row(formAddUtilisateur.email)}}
         {% endif %}
 
-        {{ form_row(formAddUtilisateur.username)}}
+        {{ form_row(formAddUtilisateur.username) }}
 
-        {{form_widget(formAddUtilisateur.valider)}}
+        {{ form_row(formAddUtilisateur._token) }}
+
+        {{ form_widget(formAddUtilisateur.valider) }}
 
     {{ form_end(formAddUtilisateur, {'render_rest': false}) }}
 

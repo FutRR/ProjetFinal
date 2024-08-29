@@ -43,6 +43,7 @@ class UtilisateurType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Utilisateur::class,
             'user_is_google' => false,
+            'csrf_field_name' => '_token',
         ]);
     }
 }
