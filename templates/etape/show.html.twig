@@ -109,7 +109,9 @@
                                     {% endif %}
                                     <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
                                 </div>
+
                                 <span class="post-text">{{post.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
+
                                 <div class="post-bottom">
                                     <div>
                                         <button class="reponse-btn" data-post-id="{{ post.id }}">Répondre</button>
@@ -135,38 +137,16 @@
                                     {% if post.parent %}
                                         <p class="respond-to">En réponse à <a href="#{{post.parent.id}}" class="respond-to-link" data-reply-id="{{post.parent.id}}">{{post.parent.utilisateur}}</a></p>
                                     {% endif %}
-
                                 </div>
 
                                 {# Formulaire de réponse #}
                                 <div class="reponseForm form-wrapper" id="reponse-form-{{ post.id }}">
                                     {{ form_start(reponseForms[post.id]) }}
-                                    {{ form_widget(reponseForms[post.id]) }}
+                                        {# {{ form_widget(reponseForms[post.id].contenu) }}
+                                        {{ form_widget(reponseForms[post.id].valider) }} #}
                                     {{ form_end(reponseForms[post.id]) }}
                                 </div>
-                                
-
                             </div>
-        
-        
-                            {# Afficher les réponses #}
-                            {# {% if post.replies|length > 0 %}
-                                    {% for reply in post.replies %}
-                                        <div class="reponse post">
-
-                                            <div class="post-top">
-                                                <h3>{{reply.utilisateur}}</h3>
-                                                <p>{{reply.dateCreation|date("d/m/Y")}} à {{reply.dateCreation|date("H:i")}}</p>
-                                            </div>
-                                            <span>{{reply.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw}}</span>
-
-                                            {% if reply.parent|length > 0 %}
-                                                <p class="post-bottom">En réponse à <a href="#{{post.id}}">{{ reply.parent.utilisateur}}</a></p>
-                                            {% endif %}
-
-                                        </div>
-                                    {% endfor %}
-                            {% endif %}   #}
         
                         {% endfor %}
                     </div>
