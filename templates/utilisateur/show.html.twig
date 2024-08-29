@@ -26,7 +26,7 @@
                         <p>La suppression de compte est irréversible,<br> le compte ne pourra pas être récupéré</p>
                     </div>
 
-                    <form action="{{ path('delete_utilisateur', {'id': utilisateur.id }) }}" method="post">
+                    <form action="{{ url('delete_utilisateur', {'id': utilisateur.id }) }}" method="post">
 
                         <input type="hidden" name="token" value="{{ csrf_token('delete_utilisateur') }}">
 
