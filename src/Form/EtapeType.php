@@ -21,18 +21,25 @@ class EtapeType extends AbstractType
     {
         $builder
             ->add('nomEtape', TextType::class, [
-                'row_attr' => ['class' => 'form'],
+                'row_attr' => ['class' => 'form input-box'],
+                'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' '],
+
                 'label' => "Nom de l'étape :"
             ])
             ->add('description', TextareaType::class, [
-                'row_attr' => ['class' => 'form', 'placeholder' => "Description de l'étape"],
-                'label' => 'Description :'
+                'row_attr' => ['class' => 'form input-box'],
+                'label' => 'Description',
+                'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' '],
+
 
             ])
             ->add('pdf', FileType::class, [
                 'data_class' => null,
                 'mapped' => false,
-                'row_attr' => ['class' => 'form'],
+                'row_attr' => ['class' => 'form input-file'],
+                'attr' => ['placeholder' => ' '],
                 'label' => 'PDF :',
                 'required' => false,
                 'constraints' => [
@@ -47,18 +54,25 @@ class EtapeType extends AbstractType
                 ]
             ])
             ->add('video', TextType::class, [
-                'row_attr' => ['class' => 'form', 'placeholder' => 'ID Youtube - ex : n7RjlO-beJA'],
+                'row_attr' => ['class' => 'form input-box', 'placeholder' => 'ID Youtube - ex : n7RjlO-beJA'],
+                'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' '],
+
                 'label' => "ID de la vidéo Youtube :",
                 'empty_data' => 'https://www.youtube.com/embed/',
                 'required' => false,
             ])
             ->add('ordre', IntegerType::class, [
-                'row_attr' => ['class' => 'form']
+                'row_attr' => ['class' => 'form input-box'],
+                'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' '],
+
             ])
             ->add('Niveau', EntityType::class, [
                 'class' => Niveau::class,
                 'choice_label' => 'nomNiveau',
-                'row_attr' => ['class' => 'select form']
+                'row_attr' => ['class' => 'select form input-box'],
+
             ])
             ->add('valider', SubmitType::class, [
                 "attr" => [

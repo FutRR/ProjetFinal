@@ -324,7 +324,18 @@ body{
         border: 3px solid var(--white);
         transition: all 250ms ease;
     }
+    
+    .input-file input[type=file]{
+        border: 1px solid var(--white);
+        border-radius: 50px;
+        padding: 20px;
+    }
 
+    .input-file input::file-selector-button {
+
+    }
+
+    
     input:-webkit-autofill,
     input:-webkit-autofill:hover, 
     input:-webkit-autofill:focus, 
@@ -376,6 +387,23 @@ body{
         padding-top: 30px;      
         font-size: 18px;
         color: var(--white);
+    }
+
+    .input-box textarea{
+        width: 90%;
+        min-height: fit-content;
+        height: 100%;
+        outline: none;
+        border: 1px solid var(--white);
+        border-radius: 50px;
+        align-self: center !important;
+        background: transparent;
+        padding: 20px;  
+        padding-top: 30px;
+        margin: 0 !important; 
+        font-size: 18px;
+        color: var(--white);
+        resize: horizontal;
     }
 
     .input-box i{
@@ -446,13 +474,22 @@ body{
 
 	.input-box > .floating-label:has(+input:focus),
     .input-box > .floating-label:has(+input:not(:placeholder-shown))
-    /* .input-box > .floating-label:has(+input:not(:focus):valid) */
     {
         top: 25%;
 		transform: translateY(-50%);
         font-size: 16px;
         opacity: .5;
 	}
+
+    .input-box > .floating-label:has(+textarea:focus),
+    .input-box > .floating-label:has(+textarea:not(:placeholder-shown))
+    {
+        top: 25%;
+		transform: translateY(-50%);
+        font-size: 16px;
+        opacity: .5;
+	}
+
 
     .login-register-submit{
         width: 100%;
@@ -1234,6 +1271,11 @@ body{
             .reponseForm .submit{
                 margin-top: 10px;
                 width: 100%;
+            }
+
+            .reponseForm form{
+                display: flex;
+                flex-direction: row;
             }
 
             .post-form{

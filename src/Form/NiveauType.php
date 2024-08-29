@@ -17,7 +17,9 @@ class NiveauType extends AbstractType
         $builder
             ->add('nomNiveau', TextType::class, [
                 'label' => 'Nom du niveau',
-                'row_attr' => ['class' => 'form']
+                'label_attr' => ['class' => 'floating-label'],
+                'attr' => ['placeholder' => ' '],
+                'row_attr' => ['class' => 'form input-box']
             ])
             // ->add('prix', FloatType::class, [
             //     'label' => 'Prix',
