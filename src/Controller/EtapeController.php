@@ -82,7 +82,7 @@ class EtapeController extends AbstractController
 
                 $entityManager->persist($etape);
                 $entityManager->flush();
-                noty()->success($message);
+                $this->addFlash('success', $message);
                 return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
             }
 
@@ -146,7 +146,7 @@ class EtapeController extends AbstractController
             $reply->setParent($post);
             $entityManager->persist($reply);
             $entityManager->flush();
-            noty()->success('Réponse publiée');
+            $this->addFlash('success', "Réponse publiée");
             return $this->redirectToRoute('show_etape', ['id' => $post->getEtape()->getId()]);
         }
 
@@ -161,10 +161,10 @@ class EtapeController extends AbstractController
 
             $entityManager->remove($post);
             $entityManager->flush();
-            noty()->success('Post supprimé');
+            $this->addFlash('success', "Post supprimé");
             return $this->redirectToRoute('show_etape', ['id' => $post->getEtape()->getId()]);
         } else {
-            noty()->success("Vous n'êtes pas l'auteur de ce post");
+            $this->addFlash('success', "Vous n'êtes pas autorisé à supprimer ce post");
             return $this->redirectToRoute('app_home');
         }
     }
@@ -216,7 +216,7 @@ class EtapeController extends AbstractController
                 $post->setEtape($etape);
                 $entityManager->persist($post);
                 $entityManager->flush();
-                noty()->success($message);
+                $this->addFlash('success', $message);
                 return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
             }
 
