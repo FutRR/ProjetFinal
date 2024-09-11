@@ -1291,8 +1291,21 @@ body{
                 width: 100%;
             }
 
+            .etape-pagination{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                height: fit-content;
+                margin-top: 10px;
+            }
+
+            .pagination-btn{
+                margin-top: 10px;
+            }
+
             .admin{
-                color: rgb(2, 207, 71) !important;
+                color: rgb(247, 151, 41) !important;
             }
 
             .reply-link{

@@ -203,10 +203,10 @@ class EtapeController extends AbstractController
             }
 
             // $posts = $entityManager->getRepository(Post::class)->findBy(['Etape' => $etape]);
-            $limit = 10;
+            $limit = 5;
             $page = $request->query->getInt('page', 1);
             $posts = $entityManager->getRepository(Post::class)->paginatePosts($page, $limit);
-            $maxPage = ceil($posts->count() / 10);
+            $maxPage = ceil($posts->count() / 5);
 
 
             // Formulaire de post
