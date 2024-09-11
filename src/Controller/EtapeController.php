@@ -202,7 +202,12 @@ class EtapeController extends AbstractController
                 $entityManager->flush();
             }
 
-            $posts = $entityManager->getRepository(Post::class)->findBy(['Etape' => $etape]);
+            // $posts = $entityManager->getRepository(Post::class)->findBy(['Etape' => $etape]);
+            $limit = 10;
+            $page = $request->query->getInt('page', 1);
+            $posts = $entityManager->getRepository(Post::class)->paginatePosts($page, $limit);
+            $maxPage = ceil($posts->count() / 10);
+
 
             // Formulaire de post
             $message = 'Post publié';
@@ -239,10 +244,12 @@ class EtapeController extends AbstractController
                 'posts' => $posts,
                 'formAddPost' => $formPost->createView(),
                 'reponseForms' => $reponseForms,
+                'maxPage' => $maxPage,
+                'page' => $page
             ]);
 
         } else {
-            noty()->error("Vous n'êtes pas connecté");
+            $this->addFlash('error', "Vous n'êtes pas connecté");
             return $this->redirectToRoute("app_home");
         }
 

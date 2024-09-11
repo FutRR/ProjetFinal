@@ -54,7 +54,7 @@
                         <iframe class="pdf-file" src="{{ asset(etape.pdf)}}" frameborder="0"></iframe> #}
 
                         {# <object class="pdf-file" data="{{ asset(etape.pdf) }}" type="application/pdf"></object> #}
-                        <embed src="{{ asset(etape.pdf) }}" frameborder="0" width="100%" height="1000px"
+                        <embed src="{{ asset(etape.pdf) }}" frameborder="0" width="100%" height="1000px">
                     {% endif %}
                 </div>
 
@@ -155,6 +155,15 @@
                         <summary>Écrire un post</summary>
                         {{ form(formAddPost) }}
                     </details>
+
+                    <div class="etape-pagination">
+                        {% if page > 1 %}
+                            <a href="{{ path('show_etape', {'id': etape.id, 'page': page - 1})}}">Page précédente</a>
+                        {% endif %}
+                        {% if page < maxPage %}
+                            <a href="{{ path('show_etape', {'id': etape.id, 'page': page + 1})}}">Page suivante</a>
+                        {% endif %}
+                    </div>
         
                 </div>
         
