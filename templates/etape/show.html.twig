@@ -150,13 +150,8 @@
         
                         {% endfor %}
                     </div>
-        
-                    <details open class="form-wrapper post-form">
-                        <summary>Écrire un post</summary>
-                        {{ form(formAddPost) }}
-                    </details>
 
-                    <div class="etape-pagination">
+                    <div class="etape-pagination"></div>
                         {% if page > 1 %}
                             <a class="btn add-btn pagination-btn" href="{{ path('show_etape', {'id': etape.id, 'page': page - 1})}}">Page précédente</a>
                         {% endif %}
@@ -164,6 +159,11 @@
                             <a class="btn add-btn pagination-btn" href="{{ path('show_etape', {'id': etape.id, 'page': page + 1})}}">Page suivante</a>
                         {% endif %}
                     </div>
+        
+                    <details open class="form-wrapper post-form">
+                        <summary>Écrire un post</summary>
+                        {{ form(formAddPost) }}
+                    </details>
         
                 </div>
         
