@@ -151,7 +151,7 @@
                         {% endfor %}
                     </div>
 
-                    <div class="etape-pagination"></div>
+                    <div class="etape-pagination">
                         {% if page > 1 %}
                             <a class="btn add-btn pagination-btn" href="{{ path('show_etape', {'id': etape.id, 'page': page - 1})}}">Page précédente</a>
                         {% endif %}

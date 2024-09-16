@@ -18,11 +18,13 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    public function paginatePosts(int $page, int $limit): Paginator
+    public function paginatePosts(int $etapeId, int $page, int $limit): Paginator
     {
         return new Paginator(
             $this
                 ->createQueryBuilder('p')
+                ->andWhere('p.Etape = :etapeId')
+                ->setParameter('etapeId', $etapeId)
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit)
                 ->orderBy('p.dateCreation', 'DESC')
