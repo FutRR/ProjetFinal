@@ -34,6 +34,16 @@ class PostRepository extends ServiceEntityRepository
         );
     }
 
+    public function findByUtilisateur(int $utilisateurId)
+    {
+        return $this->createQueryBuilder('p')
+        ->where('p.utilisateur = :utilisateurId')
+        ->setParameter('utilisateurId', $utilisateurId)
+        ->orderBy('p.dateCreation', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

@@ -9,59 +9,117 @@
     <header>
         <h1>Apprenez le piano comme il faut<br>avec <span>MAESTER</span>CLASS</h1>
 
-        <p><a class="btn header-btn" href="{{ path('app_niveau')}}">Commencez dès maintenant</a></p>
+        {% if app.user %}
+            <p><a class="btn header-btn" href="{{ path('app_niveau')}}">Continuez là où vous vous êtes arrêtez</a></p>
+        {% else %}
+            <p><a class="btn header-btn" href="{{ path('app_niveau')}}">Commencez dès maintenant</a></p>
+        {% endif %}
     </header>
 
     <div id="home-main">
 
-        <section id="why">
+        {% if app.user == false %}
+            <section id="why">
 
-            <div class="why-text">
-                <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
-                <p>Chez Maesterclass vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.</p>
-                <br>
-                <p>Le chemin ne sera pas facile mais il sera efficace, ce n’est pas en apprenant Au clair de la Lune que vous deviendrez le prochain Bach !</p>
-            </div>
-
-            <figure>
-                <img src="{{ asset('img/jj.webp')}}" alt="Jean-Jacques Futterer">
-                <figcaption>Jean-Jacques Futterer - 2014</figcaption>
-            </figure>
-        </section>
-
-        <section id="how">
-
-            <div id="schema">
-                <h2>Niveau 1</h2>
-                <h3>Étape 1</h3>
-                <i class="fa-solid fa-chevron-down"></i>
-                <h3>Étape 2</h3>
-                <i class="fa-solid fa-chevron-down"></i>
-                <h3>Étape 3</h3>
-                <i class="fa-solid fa-chevron-down"></i>
-                <h3>Étape 4</h3>
-                <div class="chevrons">
-                    <i class="fa-solid fa-chevron-down"></i>
-                    <i class="fa-solid fa-chevron-down"></i>
+                <div class="why-text">
+                    <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
+                    <p>Chez Maesterclass vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.</p>
+                    <br>
+                    <p>Le chemin ne sera pas facile mais il sera efficace, ce n’est pas en apprenant Au clair de la Lune que vous deviendrez le prochain Bach !</p>
                 </div>
-                <h2>Niveau 2</h2>
-            </div>
 
-            <div class="separator"></div>
+                <figure>
+                    <img src="{{ asset('img/jj.webp')}}" alt="Jean-Jacques Futterer">
+                    <figcaption>Jean-Jacques Futterer - 2014</figcaption>
+                </figure>
 
-            <div id="how-text">
-                <h2>COMMENT ÇA MARCHE</h2>
-                <p>C’est très simple, vous avancez par modules et chaque module comporte des étapes.</p>
-                <p>Ces étapes (Lecture, Compréhension théorique, Rythme...) contiennent chacune une vidéo et un PDF (possibilité d’imprimer afin de s’entraîner sans ordinateur/téléphone).
-                </p>
-                <p>Vous passez au module suivant en complétant toutes les étapes d’un module.</p>
-                <p>Les 5 premiers modules sont gratuits</p>
-            </div>
+            </section>
 
-        </section>
+            <section id="how">
+
+                <div id="schema">
+                    <h2>Niveau 1</h2>
+                    <h3>Étape 1</h3>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <h3>Étape 2</h3>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <h3>Étape 3</h3>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <h3>Étape 4</h3>
+                    <div class="chevrons">
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <h2>Niveau 2</h2>
+                </div>
+
+                <div class="separator"></div>
+
+                <div id="how-text">
+                    <h2>COMMENT ÇA MARCHE</h2>
+                    <p>C’est très simple, vous avancez par modules et chaque module comporte des étapes.</p>
+                    <p>Ces étapes (Lecture, Compréhension théorique, Rythme...) contiennent chacune une vidéo et un PDF (possibilité d’imprimer afin de s’entraîner sans ordinateur/téléphone).
+                    </p>
+                    <p>Vous passez au module suivant en complétant toutes les étapes d’un module.</p>
+                    <p>Les 5 premiers modules sont gratuits</p>
+                </div>
+
+            </section>
+        {% endif %}
+
+        {% if app.user %}
+            <section id="user-progress-wrapper">
+
+                <div class="user-progress last-progress">
+                <h2>Étapes en cours</h2>
+                    <div class="last-etape-wrapper">
+                        {% for progress in lastProgress %}
+                            <div class="last-etape">
+                                <p><a href="{{ path('show_etape', {'id': progress.etape.id})}}">{{progress.etape.niveau}} - {{progress.etape}}</a></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="user-progress last-posts">
+                    <h2>Derniers posts</h2>
+                    <div class="last-post-wrapper">
+                        {% for post in lastPosts %}
+                            
+                                <a href="{{ path('show_etape', {'id': post.etape.id})}}">
+                                    <div class="post last-post">
+                                        <div class="post-top">
+                                            {% if 'ROLE_ADMIN' in post.utilisateur.roles %}
+                                                <h3 title="Admin" class="admin">
+                                                    <i class="fa-solid fa-lock"></i>
+                                                    {{post.utilisateur}}
+                                                </h3>
+                                            {% else %}
+                                                <h3>{{post.utilisateur}}</h3>
+                                            {% endif %}
+                                            <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
+                                        </div>
+        
+                                        <span class="post-text">{{post.contenu}}</span>
+        
+                                        <div class="post-bottom">        
+                                            {% if post.parent and post.parent.utilisateur %}
+                                                <p class="respond-to">En réponse à <a href="#{{post.parent.id}}" class="respond-to-link" data-reply-id="{{post.parent.id}}">{{post.parent.utilisateur}}</a></p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            </section>
+        {% endif %}
+
 
         <section id="reviews">
-
 
             <div class="reviews-titre">
                 <h2>AVIS D'ÉLÈVES</h2>

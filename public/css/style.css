@@ -741,7 +741,13 @@ body{
             color: var(--blue) !important;
             border-radius: 15px;
             padding: 10px 15px;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;    }
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+            transition: all 250ms ease;
+        }
+
+        .review:hover{
+            transform: translateY(-5px);
+        }
     
         .review-top{
             margin: 10px 0;
@@ -885,6 +891,73 @@ body{
         .avis-submit{
             border: 1px solid var(--white);
             width: 100%;
+        }
+
+    /* USER */
+
+        #user-progress-wrapper{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px 0;
+        }
+
+        .user-progress{
+            border-radius: 15px;
+            background-color: var(--white);
+            color: var(--darkblue) !important;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+            padding: 20px;
+            width: 40%;
+            height: auto;
+            transition: all 250ms ease;
+        }
+
+        .user-progress:hover{
+            transform: translateY(-5px);
+        }
+
+        .last-progress{
+        }
+
+        .last-etape-wrapper{
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .last-etape{
+            padding: 0 10px;
+            border: 3px solid var(--darkblue);
+            border-radius: 24px;
+            width: fit-content;
+            color: var(--darkblue) !important;
+            transition: all 250ms ease;
+        }
+
+        .last-etape:hover{
+            transform: translateY(-3px);
+            font-weight: 500;
+        }
+
+        .last-etape a{
+            color: var(--darkblue) !important;
+        }
+
+        .last-posts{
+        }
+
+        .last-post-wrapper{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .last-post{
+            width: 100%;
+
         }
     
 

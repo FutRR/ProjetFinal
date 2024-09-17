@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Avis;
+use App\Entity\Post;
 use App\Form\AvisType;
 use App\Form\FilterType;
+use App\Entity\Progression;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +18,14 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+
+        //Progression
+        $lastProgress = $entityManager->getRepository(Progression::class)->findLastProgression($user->getId());
+
+        $lastPosts = $entityManager->getRepository(Post::class)->findByUtilisateur($user->getId());
+
+        //Avis
         $message = 'Avis posté';
 
         $avis = new Avis();
@@ -73,7 +83,9 @@ class HomeController extends AbstractController
             'formAddAvis' => $form,
             'filtre' => $filtre,
             'reviews' => $reviews,
-            'maxResults' => $maxResults
+            'maxResults' => $maxResults,
+            'lastProgress' => $lastProgress,
+            'lastPosts' => $lastPosts
         ]);
     }
 

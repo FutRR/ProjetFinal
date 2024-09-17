@@ -17,6 +17,18 @@ class ProgressionRepository extends ServiceEntityRepository
         parent::__construct($registry, Progression::class);
     }
 
+    public function findLastProgression($utilisateurId)
+    {
+        return $this->createQueryBuilder('p')
+        ->where('p.done = :done')
+        ->andWhere('p.Utilisateur = :utilisateurId')
+        ->setParameter('done', false)
+        ->setParameter('utilisateurId', $utilisateurId)
+        ->getQuery()
+        ->getResult();
+    }
+
+
     //    /**
     //     * @return Progression[] Returns an array of Progression objects
     //     */
