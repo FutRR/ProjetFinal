@@ -16,7 +16,15 @@
                     {% for etape in niveau.etapes %}
 
                         <div class="niveau-etape">
-                            <h3>{{etape}}</h3>
+                            <div class="niveau-etape-title">
+                                <h3>{{etape}}</h3>
+                                {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
+                                    <i class="fa-regular fa-circle-check" title="Étape finie"></i>
+                                {% endif %}
+                                {% if (progressionsMap[etape.id] is defined) and not (progressionsMap[etape.id]) %}
+                                    <i class="fa-regular fa-circle" title="Étape en cours"></i>
+                                {% endif %}
+                            </div>
                             <p class="niveau-etape-desc">{{ etape.description|u.truncate(200, '...', false) }}</p>
                             <a class="arrow-link" href="{{ path('show_etape', {'id': etape.id})}}"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>

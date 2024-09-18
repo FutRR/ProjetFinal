@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Niveau;
 use App\Form\NiveauType;
+use App\Entity\Progression;
 use App\Repository\EtapeRepository;
 use App\Repository\NiveauRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,11 +16,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class NiveauController extends AbstractController
 {
     #[Route('/niveau', name: 'app_niveau')]
-    public function index(NiveauRepository $niveauRepository): Response
+    public function index(NiveauRepository $niveauRepository, EntityManagerInterface $entityManager): Response
     {
         $niveaux = $niveauRepository->findAll();
+
+        $user = $this->getUser();
+        $progressionsMap = [];
+        
+        if (isset($user)) {
+            //On récupère les progressions de l'utilisateur sur les différentes étapes
+            $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $user]);
+
+            //Pour chaque étape, on récupère l'id de l'étape en tant que clé et l'état de complétion en tant que valeur
+            foreach ($progressionsUtilisateur as $progressions) {
+                $progressionsMap[$progressions->getEtape()->getId()] = $progressions->isDone();
+            }
+        }
         return $this->render('niveau/index.html.twig', [
             'niveaux' => $niveaux,
+            'progressionsMap' => $progressionsMap
         ]);
     }
 
