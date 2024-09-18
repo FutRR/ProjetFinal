@@ -35,7 +35,8 @@ class UtilisateurController extends AbstractController
 
                 $message = 'Utilisateur modifié';
 
-                $disabled = $utilisateur->isGoogleUser();
+                // Si le booléen est nul, la valeur sera false
+                $disabled = $utilisateur->isGoogleUser() ?? false;
 
                 $form = $this->createForm(UtilisateurType::class, $utilisateur, ['user_is_google' => $disabled]);
 
