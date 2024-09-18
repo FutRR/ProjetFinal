@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="admin-wrapper">
-        <details>
+        <details class="details-user">
             <summary>Liste des utilisateurs</summary>
             <p>{{utilisateurs|length}} utilisateurs incrits</p>
 
@@ -25,20 +25,18 @@
             {% endfor %}
         </details>
 
-        <details>
+        <details class="details-niveau" open>
             <summary>Niveaux</summary>
-            <a class="btn add-btn" href="{{ path('new_niveau')}}">Ajouter un niveau</a>
+            <a class="btn add-btn admin-add" href="{{ path('new_niveau')}}">Ajouter un niveau</a>
             <h3>Liste des niveaux</h3>
-            <ul>
+            <div class="admin-niveau-wrapper">
                 {% for niveau in niveaux %}
-                    <li>
-                        <a href="{{ path('show_niveau', {'id': niveau.id})}}">{{niveau}}</a>
+                    <div class="admin-niveau">
+                        <h2><a href="{{ path('show_niveau', {'id': niveau.id})}}">{{niveau}}</a></h2>
                         <a class="btn add-btn" href="{{ path('edit_niveau', {'id': niveau.id})}}">Modifier le niveau</a>
-                    </li>
-                    
-
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         </details>
 
         <details>

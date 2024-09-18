@@ -543,19 +543,48 @@ body{
         gap: 10px;
     }
 
-    .admin-wrapper ul{
-    }
-
-    .admin-wrapper li{
-        list-style-type: none;
-        height: fit-content;
-    }
-
     .utilisateur-card{
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+        transition: transform 250ms ease;
+    }
+
+    .utilisateur-card:hover{
+        transform: translateY(-3px);
     }
 
     .utilisateur-card h2 a:hover{
+        text-decoration: underline;
+    }
+
+    .details-niveau{
+        display: flex;
+
+    }
+
+    .admin-add{
+        width: fit-content;
+        align-self: flex-end !important;
+    }
+
+    .admin-niveau-wrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .admin-niveau{
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+        width: fit-content;
+        gap: 10px;
+    }
+
+    .admin-niveau h2:hover{
         text-decoration: underline;
     }
 
@@ -1042,63 +1071,7 @@ body{
         .arrow-link:hover{
             transform: scale(1.2);
         }
-
-        /* .post{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            border-radius: 15px;
-            padding: 15px 15px;
-            gap: 10px;
-            min-width: fit-content;
-            width: 50%;
-            background-color: var(--darkblue);
-            transition: background-color 1000ms ease-in-out;
-        }
-
-        .post > p{
-            font-size: 16px !important;
-        }
-
-        .post-top{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            font-size: 20px;
-            gap: 5px;
-        }
-
-        .post-top > *{
-            margin: 0;
-        }
-
-        .post-top h3{
-            font-size: 20px;
-        }
-
-        .post-top p{
-            font-size: 16px !important;
-        }
-
-        .post-text{
-            display: flex;
-            align-items: flex-start;
-            width: 100%;        
-        }
-
-        .post-bottom{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            font-size: 16px !important;
-        } */
-
     
-    
-
 
 /* NIVEAU */
 
