@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `avis` (
   CONSTRAINT `FK_8F91ABF0FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.avis : ~16 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.avis : ~8 rows (environ)
 REPLACE INTO `avis` (`id`, `utilisateur_id`, `contenu`, `date_creation`, `note`) VALUES
 	(1, 1, 'cool', '2024-07-05 14:20:48', 5),
 	(2, 1, 'test', '2024-07-05 14:30:40', 2),
@@ -40,14 +40,6 @@ REPLACE INTO `avis` (`id`, `utilisateur_id`, `contenu`, `date_creation`, `note`)
 	(5, 2, 'test 3', '2024-07-05 14:41:31', 4),
 	(6, 1, 'super', '2024-07-05 15:51:44', 5),
 	(7, 2, 'cool', '2024-07-09 13:43:19', 5),
-	(8, 1, '<p><strong>super</strong></p>', '2024-07-10 07:56:05', 5),
-	(9, 1, '<p>test</p>', '2024-07-10 07:58:27', 1),
-	(10, 1, '<p>Tr&egrave;s bon site, j\'ai appris le piano tr&egrave;s efficacement!</p>', '2024-07-11 09:50:03', 5),
-	(11, 1, '<p>test</p>', '2024-07-11 09:51:05', 1),
-	(12, 1, '<p>4 etoiles</p>', '2024-07-11 10:52:30', 4),
-	(13, 1, '<p>testt</p>', '2024-07-11 10:54:40', 2),
-	(14, 1, '<p>retest</p>', '2024-07-11 10:56:20', 3),
-	(15, 1, '<p>yes</p>', '2024-07-11 10:58:32', 5),
 	(17, 1, 'bof bof', '2024-07-29 14:32:14', 3);
 
 -- Listage de la structure de table projet_final_maximefutterer. etape
@@ -118,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `niveau` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table projet_final_maximefutterer.niveau : ~6 rows (environ)
+-- Listage des données de la table projet_final_maximefutterer.niveau : ~2 rows (environ)
 REPLACE INTO `niveau` (`id`, `nom_niveau`, `prix`) VALUES
 	(1, 'Niveau 1', NULL),
 	(2, 'Niveau 2', NULL),
