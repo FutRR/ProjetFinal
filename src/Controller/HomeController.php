@@ -18,12 +18,21 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $lastProgress = null;
+        $lastPosts = null;
+        $lastReplies = null;
+
         $user = $this->getUser();
 
-        //Progression
-        $lastProgress = $entityManager->getRepository(Progression::class)->findLastProgression($user->getId());
+        if (isset($user)){
+            //Progression
+            $lastProgress = $entityManager->getRepository(Progression::class)->findLastProgression($user->getId());
 
-        $lastPosts = $entityManager->getRepository(Post::class)->findByUtilisateur($user->getId());
+            $lastPosts = $entityManager->getRepository(Post::class)->findByUtilisateur($user->getId());
+
+            $lastReplies = $entityManager->getRepository(Post::class)->findByParent($user->getId());
+
+        }
 
         //Avis
         $message = 'Avis posté';
@@ -85,7 +94,8 @@ class HomeController extends AbstractController
             'reviews' => $reviews,
             'maxResults' => $maxResults,
             'lastProgress' => $lastProgress,
-            'lastPosts' => $lastPosts
+            'lastPosts' => $lastPosts,
+            'lastReplies' => $lastReplies
         ]);
     }
 

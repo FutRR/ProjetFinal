@@ -40,9 +40,23 @@ class PostRepository extends ServiceEntityRepository
         ->where('p.utilisateur = :utilisateurId')
         ->setParameter('utilisateurId', $utilisateurId)
         ->orderBy('p.dateCreation', 'DESC')
+        ->setMaxResults(5)
         ->getQuery()
         ->getResult();
     }
+
+    public function findByParent(int $utilisateurId)
+    {
+        return $this->createQueryBuilder('p')
+        ->innerJoin('p.parent', 'parentPost')
+        ->where('parentPost.utilisateur = :utilisateurId')
+        ->setParameter('utilisateurId', $utilisateurId)
+        ->orderBy('p.dateCreation', 'DESC')
+        ->setMaxResults(5)
+        ->getQuery()
+        ->getResult();
+    }
+
 
     //    /**
     //     * @return Post[] Returns an array of Post objects

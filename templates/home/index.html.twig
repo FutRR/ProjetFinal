@@ -18,106 +18,147 @@
 
     <div id="home-main">
 
-        {% if app.user == false %}
-            <section id="why">
-
-                <div class="why-text">
-                    <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
-                    <p>Chez Maesterclass vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.</p>
-                    <br>
-                    <p>Le chemin ne sera pas facile mais il sera efficace, ce n’est pas en apprenant Au clair de la Lune que vous deviendrez le prochain Bach !</p>
-                </div>
-
-                <figure>
-                    <img src="{{ asset('img/jj.webp')}}" alt="Jean-Jacques Futterer">
-                    <figcaption>Jean-Jacques Futterer - 2014</figcaption>
-                </figure>
-
-            </section>
-
-            <section id="how">
-
-                <div id="schema">
-                    <h2>Niveau 1</h2>
-                    <h3>Étape 1</h3>
-                    <i class="fa-solid fa-chevron-down"></i>
-                    <h3>Étape 2</h3>
-                    <i class="fa-solid fa-chevron-down"></i>
-                    <h3>Étape 3</h3>
-                    <i class="fa-solid fa-chevron-down"></i>
-                    <h3>Étape 4</h3>
-                    <div class="chevrons">
-                        <i class="fa-solid fa-chevron-down"></i>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <h2>Niveau 2</h2>
-                </div>
-
-                <div class="separator"></div>
-
-                <div id="how-text">
-                    <h2>COMMENT ÇA MARCHE</h2>
-                    <p>C’est très simple, vous avancez par modules et chaque module comporte des étapes.</p>
-                    <p>Ces étapes (Lecture, Compréhension théorique, Rythme...) contiennent chacune une vidéo et un PDF (possibilité d’imprimer afin de s’entraîner sans ordinateur/téléphone).
-                    </p>
-                    <p>Vous passez au module suivant en complétant toutes les étapes d’un module.</p>
-                    <p>Les 5 premiers modules sont gratuits</p>
-                </div>
-
-            </section>
-        {% endif %}
-
         {% if app.user %}
             <section id="user-progress-wrapper">
 
-                <div class="user-progress last-progress">
-                <h2>Étapes en cours</h2>
-                    <div class="last-etape-wrapper">
-                        {% for progress in lastProgress %}
-                            <div class="last-etape">
-                                <p><a href="{{ path('show_etape', {'id': progress.etape.id})}}">{{progress.etape.niveau}} - {{progress.etape}}</a></p>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
+                {% if lastProgress is defined and lastProgress|length > 0 
+                    or lastPosts is defined and lastPosts|length > 0 
+                    or lastReplies is defined and lastReplies|length > 0 %}
 
-                <div class="user-progress last-posts">
-                    <h2>Derniers posts</h2>
-                    <div class="last-post-wrapper">
-                        {% for post in lastPosts %}
-                            
-                                <a href="{{ path('show_etape', {'id': post.etape.id})}}">
-                                    <div class="post last-post">
-                                        <div class="post-top">
-                                            {% if 'ROLE_ADMIN' in post.utilisateur.roles %}
-                                                <h3 title="Admin" class="admin">
-                                                    <i class="fa-solid fa-lock"></i>
-                                                    {{post.utilisateur}}
-                                                </h3>
-                                            {% else %}
-                                                <h3>{{post.utilisateur}}</h3>
-                                            {% endif %}
-                                            <p>{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</p>
-                                        </div>
-        
-                                        <span class="post-text">{{post.contenu}}</span>
-        
-                                        <div class="post-bottom">        
-                                            {% if post.parent and post.parent.utilisateur %}
-                                                <p class="respond-to">En réponse à <a href="#{{post.parent.id}}" class="respond-to-link" data-reply-id="{{post.parent.id}}">{{post.parent.utilisateur}}</a></p>
-                                            {% endif %}
-                                        </div>
+                    {% if lastProgress|length > 0 %}
+                        <div class="user-progress last-progress">
+                            <h2>Étapes en cours</h2>
+                            <div class="last-etape-wrapper">
+                                {% for progress in lastProgress %}
+                                    <div class="last-etape">
+                                        <p><a href="{{ path('show_etape', {'id': progress.etape.id})}}">{{progress.etape.niveau}} - {{progress.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
                                     </div>
-                                </a>
-                            
-                        {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <h2>Aucune progression pour l'instant</h2>
+                    {% endif %}
+
+
+                    {% if lastPosts|length > 0 or lastReplies|length > 0 %}
+                        <div class="user-progress last-posts">
+
+                            {% if lastPosts|length > 0 %}
+                                <div class="last-user-posts">
+                                    <h2>Derniers posts</h2>
+                                    <div class="last-post-wrapper">
+                                        {% for post in lastPosts %}
+                                            <div class="last-post">
+                                                <span class="last-post-date">{{post.dateCreation|date("d/m/Y")}} à {{post.dateCreation|date("H:i")}}</span>
+
+                                                <span class="last-post-text">{{post.contenu}}</span>
+
+                                                <div class="last-post-bottom">
+                                                    <a class="arrow-link home-arrow" href="{{ path('show_etape', {'id': post.etape.id})}}">{{post.etape.niveau}} - {{post.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                                </div>
+                                            </div>
+                                            
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <h2>Aucun posts pour l'instant</h2>
+                            {% endif %}
+
+                            {% if lastReplies|length > 0 %}
+                                <div class="last-user-replies">
+                                    <h2>Dernières réponses</h2>
+                                    <div class="last-post-wrapper">
+                                        {% for reply in lastReplies %}
+                                            <div class="last-post">
+                                                <div class="last-reply-top">
+                                                    {% if reply.utilisateur %}
+                                                        {% if 'ROLE_ADMIN' in reply.utilisateur.roles %}
+                                                            <h3 title="Admin" class="admin">
+                                                                <i class="fa-solid fa-lock"></i>
+                                                                {{reply.utilisateur}}
+                                                            </h3>
+                                                        {% else %}
+                                                            <h3>{{reply.utilisateur}}</h3>
+                                                        {% endif %}
+                                                    {% else %}
+                                                            <h3 class="deleted">Compte supprimé</h3>
+                                                    {% endif %}
+                                                
+                                                <span class="last-post-date">{{reply.dateCreation|date("d/m/Y")}} à {{reply.dateCreation|date("H:i")}}</span>
+                                                </div>
+
+                                                <span class="last-post-text">{{reply.contenu}}</span>
+
+                                                <div class="last-post-bottom">
+                                                    <a class="arrow-link home-arrow" href="{{ path('show_etape', {'id': reply.etape.id})}}">{{reply.etape.niveau}} - {{reply.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <h2>Aucune réponses pour l'instant</h2>
+                            {% endif %}
+
+                        </div>
+                    {% endif %}
+
+                {% else %}
+                    <h2>Aucune progression / posts pour l'instant</h2>
+                {% endif %}
+
+
+                </section>
+            {% else %}
+                <section id="why">
+
+                    <div class="why-text">
+                        <h2>POURQUOI ICI ET PAS AILLEURS ?</h2>
+                        <p>Chez Maesterclass vous apprendrez le piano de la bonne façon, pas à base d’exercices faciles et insensés mais avec un vrai professeur ayant 30 ans de carrière.</p>
+                        <br>
+                        <p>Le chemin ne sera pas facile mais il sera efficace, ce n’est pas en apprenant Au clair de la Lune que vous deviendrez le prochain Bach !</p>
                     </div>
 
-                </div>
+                    <figure>
+                        <img src="{{ asset('img/jj.webp')}}" alt="Jean-Jacques Futterer">
+                        <figcaption>Jean-Jacques Futterer - 2014</figcaption>
+                    </figure>
+
+                </section>
+
+                <section id="how">
+
+                    <div id="schema">
+                        <h2>Niveau 1</h2>
+                        <h3>Étape 1</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <h3>Étape 2</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <h3>Étape 3</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <h3>Étape 4</h3>
+                        <div class="chevrons">
+                            <i class="fa-solid fa-chevron-down"></i>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <h2>Niveau 2</h2>
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <div id="how-text">
+                        <h2>COMMENT ÇA MARCHE</h2>
+                        <p>C’est très simple, vous avancez par modules et chaque module comporte des étapes.</p>
+                        <p>Ces étapes (Lecture, Compréhension théorique, Rythme...) contiennent chacune une vidéo et un PDF (possibilité d’imprimer afin de s’entraîner sans ordinateur/téléphone).
+                        </p>
+                        <p>Vous passez au module suivant en complétant toutes les étapes d’un module.</p>
+                        <p>Les 5 premiers modules sont gratuits</p>
+                    </div>
 
             </section>
         {% endif %}
-
 
         <section id="reviews">
 

@@ -24,6 +24,7 @@ class ProgressionRepository extends ServiceEntityRepository
         ->andWhere('p.Utilisateur = :utilisateurId')
         ->setParameter('done', false)
         ->setParameter('utilisateurId', $utilisateurId)
+        ->setMaxResults(5)
         ->getQuery()
         ->getResult();
     }
