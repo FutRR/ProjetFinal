@@ -18,7 +18,7 @@
                         <div class="niveau-etape">
                             <h3>{{etape}}</h3>
                             <p class="niveau-etape-desc">{{ etape.description|u.truncate(200, '...', false) }}</p>
-                            <a class="niveau-etape-link" href="{{ path('show_etape', {'id': etape.id})}}"><i class="fa-solid fa-arrow-right"></i></a>
+                            <a class="arrow-link" href="{{ path('show_etape', {'id': etape.id})}}"><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                         
                     {% endfor %}

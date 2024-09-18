@@ -900,6 +900,7 @@ body{
             justify-content: space-between;
             align-items: flex-start;
             padding: 40px 0;
+            gap: 50px;
         }
 
         .user-progress{
@@ -908,13 +909,10 @@ body{
             color: var(--darkblue) !important;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
             padding: 20px;
-            width: 40%;
+            min-width: 40%;
+            max-width: 100%;
             height: auto;
             transition: all 250ms ease;
-        }
-
-        .user-progress:hover{
-            transform: translateY(-5px);
         }
 
         .last-progress{
@@ -946,19 +944,159 @@ body{
         }
 
         .last-posts{
+            display: flex;
+            justify-content: space-between;
+            width: fit-content;
+        }
+
+        .last-user-posts{
+            max-width: 50%;
+            width: fit-content;
+        }
+
+        .last-user-replies{
+            max-width: 50%;
+            width: fit-content;
         }
 
         .last-post-wrapper{
             display: flex;
             flex-direction: column;
-            align-items: center;
-            width: 100%;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 10px;
+            width: fit-content;
         }
 
         .last-post{
-            width: 100%;
-
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            border-radius: 15px;
+            padding: 15px;
+            gap: 10px;
+            min-width: 50%;
+            background-color: var(--white) !important;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+            transition: all 250ms ease !important;
         }
+
+        .last-post:hover{
+            transform: translateY(-3px);
+        }
+
+
+        .last-reply-top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .last-reply-top h3{
+            margin: 0;
+        }
+
+        .last-post-date{
+            font-size: 20px;
+        }
+
+        .last-post-text{
+            font-size: 24px;
+        }
+
+        .last-post-bottom{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 5px;
+            transition: all 250ms ease;
+        }
+
+        .home-arrow{
+            align-self: flex-start !important;
+            transform: none !important;
+            background-color: transparent !important;
+            border: 1px solid var(--darkblue);
+            color: var(--darkblue) !important;
+        }
+
+        .last-post-bottom:hover{
+            transform: scale(1.02);
+        }
+
+        .arrow-link{
+            align-self: flex-end;
+            color: var(--white);
+            background-color: var(--blue);
+            padding: 6px 7.5px;
+            border-radius: 5000px;
+            width: fit-content;
+            transform: rotate(-45deg);
+            transition: all 250ms ease;
+        }
+    
+        .arrow-link:hover{
+            transform: scale(1.2);
+        }
+
+        /* .post{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            border-radius: 15px;
+            padding: 15px 15px;
+            gap: 10px;
+            min-width: fit-content;
+            width: 50%;
+            background-color: var(--darkblue);
+            transition: background-color 1000ms ease-in-out;
+        }
+
+        .post > p{
+            font-size: 16px !important;
+        }
+
+        .post-top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            font-size: 20px;
+            gap: 5px;
+        }
+
+        .post-top > *{
+            margin: 0;
+        }
+
+        .post-top h3{
+            font-size: 20px;
+        }
+
+        .post-top p{
+            font-size: 16px !important;
+        }
+
+        .post-text{
+            display: flex;
+            align-items: flex-start;
+            width: 100%;        
+        }
+
+        .post-bottom{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            font-size: 16px !important;
+        } */
+
+    
     
 
 
@@ -1008,22 +1146,6 @@ body{
         height: 100%;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
-
-    .niveau-etape a{
-        align-self: flex-end;
-        color: var(--white);
-        background-color: var(--blue);
-        padding: 6px 7.5px;
-        border-radius: 5000px;
-        width: fit-content;
-        transform: rotate(-45deg);
-        transition: all 250ms ease;
-    }
-
-    .niveau-etape a:hover{
-        transform: scale(1.2);
-    }
-
 
 
 /* ETAPE */
@@ -1554,7 +1676,11 @@ body{
     /* LOGIN/REGISTER */
 
     .login-register{
-        width: 90%;
+        max-width: none !important;
+    }
+
+    .input-box{
+        width: 100%;
     }
 
     .login-options{
@@ -1587,6 +1713,14 @@ body{
     }
 
     /* PAGE D'ACCUEIL */
+
+    #user-progress-wrapper{
+        flex-direction: column !important;
+    }
+
+    .last-posts{
+        flex-direction: column !important;
+    }
 
     #why{
         flex-direction: column;
@@ -1634,17 +1768,24 @@ body{
     /* NIVEAU */
 
     .niveau-wrapper{
+        justify-content: center;
         min-width: fit-content !important;
         width: 100%;
     }
 
     .niveau{
         height: fit-content;
+        justify-content: center;
+        align-items: center;
+        width: 70% !important;
+        padding: 15px;
     }
 
     .etapes-wrapper{
         flex-direction: column;
-        width: fit-content;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
     }
 
     .niveau-etape{
@@ -1674,6 +1815,22 @@ body{
         height: 500px;
     }
 
+    .post-wrapper{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .post{
+        min-width: fit-content;
+        width: 100%;
+    }
+
+    .post-bottom{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+
     .post-form textarea{
         width: 100%;
         margin: 0 !important;
@@ -1681,7 +1838,11 @@ body{
 
     /* PROFIL */
 
-    .profil-title > .add-btn{
+    .profil-title{
+        flex-direction: column;
+    }
+
+    .profil-title > .add-btn-wrapper{
         padding: 5px !important;
     }
 }
