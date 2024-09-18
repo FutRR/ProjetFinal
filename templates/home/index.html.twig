@@ -182,7 +182,7 @@
                             </div>
                         </div>
                         {% if avis.contenu %}
-                            <span class="review-text">{{ avis.contenu|striptags('<p>,<strong>,<em>,<ul>,<ol>,<li>,<a>')|raw }}</span> 
+                            <span class="review-text">{{ avis.contenu }}</span> 
                         {% endif %}
                         <p class="review-bottom">{{ avis.dateCreation|date("d/m/Y", "Europe/Paris") }} à {{ avis.dateCreation|date("H:i", "Europe/Paris") }}</p>
                     </div> 
