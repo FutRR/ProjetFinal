@@ -180,11 +180,15 @@ class EtapeController extends AbstractController
         $user = $this->getUser();
 
         if (isset($user)) {
-            $utilisateur = $this->getUser();
-            $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $utilisateur]);
+
+            $progressionEtapePrecedente = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etapePrecedente, 'Utilisateur' => $user]);
+
+            if ((!isset($etapePrecedente) && $etape->getOrdre(1)) || $progressionEtapePrecedente->isDone(true)){
+
+            $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $user]);
 
             //On récupère les progressions de l'utilisateur sur les différentes étapes
-            $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $utilisateur]);
+            $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $user]);
 
             //On initialise le tableau associatif
             $progressionsMap = [];
@@ -196,7 +200,7 @@ class EtapeController extends AbstractController
             //S'il n'y à pas de progression, on en créer une et lui attribue l'utilisateur connecté et l'étape concernée
             if (!$progression) {
                 $progression = new Progression();
-                $progression->setUtilisateur($utilisateur);
+                $progression->setUtilisateur($user);
                 $progression->setEtape($etape);
                 $entityManager->persist($progression);
                 $entityManager->flush();
@@ -222,7 +226,7 @@ class EtapeController extends AbstractController
             $formPost->handleRequest($request);
 
             if ($formPost->isSubmitted() && $formPost->isValid()) {
-                $post->setUtilisateur($utilisateur);
+                $post->setUtilisateur($user);
                 $post->setEtape($etape);
                 $entityManager->persist($post);
                 $entityManager->flush();
@@ -252,6 +256,11 @@ class EtapeController extends AbstractController
                 'maxPage' => $maxPage,
                 'page' => $page
             ]);
+
+        } else {
+            $this->addFlash('error', "Vous devez finir l'étape précédente");
+            return $this->redirectToRoute("app_home");
+        }
 
         } else {
             $this->addFlash('error', "Vous n'êtes pas connecté");
