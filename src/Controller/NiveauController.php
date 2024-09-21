@@ -76,13 +76,18 @@ class NiveauController extends AbstractController
     }
 
     #[Route('/niveau/{id}', name: 'show_niveau')]
-    public function show(Niveau $niveau, EtapeRepository $etapeRepository): Response
+    public function show(?Niveau $niveau, EtapeRepository $etapeRepository): Response
     {
+        if ($niveau){
 
-        $etapes = $etapeRepository->findByNiveauOrderedByOrder($niveau->getId());
-        return $this->render("niveau/show.html.twig", [
-            'niveau' => $niveau,
-            'etapes' => $etapes
-        ]);
+            $etapes = $etapeRepository->findByNiveauOrderedByOrder($niveau->getId());
+            return $this->render("niveau/show.html.twig", [
+                'niveau' => $niveau,
+                'etapes' => $etapes
+            ]);
+        } else {
+            $this->addFlash('error', 'Niveau non disponible');
+            return $this->redirectToRoute('app_home');
+        }
     }
 }

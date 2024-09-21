@@ -171,99 +171,106 @@ class EtapeController extends AbstractController
 
 
     #[Route('/etape/{id}', name: 'show_etape')]
-    public function show(Etape $etape, EtapeRepository $etapeRepository, EntityManagerInterface $entityManager, Request $request): Response
+    public function show(?Etape $etape, EtapeRepository $etapeRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $etapeSuivante = $etapeRepository->findEtapeSuivante($etape);
-        $etapePrecedente = $etapeRepository->findEtapePrecedente($etape);
-        $etapes = $etapeRepository->findBy(['Niveau' => $etape->getNiveau()]);
+        if ($etape){
 
-        $user = $this->getUser();
+            $etapeSuivante = $etapeRepository->findEtapeSuivante($etape);
+            $etapePrecedente = $etapeRepository->findEtapePrecedente($etape);
+            $etapes = $etapeRepository->findBy(['Niveau' => $etape->getNiveau()]);
 
-        if (isset($user)) {
+            $user = $this->getUser();
 
-            $progressionEtapePrecedente = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etapePrecedente, 'Utilisateur' => $user]);
+            if (isset($user)) {
 
-            if ((!isset($etapePrecedente) && $etape->getOrdre(1)) || $progressionEtapePrecedente->isDone(true)){
+                $progressionEtapePrecedente = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etapePrecedente, 'Utilisateur' => $user]);
 
-            $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $user]);
+                if ((!isset($etapePrecedente) && $etape->getOrdre(1)) || $progressionEtapePrecedente->isDone(true)){
 
-            //On récupère les progressions de l'utilisateur sur les différentes étapes
-            $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $user]);
+                    $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $user]);
 
-            //On initialise le tableau associatif
-            $progressionsMap = [];
-            //Pour chaque étape, on récupère l'id de l'étape en tant que clé et l'état de complétion en tant que valeur
-            foreach ($progressionsUtilisateur as $progressions) {
-                $progressionsMap[$progressions->getEtape()->getId()] = $progressions->isDone();
+                    //On récupère les progressions de l'utilisateur sur les différentes étapes
+                    $progressionsUtilisateur = $entityManager->getRepository(Progression::class)->findBy(['Utilisateur' => $user]);
+
+                    //On initialise le tableau associatif
+                    $progressionsMap = [];
+                    //Pour chaque étape, on récupère l'id de l'étape en tant que clé et l'état de complétion en tant que valeur
+                    foreach ($progressionsUtilisateur as $progressions) {
+                        $progressionsMap[$progressions->getEtape()->getId()] = $progressions->isDone();
+                    }
+
+                    //S'il n'y à pas de progression, on en créer une et lui attribue l'utilisateur connecté et l'étape concernée
+                    if (!$progression) {
+                        $progression = new Progression();
+                        $progression->setUtilisateur($user);
+                        $progression->setEtape($etape);
+                        $entityManager->persist($progression);
+                        $entityManager->flush();
+                    }
+
+                    // $posts = $entityManager->getRepository(Post::class)->findBy(['Etape' => $etape]);
+
+                    //Maximum de posts sur la page
+                    $limit = 5;
+                    //Recherche la page dans la requête HTTP et la set par defaut à 1 s'il n'y en a pas
+                    $page = $request->query->getInt('page', 1);
+                    //Envoi les paramètres requis et récupère les posts du repository
+                    $posts = $entityManager->getRepository(Post::class)->paginatePosts($etape->getId(), $page, $limit);
+                    //Défini le nombre de page maximum en divisant le nombre de posts par la limite par page et en arrondissant le résultat au nombre supérieur
+                    $maxPage = ceil($posts->count() / $limit);
+
+
+                    // Formulaire de post
+                    $message = 'Post publié';
+
+                    $post = new Post();
+                    $formPost = $this->createForm(PostType::class, $post);
+                    $formPost->handleRequest($request);
+
+                    if ($formPost->isSubmitted() && $formPost->isValid()) {
+                        $post->setUtilisateur($user);
+                        $post->setEtape($etape);
+                        $entityManager->persist($post);
+                        $entityManager->flush();
+                        $this->addFlash('success', $message);
+                        return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
+                    }
+
+                    // Création des formulaires de réponse pour chaque post
+                    $reponseForms = [];
+                    foreach ($posts as $post) {
+                        $form = $this->createForm(PostType::class, null, [
+                            'action' => $this->generateUrl('post_reply', ['postId' => $post->getId()]),
+                        ]);
+                        $reponseForms[$post->getId()] = $form->createView();
+                    }
+
+
+                    return $this->render("etape/show.html.twig", [
+                        'etape' => $etape,
+                        'etapes' => $etapes,
+                        'etapeSuivante' => $etapeSuivante,
+                        'etapePrecedente' => $etapePrecedente,
+                        'progressionsMap' => $progressionsMap,
+                        'posts' => $posts,
+                        'formAddPost' => $formPost->createView(),
+                        'reponseForms' => $reponseForms,
+                        'maxPage' => $maxPage,
+                        'page' => $page
+                    ]);
+
+                } else {
+                    $this->addFlash('error', "Vous devez finir l'étape précédente");
+                    return $this->redirectToRoute("app_home");
+                }
+
+            } else {
+                $this->addFlash('error', "Vous n'êtes pas connecté");
+                return $this->redirectToRoute("app_home");
             }
-
-            //S'il n'y à pas de progression, on en créer une et lui attribue l'utilisateur connecté et l'étape concernée
-            if (!$progression) {
-                $progression = new Progression();
-                $progression->setUtilisateur($user);
-                $progression->setEtape($etape);
-                $entityManager->persist($progression);
-                $entityManager->flush();
-            }
-
-            // $posts = $entityManager->getRepository(Post::class)->findBy(['Etape' => $etape]);
-
-            //Maximum de posts sur la page
-            $limit = 5;
-            //Recherche la page dans la requête HTTP et la set par defaut à 1 s'il n'y en a pas
-            $page = $request->query->getInt('page', 1);
-            //Envoi les paramètres requis et récupère les posts du repository
-            $posts = $entityManager->getRepository(Post::class)->paginatePosts($etape->getId(), $page, $limit);
-            //Défini le nombre de page maximum en divisant le nombre de posts par la limite par page et en arrondissant le résultat au nombre supérieur
-            $maxPage = ceil($posts->count() / $limit);
-
-
-            // Formulaire de post
-            $message = 'Post publié';
-
-            $post = new Post();
-            $formPost = $this->createForm(PostType::class, $post);
-            $formPost->handleRequest($request);
-
-            if ($formPost->isSubmitted() && $formPost->isValid()) {
-                $post->setUtilisateur($user);
-                $post->setEtape($etape);
-                $entityManager->persist($post);
-                $entityManager->flush();
-                $this->addFlash('success', $message);
-                return $this->redirectToRoute('show_etape', ['id' => $etape->getId()]);
-            }
-
-            // Création des formulaires de réponse pour chaque post
-            $reponseForms = [];
-            foreach ($posts as $post) {
-                $form = $this->createForm(PostType::class, null, [
-                    'action' => $this->generateUrl('post_reply', ['postId' => $post->getId()]),
-                ]);
-                $reponseForms[$post->getId()] = $form->createView();
-            }
-
-
-            return $this->render("etape/show.html.twig", [
-                'etape' => $etape,
-                'etapes' => $etapes,
-                'etapeSuivante' => $etapeSuivante,
-                'etapePrecedente' => $etapePrecedente,
-                'progressionsMap' => $progressionsMap,
-                'posts' => $posts,
-                'formAddPost' => $formPost->createView(),
-                'reponseForms' => $reponseForms,
-                'maxPage' => $maxPage,
-                'page' => $page
-            ]);
 
         } else {
-            $this->addFlash('error', "Vous devez finir l'étape précédente");
-            return $this->redirectToRoute("app_home");
-        }
-
-        } else {
-            $this->addFlash('error', "Vous n'êtes pas connecté");
+            $this->addFlash('error', "Étape non disponible");
             return $this->redirectToRoute("app_home");
         }
 
