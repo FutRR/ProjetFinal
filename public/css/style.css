@@ -1694,12 +1694,33 @@ body{
     /* PAGE D'ACCUEIL */
 
     #user-progress-wrapper{
+        margin: 20px !important;
         flex-direction: column !important;
     }
 
     .last-posts{
         flex-direction: column !important;
     }
+
+    .user-progress{
+        justify-content: center;
+    }
+
+    .last-etape-wrapper{
+        justify-content: center;
+        max-width: 100%;
+    }
+
+    .last-user-posts{
+        justify-content: center !important;
+        max-width: 100%;
+    }
+
+    .last-user-replies{
+        justify-content: center;
+        max-width: 100%;
+    }
+
 
     #why{
         flex-direction: column;
