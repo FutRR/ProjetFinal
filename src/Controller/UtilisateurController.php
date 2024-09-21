@@ -124,36 +124,40 @@ class UtilisateurController extends AbstractController
 
         $user = $this->getUser();
         if (isset($user)) {
-            if ($user->getId() == $utilisateur->getId() || $this->isGranted('ROLE_ADMIN')) {
-
-                if (!$utilisateur) {
-                    $this->addFlash('error', "Utilisateur non trouvé");
-                    return $this->redirectToRoute("app_home");
-                }
-
-                $submittedToken = $request->getPayload()->get('token');
-                if ($this->isCsrfTokenValid('delete_utilisateur', $submittedToken)) {
-                    if ($user->getId() == $utilisateur->getId()) {
-                        $session = new Session();
-                        $session->invalidate();
-                    }
-
-                    $entityManager->remove($utilisateur);
-                    $entityManager->flush();
-
-                    $this->addFlash('success', "Utilisateur supprimé");
-                    return $this->redirectToRoute("app_logout");
-                }
-
-            } else {
-                $this->addFlash('error', "Ce n'est pas votre profil");
+            //Si l'utilisateur est un admin, le compte ne peut pas être supprimé
+            if ($utilisateur->getRoles('ROLE_ADMIN')){
+                $this->addFlash('error', "Ce compte appartient à un admin");
                 return $this->redirectToRoute("app_home");
-            }
+            } else {
+                    if ($user->getId() == $utilisateur->getId() || $this->isGranted('ROLE_ADMIN')) {
 
-        } else {
+                        if (!$utilisateur) {
+                            $this->addFlash('error', "Utilisateur non trouvé");
+                            return $this->redirectToRoute("app_home");
+                        }
+
+                        $submittedToken = $request->getPayload()->get('token');
+                        if ($this->isCsrfTokenValid('delete_utilisateur', $submittedToken)) {
+                            if ($user->getId() == $utilisateur->getId()) {
+                                $session = new Session();
+                                $session->invalidate();
+                            }
+
+                            $entityManager->remove($utilisateur);
+                            $entityManager->flush();
+
+                            $this->addFlash('success', "Utilisateur supprimé");
+                            return $this->redirectToRoute("app_logout");
+                        }
+
+                    } else {
+                        $this->addFlash('error', "Ce n'est pas votre profil");
+                        return $this->redirectToRoute("app_home");
+                    }
+                }
+            }
             $this->addFlash('error', "Vous n'êtes pas connecté");
             return $this->redirectToRoute("app_home");
-        }
 
     }
 
