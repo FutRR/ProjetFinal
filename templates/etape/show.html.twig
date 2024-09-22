@@ -10,14 +10,14 @@
                 
             <section id="sidebar">
 
-                <h2><a href="{{ path('show_niveau', {'id': etape.niveau.id})}}">{{etape.niveau}}</a></h2>
+                <h2><a href="{{ path('show_niveau', {'id': etape.niveau.id})}}" title="Vers le niveau">{{etape.niveau}}</a></h2>
                 <div class="etape-progression-wrapper">
                     <div class="progression-line"></div>
                     <ul>
                         {# On boucle à travers les étapes #}
                         {% for etape in etapes %}
                             <li>
-                                <a class="no-underline" title="{{etape}}" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
+                                <a class="no-underline" title="Vers {{etape}} - {{etape.niveau}}" href="{{ path('show_etape', {'id': etape.id})}}">{{etape}}</a>
                                 {# Si l'étape actuelle à une entrée dans le tableau associatif et qu'elle est complétée, on affiche l'icone #}
                                 {% if (progressionsMap[etape.id] is defined) and (progressionsMap[etape.id]) %}
                                     <i class="fa-solid fa-check"></i>
@@ -35,7 +35,7 @@
 
                 <div class="titre">
                     <h1>{{etape}}</h1>
-                    <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}">Modifier l'étape</a>
+                    <a class="btn add-btn" href="{{ path('edit_etape', {'id': etape.id})}}" title="Modifier l'étape">Modifier l'étape</a>
                 </div>
 
                 <h2>Description</h2>
@@ -44,7 +44,7 @@
                 <div class="video">
                     {% if etape.video %}
                         <h2>Vidéo</h2>
-                        <iframe allowfullscreen class="yt-video" src="{{etape.video}}" frameborder="0"></iframe>
+                        <iframe allowfullscreen class="yt-video" src="{{etape.video}}" frameborder="0" title="Vidéo explicative de l'étape"></iframe>
                     {% endif %}
                 </div>
             
@@ -54,7 +54,7 @@
                         <iframe class="pdf-file" src="{{ asset(etape.pdf)}}" frameborder="0"></iframe> #}
 
                         {# <object class="pdf-file" data="{{ asset(etape.pdf) }}" type="application/pdf"></object> #}
-                        <embed src="{{ asset(etape.pdf) }}" frameborder="0" width="100%" height="1000px">
+                        <embed src="{{ asset(etape.pdf) }}" title="PDF de l'étape" frameborder="0" width="100%" height="1000px">
                     {% endif %}
                 </div>
 
@@ -160,10 +160,10 @@
 
                     <div class="etape-pagination">
                         {% if page > 1 %}
-                            <a class="btn add-btn pagination-btn" href="{{ path('show_etape', {'id': etape.id, 'page': page - 1})}}">Page précédente</a>
+                            <a class="btn add-btn pagination-btn" href="{{ path('show_etape', {'id': etape.id, 'page': page - 1})}}" title="Page précédente">Page précédente</a>
                         {% endif %}
                         {% if page < maxPage %}
-                            <a class="btn add-btn pagination-btn" href="{{ path('show_etape', {'id': etape.id, 'page': page + 1})}}">Page suivante</a>
+                            <a class="btn add-btn pagination-btn" href="{{ path('show_etape', {'id': etape.id, 'page': page + 1})}}" title="Page suivante">Page suivante</a>
                         {% endif %}
                     </div>
         

@@ -10,9 +10,9 @@
         <h1>Apprenez le piano comme il faut<br>avec <span>MAESTER</span>CLASS</h1>
 
         {% if app.user %}
-            <p><a class="btn header-btn" href="{{ path('app_niveau')}}">Continuez là où vous vous êtes arrêtez</a></p>
+            <p><a class="btn header-btn" href="{{ path('app_niveau')}}" title="Vers liste des niveaux">Continuez là où vous vous êtes arrêtez</a></p>
         {% else %}
-            <p><a class="btn header-btn" href="{{ path('app_niveau')}}">Commencez dès maintenant</a></p>
+            <p><a class="btn header-btn" href="{{ path('app_niveau')}}" title="Vers liste des niveaux">Commencez dès maintenant</a></p>
         {% endif %}
     </header>
 
@@ -31,7 +31,7 @@
                             <div class="last-etape-wrapper">
                                 {% for progress in lastProgress %}
                                     <div class="last-etape">
-                                        <p><a href="{{ path('show_etape', {'id': progress.etape.id})}}">{{progress.etape.niveau}} - {{progress.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
+                                        <p><a href="{{ path('show_etape', {'id': progress.etape.id})}}" title="Vers l'étape">{{progress.etape.niveau}} - {{progress.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -55,7 +55,7 @@
                                                 <span class="last-post-text">{{post.contenu}}</span>
 
                                                 <div class="last-post-bottom">
-                                                    <a class="arrow-link home-arrow" href="{{ path('show_etape', {'id': post.etape.id})}}">{{post.etape.niveau}} - {{post.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                                    <a class="arrow-link home-arrow" href="{{ path('show_etape', {'id': post.etape.id})}}" title="Vers le post">{{post.etape.niveau}} - {{post.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                                                 </div>
                                             </div>
                                             
@@ -92,7 +92,7 @@
                                                 <span class="last-post-text">{{reply.contenu}}</span>
 
                                                 <div class="last-post-bottom">
-                                                    <a class="arrow-link home-arrow" href="{{ path('show_etape', {'id': reply.etape.id})}}">{{reply.etape.niveau}} - {{reply.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                                    <a class="arrow-link home-arrow" href="{{ path('show_etape', {'id': reply.etape.id})}}" title="Vers le post">{{reply.etape.niveau}} - {{reply.etape}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                                                 </div>
                                             </div>
                                         {% endfor %}
@@ -122,7 +122,7 @@
                     </div>
 
                     <figure>
-                        <img src="{{ asset('img/jj.webp')}}" alt="Jean-Jacques Futterer">
+                        <img src="{{ asset('img/jj.webp')}}" alt="Jean-Jacques Futterer - Producteur et professeur de musique">
                         <figcaption>Jean-Jacques Futterer - 2014</figcaption>
                     </figure>
 
@@ -189,7 +189,7 @@
                 {% endfor %}
 
                 {% if (maxResults < reviews|length) or (maxResults == reviews|length) %}
-                    <a href="{{ path('app_home', {'maxResults': maxResults + 5}) }}">Voir plus</a>
+                    <a href="{{ path('app_home', {'maxResults': maxResults + 5}) }}" title="Voir plus d'avis">Voir plus</a>
                 {% endif %}
 
             </div>
