@@ -3,12 +3,12 @@
 :root{
     --white: #fff;
     --black: #070707;
-    --blue: #336191;
-    --darkblue: #284C83;
+    --blue: #174e85;
+    --darkblue: #1a3270;
     --red: #961d1d;
     --grey: #adadad;
     --offwhite: #e4e4e4;
-    --gradient: linear-gradient(0deg, #4b8db1 0%, #1a3270 100%);
+    --gradient: linear-gradient(0deg, #146d9d 0%, #174e85 50%, #1a3270 100%);
     --whitegradient: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgb(218, 218, 218) 100%);
 }
 
