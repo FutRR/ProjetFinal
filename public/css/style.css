@@ -1590,7 +1590,7 @@ body{
 
     :not(.home-page) > main{
         margin: 0;
-        padding: 0 50px !important;
+        padding: 0 10px !important;
     }
 
     /* NAVBAR */
@@ -1693,9 +1693,28 @@ body{
 
     /* PAGE D'ACCUEIL */
 
+    #why{
+        padding: 10px 75px;
+        margin: 0 !important;
+    }
+
+    #why h2{
+        text-align: center;
+    }
+
+    #how{
+        padding: 10px 20px;
+    }
+
+    #how h2{
+        text-align: center;
+    }
+    
+
     #user-progress-wrapper{
         margin: 20px !important;
         flex-direction: column !important;
+        align-items: center;
     }
 
     .last-posts{
