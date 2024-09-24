@@ -185,7 +185,7 @@ class EtapeController extends AbstractController
 
                 $progressionEtapePrecedente = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etapePrecedente, 'Utilisateur' => $user]);
 
-                if ((!isset($etapePrecedente) && $etape->getOrdre(1)) || $progressionEtapePrecedente->isDone(true)){
+                if ((!isset($etapePrecedente) && $etape->getOrdre(1)) || ($progressionEtapePrecedente && $progressionEtapePrecedente->isDone(true))){
 
                     $progression = $entityManager->getRepository(Progression::class)->findOneBy(['Etape' => $etape, 'Utilisateur' => $user]);
 
